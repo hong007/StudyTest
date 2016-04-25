@@ -1,0 +1,886 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地区选择测试</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script src="scripts/jquery.js"></script>
+</head>
+<body>
+    <div class="column">
+        <div class="column-head">
+            <h2 class="column-title">热门城市</h2>
+        </div>
+        <div class="column-body1">
+
+        </div>
+    </div>
+    <div class="column">
+        <div class="column-head">
+            <h2 class="column-title">其他城市<span>(可在省份里选择具体城市)</span></h2>
+        </div>
+        <div class="column-body" data-widget="com/mobile/page/milan/city_index.js#toggleCity">
+            <ul class="category clear">
+                <li><a href="/bj/">北京</a></li>
+                <li><a href="/sh/">上海</a></li>
+                <li><a href="/tj/">天津</a></li>
+                <li><a href="/cq/">重庆</a></li>
+            </ul>
+            <ul class="category clear">
+                <li data-role="province" data-id="guangdong" class=""><b>广东</b></li>
+                <li data-role="province" data-id="sichuan" class=""><b>四川</b></li>
+                <li data-role="province" data-id="zhejiang" class=""><b>浙江</b></li>
+                <li data-role="province" data-id="guizhou" class=""><b>贵州</b></li>
+            </ul>
+            <ul class="category-child clear" id="guangdong">
+
+                <li><a href="/gz/">广州</a></li>
+
+                <li><a href="/sz/">深圳</a></li>
+
+                <li><a href="/dg/">东莞</a></li>
+
+                <li><a href="/zhuhai/">珠海</a></li>
+
+                <li><a href="/shantou/">汕头</a></li>
+
+                <li><a href="/foshan/">佛山</a></li>
+
+                <li><a href="/jiangmen/">江门</a></li>
+
+                <li><a href="/zhongshan/">中山</a></li>
+
+                <li><a href="/huizhou/">惠州</a></li>
+
+                <li><a href="/maoming/">茂名</a></li>
+
+                <li><a href="/shaoguan/">韶关</a></li>
+
+                <li><a href="/zhanjiang/">湛江</a></li>
+
+                <li><a href="/zhaoqing/">肇庆</a></li>
+
+                <li><a href="/meizhou/">梅州</a></li>
+
+                <li><a href="/shanwei/">汕尾</a></li>
+
+                <li><a href="/heyuan/">河源</a></li>
+
+                <li><a href="/yangjiang/">阳江</a></li>
+
+                <li><a href="/qingyuan/">清远</a></li>
+
+                <li><a href="/chaozhou/">潮州</a></li>
+
+                <li><a href="/jieyang/">揭阳</a></li>
+
+                <li><a href="/yunfu/">云浮</a></li>
+            </ul>
+            <ul class="category-child clear" id="sichuan">
+
+                <li><a href="/cd/">成都</a></li>
+
+                <li><a href="/zigong/">自贡</a></li>
+
+                <li><a href="/luzhou/">泸州</a></li>
+
+                <li><a href="/deyang/">德阳</a></li>
+
+                <li><a href="/mianyang/">绵阳</a></li>
+
+                <li><a href="/nanchong/">南充</a></li>
+
+                <li><a href="/liangshan/">凉山</a></li>
+
+                <li><a href="/leshan/">乐山</a></li>
+
+                <li><a href="/dazhou/">达州</a></li>
+
+                <li><a href="/yibin/">宜宾</a></li>
+
+                <li><a href="/panzhihua/">攀枝花</a></li>
+
+                <li><a href="/guangyuan/">广元</a></li>
+
+                <li><a href="/suining/">遂宁</a></li>
+
+                <li><a href="/neijiang/">内江</a></li>
+
+                <li><a href="/guangan/">广安</a></li>
+
+                <li><a href="/meishan/">眉山</a></li>
+
+                <li><a href="/yaan/">雅安</a></li>
+
+                <li><a href="/bazhong/">巴中</a></li>
+
+                <li><a href="/ziyang/">资阳</a></li>
+
+                <li><a href="/aba/">阿坝</a></li>
+
+                <li><a href="/ganzi/">甘孜</a></li>
+
+                <li><a href="/pixian/">郫县</a></li>
+
+                <li><a href="/shuangliu/">双流</a></li>
+            </ul>
+            <ul class="category-child clear" id="zhejiang">
+
+                <li><a href="/hz/">杭州</a></li>
+
+                <li><a href="/nb/">宁波</a></li>
+
+                <li><a href="/wenzhou/">温州</a></li>
+
+                <li><a href="/jiaxing/">嘉兴</a></li>
+
+                <li><a href="/huzhou/">湖州</a></li>
+
+                <li><a href="/shaoxing/">绍兴</a></li>
+
+                <li><a href="/jinhua/">金华</a></li>
+
+                <li><a href="/quzhou/">衢州</a></li>
+
+                <li><a href="/zhoushan/">舟山</a></li>
+
+                <li><a href="/zjtaizhou/">台州</a></li>
+
+                <li><a href="/lishui/">丽水</a></li>
+
+                <li><a href="/cixi/">慈溪</a></li>
+
+                <li><a href="/yiwu/">义乌</a></li>
+            </ul>
+            <ul class="category-child clear" id="guizhou">
+
+                <li><a href="/gy/">贵阳</a></li>
+
+                <li><a href="/liupanshui/">六盘水</a></li>
+
+                <li><a href="/zunyi/">遵义</a></li>
+
+                <li><a href="/anshun/">安顺</a></li>
+
+                <li><a href="/tongren/">铜仁</a></li>
+
+                <li><a href="/bijie/">毕节</a></li>
+
+                <li><a href="/qianxinan/">黔西南</a></li>
+
+                <li><a href="/qiandongnan/">黔东南</a></li>
+
+                <li><a href="/qiannan/">黔南</a></li>
+            </ul>
+            <ul class="category clear">
+                <li data-role="province" data-id="liaoning" class=""><b>辽宁</b></li>
+                <li data-role="province" data-id="jiangsu" class=""><b>江苏</b></li>
+                <li data-role="province" data-id="fujian" class=""><b>福建</b></li>
+                <li data-role="province" data-id="hebei" class=""><b>河北</b></li>
+            </ul>
+            <ul class="category-child clear" id="liaoning">
+
+                <li><a href="/sy/">沈阳</a></li>
+
+                <li><a href="/dl/">大连</a></li>
+
+                <li><a href="/anshan/">鞍山</a></li>
+
+                <li><a href="/fushun/">抚顺</a></li>
+
+                <li><a href="/dandong/">丹东</a></li>
+
+                <li><a href="/jinzhou/">锦州</a></li>
+
+                <li><a href="/yingkou/">营口</a></li>
+
+                <li><a href="/liaoyang/">辽阳</a></li>
+
+                <li><a href="/panjin/">盘锦</a></li>
+
+                <li><a href="/huludao/">葫芦岛</a></li>
+
+                <li><a href="/benxi/">本溪</a></li>
+
+                <li><a href="/fuxin/">阜新</a></li>
+
+                <li><a href="/tieling/">铁岭</a></li>
+
+                <li><a href="/chaoyang/">朝阳市</a></li>
+            </ul>
+            <ul class="category-child clear" id="jiangsu">
+
+                <li><a href="/nj/">南京</a></li>
+
+                <li><a href="/su/">苏州</a></li>
+
+                <li><a href="/wx/">无锡</a></li>
+
+                <li><a href="/xuzhou/">徐州</a></li>
+
+                <li><a href="/changzhou/">常州</a></li>
+
+                <li><a href="/nantong/">南通</a></li>
+
+                <li><a href="/lianyungang/">连云港</a></li>
+
+                <li><a href="/huaian/">淮安</a></li>
+
+                <li><a href="/yancheng/">盐城</a></li>
+
+                <li><a href="/yangzhou/">扬州</a></li>
+
+                <li><a href="/zhenjiang/">镇江</a></li>
+
+                <li><a href="/jstaizhou/">泰州</a></li>
+
+                <li><a href="/suqian/">宿迁</a></li>
+
+                <li><a href="/kunshan/">昆山</a></li>
+
+                <li><a href="/changshu/">常熟</a></li>
+            </ul>
+            <ul class="category-child clear" id="fujian">
+
+                <li><a href="/fz/">福州</a></li>
+
+                <li><a href="/xm/">厦门</a></li>
+
+                <li><a href="/putian/">莆田</a></li>
+
+                <li><a href="/sanming/">三明</a></li>
+
+                <li><a href="/quanzhou/">泉州</a></li>
+
+                <li><a href="/zhangzhou/">漳州</a></li>
+
+                <li><a href="/nanping/">南平</a></li>
+
+                <li><a href="/longyan/">龙岩</a></li>
+
+                <li><a href="/ningde/">宁德</a></li>
+            </ul>
+            <ul class="category-child clear" id="hebei">
+
+                <li><a href="/sjz/">石家庄</a></li>
+
+                <li><a href="/tangshan/">唐山</a></li>
+
+                <li><a href="/handan/">邯郸</a></li>
+
+                <li><a href="/xingtai/">邢台</a></li>
+
+                <li><a href="/baoding/">保定</a></li>
+
+                <li><a href="/zhangjiakou/">张家口</a></li>
+
+                <li><a href="/chengde/">承德</a></li>
+
+                <li><a href="/cangzhou/">沧州</a></li>
+
+                <li><a href="/langfang/">廊坊</a></li>
+
+                <li><a href="/qinhuangdao/">秦皇岛</a></li>
+
+                <li><a href="/hengshui/">衡水</a></li>
+            </ul>
+
+            <ul class="category clear">
+                <li data-role="province" data-id="henan" class=""><b>河南</b></li>
+                <li data-role="province" data-id="jilin" class=""><b>吉林</b></li>
+                <li data-role="province" data-id="heilongjiang" class=""><b>黑龙江</b></li>
+                <li data-role="province" data-id="shandong" class=""><b>山东</b></li>
+            </ul>
+            <ul class="category-child clear" id="henan">
+
+                <li><a href="/zz/">郑州</a></li>
+
+                <li><a href="/luoyang/">洛阳</a></li>
+
+                <li><a href="/pingdingshan/">平顶山</a></li>
+
+                <li><a href="/jiaozuo/">焦作</a></li>
+
+                <li><a href="/hebi/">鹤壁</a></li>
+
+                <li><a href="/xinxiang/">新乡</a></li>
+
+                <li><a href="/anyang/">安阳</a></li>
+
+                <li><a href="/nanyang/">南阳</a></li>
+
+                <li><a href="/luohe/">漯河</a></li>
+
+                <li><a href="/jiyuan/">济源</a></li>
+
+                <li><a href="/kaifeng/">开封</a></li>
+
+                <li><a href="/puyang/">濮阳</a></li>
+
+                <li><a href="/xuchang/">许昌</a></li>
+
+                <li><a href="/sanmenxia/">三门峡</a></li>
+
+                <li><a href="/shangqiu/">商丘</a></li>
+
+                <li><a href="/xinyang/">信阳</a></li>
+
+                <li><a href="/zhoukou/">周口</a></li>
+
+                <li><a href="/zhumadian/">驻马店</a></li>
+            </ul>
+            <ul class="category-child clear" id="jilin">
+
+                <li><a href="/cc/">长春</a></li>
+
+                <li><a href="/jilin/">吉林</a></li>
+
+                <li><a href="/siping/">四平</a></li>
+
+                <li><a href="/liaoyuan/">辽源</a></li>
+
+                <li><a href="/tonghua/">通化</a></li>
+
+                <li><a href="/baishan/">白山</a></li>
+
+                <li><a href="/songyuan/">松原</a></li>
+
+                <li><a href="/baicheng/">白城</a></li>
+
+                <li><a href="/yanbian/">延边</a></li>
+            </ul>
+            <ul class="category-child clear" id="heilongjiang">
+
+                <li><a href="/hrb/">哈尔滨</a></li>
+
+                <li><a href="/qiqihaer/">齐齐哈尔</a></li>
+
+                <li><a href="/jixi/">鸡西</a></li>
+
+                <li><a href="/hegang/">鹤岗</a></li>
+
+                <li><a href="/shuangyashan/">双鸭山</a></li>
+
+                <li><a href="/daqing/">大庆</a></li>
+
+                <li><a href="/hljyichun/">伊春</a></li>
+
+                <li><a href="/jiamusi/">佳木斯</a></li>
+
+                <li><a href="/heihe/">黑河</a></li>
+
+                <li><a href="/suihua/">绥化</a></li>
+
+                <li><a href="/qitaihe/">七台河</a></li>
+
+                <li><a href="/mudanjiang/">牡丹江</a></li>
+
+                <li><a href="/daxinganling/">大兴安岭</a></li>
+            </ul>
+            <ul class="category-child clear" id="shandong">
+
+                <li><a href="/jn/">济南</a></li>
+
+                <li><a href="/qd/">青岛</a></li>
+
+                <li><a href="/wei/">威海</a></li>
+
+                <li><a href="/zibo/">淄博</a></li>
+
+                <li><a href="/zaozhuang/">枣庄</a></li>
+
+                <li><a href="/dongying/">东营</a></li>
+
+                <li><a href="/yantai/">烟台</a></li>
+
+                <li><a href="/weifang/">潍坊</a></li>
+
+                <li><a href="/laiwu/">莱芜</a></li>
+
+                <li><a href="/binzhou/">滨州</a></li>
+
+                <li><a href="/jining/">济宁</a></li>
+
+                <li><a href="/taian/">泰安</a></li>
+
+                <li><a href="/rizhao/">日照</a></li>
+
+                <li><a href="/linyi/">临沂</a></li>
+
+                <li><a href="/dezhou/">德州</a></li>
+
+                <li><a href="/liaocheng/">聊城</a></li>
+
+                <li><a href="/heze/">菏泽</a></li>
+
+                <li><a href="/jiaozhou/">胶州</a></li>
+
+                <li><a href="/jimo/">即墨</a></li>
+            </ul>
+
+            <ul class="category clear">
+                <li data-role="province" data-id="anhui" class=""><b>安徽</b></li>
+                <li data-role="province" data-id="guangxi" class=""><b>广西</b></li>
+                <li data-role="province" data-id="hainan" class=""><b>海南</b></li>
+                <li data-role="province" data-id="neimenggu" class=""><b>内蒙古</b></li>
+            </ul>
+            <ul class="category-child clear" id="anhui">
+
+                <li><a href="/hf/">合肥</a></li>
+
+                <li><a href="/wuhu/">芜湖</a></li>
+
+                <li><a href="/bengbu/">蚌埠</a></li>
+
+                <li><a href="/maanshan/">马鞍山</a></li>
+
+                <li><a href="/anqing/">安庆</a></li>
+
+                <li><a href="/chuzhou/">滁州</a></li>
+
+                <li><a href="/fuyang/">阜阳</a></li>
+
+                <li><a href="/ahsuzhou/">宿州</a></li>
+
+                <li><a href="/chaohu/">巢湖</a></li>
+
+                <li><a href="/luan/">六安</a></li>
+
+                <li><a href="/huainan/">淮南</a></li>
+
+                <li><a href="/huaibei/">淮北</a></li>
+
+                <li><a href="/tongling/">铜陵</a></li>
+
+                <li><a href="/huangshan/">黄山</a></li>
+
+                <li><a href="/bozhou/">亳州</a></li>
+
+                <li><a href="/chizhou/">池州</a></li>
+
+                <li><a href="/xuancheng/">宣城</a></li>
+            </ul>
+            <ul class="category-child clear" id="guangxi">
+
+                <li><a href="/nn/">南宁</a></li>
+
+                <li><a href="/gl/">桂林</a></li>
+
+                <li><a href="/liuzhou/">柳州</a></li>
+
+                <li><a href="/wuzhou/">梧州</a></li>
+
+                <li><a href="/qinzhou/">钦州</a></li>
+
+                <li><a href="/guigang/">贵港</a></li>
+
+                <li><a href="/gxyulin/">玉林</a></li>
+
+                <li><a href="/baise/">百色</a></li>
+
+                <li><a href="/hechi/">河池</a></li>
+
+                <li><a href="/laibin/">来宾</a></li>
+
+                <li><a href="/beihai/">北海</a></li>
+
+                <li><a href="/fangchenggang/">防城港</a></li>
+
+                <li><a href="/hezhou/">贺州</a></li>
+
+                <li><a href="/chongzuo/">崇左</a></li>
+            </ul>
+            <ul class="category-child clear" id="hainan">
+
+                <li><a href="/hn/">海口</a></li>
+
+                <li><a href="/sanya/">三亚</a></li>
+
+                <li><a href="/qh/">琼海</a></li>
+
+                <li><a href="/danzhou/">儋州</a></li>
+
+                <li><a href="/wuzhishan/">五指山</a></li>
+            </ul>
+            <ul class="category-child clear" id="neimenggu">
+
+                <li><a href="/nmg/">呼和浩特</a></li>
+
+                <li><a href="/baotou/">包头</a></li>
+
+                <li><a href="/wuhai/">乌海</a></li>
+
+                <li><a href="/chifeng/">赤峰</a></li>
+
+                <li><a href="/tongliao/">通辽</a></li>
+
+                <li><a href="/eerduosi/">鄂尔多斯</a></li>
+
+                <li><a href="/hulunbeier/">呼伦贝尔</a></li>
+
+                <li><a href="/bayannaoer/">巴彦淖尔</a></li>
+
+                <li><a href="/wulanchabu/">乌兰察布</a></li>
+
+                <li><a href="/xingan/">兴安</a></li>
+
+                <li><a href="/xilinguole/">锡林郭勒</a></li>
+
+                <li><a href="/alashan/">阿拉善</a></li>
+            </ul>
+            <ul class="category clear">
+                <li data-role="province" data-id="shan1xi1" class=""><b>山西</b></li>
+                <li data-role="province" data-id="ningxia" class=""><b>宁夏</b></li>
+                <li data-role="province" data-id="gansu" class=""><b>甘肃</b></li>
+                <li data-role="province" data-id="shan3xi1" class=""><b>陕西</b></li>
+            </ul>
+            <ul class="category-child clear" id="shan1xi1">
+
+                <li><a href="/ty/">太原</a></li>
+
+                <li><a href="/datong/">大同</a></li>
+
+                <li><a href="/yangquan/">阳泉</a></li>
+
+                <li><a href="/changzhi/">长治</a></li>
+
+                <li><a href="/jincheng/">晋城</a></li>
+
+                <li><a href="/shuozhou/">朔州</a></li>
+
+                <li><a href="/jinzhong/">晋中</a></li>
+
+                <li><a href="/yuncheng/">运城</a></li>
+
+                <li><a href="/xinzhou/">忻州</a></li>
+
+                <li><a href="/linfen/">临汾</a></li>
+
+                <li><a href="/lvliang/">吕梁</a></li>
+            </ul>
+            <ul class="category-child clear" id="ningxia">
+
+                <li><a href="/yc/">银川</a></li>
+
+                <li><a href="/shizuishan/">石嘴山</a></li>
+
+                <li><a href="/wuzhong/">吴忠</a></li>
+
+                <li><a href="/guyuan/">固原</a></li>
+
+                <li><a href="/zhongwei/">中卫</a></li>
+            </ul>
+            <ul class="category-child clear" id="gansu">
+
+                <li><a href="/lz/">兰州</a></li>
+
+                <li><a href="/jinchang/">金昌</a></li>
+
+                <li><a href="/baiyin/">白银</a></li>
+
+                <li><a href="/tianshui/">天水</a></li>
+
+                <li><a href="/wuwei/">武威</a></li>
+
+                <li><a href="/zhangye/">张掖</a></li>
+
+                <li><a href="/pingliang/">平凉</a></li>
+
+                <li><a href="/jiuquan/">酒泉</a></li>
+
+                <li><a href="/qingyang/">庆阳</a></li>
+
+                <li><a href="/dingxi/">定西</a></li>
+
+                <li><a href="/jiayuguan/">嘉峪关</a></li>
+
+                <li><a href="/longnan/">陇南</a></li>
+
+                <li><a href="/linxia/">临夏</a></li>
+
+                <li><a href="/gannan/">甘南</a></li>
+            </ul>
+            <ul class="category-child clear" id="shan3xi1">
+
+                <li><a href="/xa/">西安</a></li>
+
+                <li><a href="/tongchuan/">铜川</a></li>
+
+                <li><a href="/baoji/">宝鸡</a></li>
+
+                <li><a href="/xianyang/">咸阳</a></li>
+
+                <li><a href="/weinan/">渭南</a></li>
+
+                <li><a href="/yanan/">延安</a></li>
+
+                <li><a href="/hanzhong/">汉中</a></li>
+
+                <li><a href="/sxyulin/">榆林</a></li>
+
+                <li><a href="/ankang/">安康</a></li>
+
+                <li><a href="/shangluo/">商洛</a></li>
+            </ul>
+            <ul class="category clear">
+                <li data-role="province" data-id="qinghai" class=""><b>青海</b></li>
+                <li data-role="province" data-id="hubei" class=""><b>湖北</b></li>
+                <li data-role="province" data-id="hunan" class=""><b>湖南</b></li>
+                <li data-role="province" data-id="jiangxi" class=""><b>江西</b></li>
+            </ul>
+            <ul class="category-child clear" id="qinghai">
+
+                <li><a href="/xn/">西宁</a></li>
+
+                <li><a href="/haidong/">海东</a></li>
+
+                <li><a href="/haibei/">海北</a></li>
+
+                <li><a href="/huangnan/">黄南</a></li>
+
+                <li><a href="/hainanzhou/">海南州</a></li>
+
+                <li><a href="/guoluo/">果洛</a></li>
+
+                <li><a href="/yushu/">玉树</a></li>
+
+                <li><a href="/haixi/">海西</a></li>
+            </ul>
+            <ul class="category-child clear" id="hubei">
+
+                <li><a href="/wh/">武汉</a></li>
+
+                <li><a href="/huangshi/">黄石</a></li>
+
+                <li><a href="/xiangyang/">襄阳</a></li>
+
+                <li><a href="/shiyan/">十堰</a></li>
+
+                <li><a href="/jingzhou/">荆州</a></li>
+
+                <li><a href="/yichang/">宜昌</a></li>
+
+                <li><a href="/jingmen/">荆门</a></li>
+
+                <li><a href="/ezhou/">鄂州</a></li>
+
+                <li><a href="/xiantao/">仙桃</a></li>
+
+                <li><a href="/qianjiang/">潜江</a></li>
+
+                <li><a href="/xiaogan/">孝感</a></li>
+
+                <li><a href="/huanggang/">黄冈</a></li>
+
+                <li><a href="/xianning/">咸宁</a></li>
+
+                <li><a href="/suizhou/">随州</a></li>
+
+                <li><a href="/enshi/">恩施</a></li>
+
+                <li><a href="/tianmen/">天门</a></li>
+
+                <li><a href="/shennongjia/">神农架</a></li>
+            </ul>
+            <ul class="category-child clear" id="hunan">
+
+                <li><a href="/cs/">长沙</a></li>
+
+                <li><a href="/zhuzhou/">株洲</a></li>
+
+                <li><a href="/xiangtan/">湘潭</a></li>
+
+                <li><a href="/hengyang/">衡阳</a></li>
+
+                <li><a href="/shaoyang/">邵阳</a></li>
+
+                <li><a href="/yueyang/">岳阳</a></li>
+
+                <li><a href="/changde/">常德</a></li>
+
+                <li><a href="/chenzhou/">郴州</a></li>
+
+                <li><a href="/yongzhou/">永州</a></li>
+
+                <li><a href="/loudi/">娄底</a></li>
+
+                <li><a href="/zhangjiajie/">张家界</a></li>
+
+                <li><a href="/yiyang/">益阳</a></li>
+
+                <li><a href="/huaihua/">怀化</a></li>
+
+                <li><a href="/xiangxi/">湘西</a></li>
+            </ul>
+            <ul class="category-child clear" id="jiangxi">
+
+                <li><a href="/nc/">南昌</a></li>
+
+                <li><a href="/jingdezhen/">景德镇</a></li>
+
+                <li><a href="/pingxiang/">萍乡</a></li>
+
+                <li><a href="/jiujiang/">九江</a></li>
+
+                <li><a href="/xinyu/">新余</a></li>
+
+                <li><a href="/yingtan/">鹰潭</a></li>
+
+                <li><a href="/ganzhou/">赣州</a></li>
+
+                <li><a href="/shangrao/">上饶</a></li>
+
+                <li><a href="/jian/">吉安</a></li>
+
+                <li><a href="/jxfuzhou/">抚州</a></li>
+
+                <li><a href="/jxyichun/">宜春</a></li>
+            </ul>
+            <ul class="category clear">
+                <li data-role="province" data-id="yunnan" class=""><b>云南</b></li>
+                <li data-role="province" data-id="xinjiang" class=""><b>新疆</b></li>
+                <li data-role="province" data-id="xicang" class=""><b>西藏</b></li>
+                <li><a href="/xianggang/">香港</a></li>
+            </ul>
+            <ul class="category-child clear" id="yunnan">
+
+                <li><a href="/km/">昆明</a></li>
+
+                <li><a href="/qujing/">曲靖</a></li>
+
+                <li><a href="/yuxi/">玉溪</a></li>
+
+                <li><a href="/baoshan/">保山</a></li>
+
+                <li><a href="/zhaotong/">昭通</a></li>
+
+                <li><a href="/honghe/">红河</a></li>
+
+                <li><a href="/xishuangbanna/">西双版纳</a></li>
+
+                <li><a href="/chuxiong/">楚雄</a></li>
+
+                <li><a href="/dali/">大理</a></li>
+
+                <li><a href="/dehong/">德宏</a></li>
+
+                <li><a href="/lijiang/">丽江</a></li>
+
+                <li><a href="/puer/">普洱</a></li>
+
+                <li><a href="/lincang/">临沧</a></li>
+
+                <li><a href="/wenshan/">文山</a></li>
+
+                <li><a href="/nujiang/">怒江</a></li>
+
+                <li><a href="/diqing/">迪庆</a></li>
+            </ul>
+            <ul class="category-child clear" id="xinjiang">
+
+                <li><a href="/xj/">乌鲁木齐</a></li>
+
+                <li><a href="/kelamayi/">克拉玛依</a></li>
+
+                <li><a href="/tulufan/">吐鲁番</a></li>
+
+                <li><a href="/hami/">哈密</a></li>
+
+                <li><a href="/hetian/">和田</a></li>
+
+                <li><a href="/akesu/">阿克苏</a></li>
+
+                <li><a href="/kashi/">喀什</a></li>
+
+                <li><a href="/yili/">伊犁</a></li>
+
+                <li><a href="/shihezi/">石河子</a></li>
+
+                <li><a href="/bayinguoleng/">巴音郭楞</a></li>
+
+                <li><a href="/kezilesu/">克孜勒苏</a></li>
+
+                <li><a href="/changji/">昌吉</a></li>
+
+                <li><a href="/boertala/">博尔塔拉</a></li>
+
+                <li><a href="/tacheng/">塔城</a></li>
+
+                <li><a href="/aletai/">阿勒泰</a></li>
+
+                <li><a href="/kuerle/">库尔勒</a></li>
+
+                <li><a href="/alaer/">阿拉尔</a></li>
+
+                <li><a href="/tumushuke/">图木舒克</a></li>
+
+                <li><a href="/wujiaqu/">五家渠</a></li>
+            </ul>
+            <ul class="category-child clear" id="xicang">
+
+                <li><a href="/xz/">拉萨</a></li>
+
+                <li><a href="/changdu/">昌都</a></li>
+
+                <li><a href="/shannan/">山南</a></li>
+
+                <li><a href="/rikaze/">日喀则</a></li>
+
+                <li><a href="/naqu/">那曲</a></li>
+
+                <li><a href="/ali/">阿里</a></li>
+
+                <li><a href="/linzhi/">林芝</a></li>
+            </ul>
+            <ul class="category clear">
+                <li><a href="/aomen/">澳门</a></li>
+            </ul>
+        </div>
+    </div>
+    <script src="scripts/jquery.js"></script>
+    <script type="text/javascript">
+        var hotCityData = [
+                     { id: 110100, name: "北京市", pid: "110000", type: "city", pinyin: "bei jing shi", py: "bjs", prefix: "b" },
+                     { id: 310100, name: "上海市", pid: "310000", type: "city", pinyin: "shang hai shi", py: "shs", prefix: "s" },
+                     { id: 440100, name: "广州市", pid: "440000", type: "city", pinyin: "guang zhou shi", py: "gzs", prefix: "g" },
+                     { id: 440300, name: "深圳市", pid: "440000", type: "city", pinyin: "shen zhen shi", py: "szs", prefix: "s" },
+                     { id: 330100, name: "杭州市", pid: "330000", type: "city", pinyin: "hang zhou shi", py: "hzs", prefix: "h" },
+                     { id: 120000, name: "天津市", pid: "86", type: "province", pinyin: "tian jin shi", py: "tjs", prefix: "t" },
+                     { id: 320500, name: "苏州市", pid: "320000", type: "city", pinyin: "su zhou shi", py: "szs", prefix: "s" },
+                     { id: 330200, name: "宁波市", pid: "330000", type: "city", pinyin: "ning bo shi", py: "nbs", prefix: "n" },
+                     { id: 450300, name: "桂林市", pid: "450000", type: "city", pinyin: "gui lin shi", py: "gls", prefix: "g" },
+                     { id: 510100, name: "成都市", pid: "510000", type: "city", pinyin: "cheng dou shi", py: "cds", prefix: "c" },
+                     { id: 341003, name: "黄山区", pid: "341000", type: "district", pinyin: "huang shan qu", py: "hsq", prefix: "h" },
+                     { id: 610100, name: "西安市", pid: "610000", type: "city", pinyin: "xi an shi", py: "xas", prefix: "x" },
+                     { id: 230100, name: "哈尔滨市", pid: "230000", type: "city", pinyin: "ha er bin shi", py: "hebs", prefix: "h" },
+                     { id: 330700, name: "金华市", pid: "330000", type: "city", pinyin: "jin hua shi", py: "jhs", prefix: "j" },
+                     { id: 500100, name: "重庆市", pid: "500000", type: "city", pinyin: "chong qing shi", py: "cqs", prefix: "c" },
+                     { id: 370200, name: "青岛市", pid: "370000", type: "city", pinyin: "qing dao shi", py: "qds", prefix: "q" },
+                     { id: 370600, name: "烟台市", pid: "370000", type: "city", pinyin: "yan tai shi", py: "yts", prefix: "y" },
+                     { id: 350100, name: "福州市", pid: "350000", type: "city", pinyin: "fu zhou shi", py: "fzs", prefix: "f" },
+                     { id: 320300, name: "徐州市", pid: "320000", type: "city", pinyin: "xu zhou shi", py: "xzs", prefix: "x" }
+        ];
+        var html = '<ul class=\"category clear\">';
+        for (var i = 0; i < hotCityData.length; i++) {
+            html += '<li data-role=\"province\" data-id=' + hotCityData[i].id + '>' + '<b>' + hotCityData[i].name + '</b>' + '</li>';
+        }
+        html += '</ul>';
+        $(".column-body1").html(html);
+
+        $(function () {
+            $(".category li").click(function () {
+                // alert($(this).attr("data-id"));
+                $(".category li.active").removeClass("active");
+                $(this).toggleClass("active");
+                var curD = $(this).attr("data-id");
+                $("#" + curD).toggle().closest("ul").siblings(".category-child").hide();
+                if ($("#" + curD).is(":hidden")){
+                    // alert("隐藏了");
+                    $(".category li.active").removeClass("active");
+
+                }
+            })
+        })
+    </script>
+</body>
+</html>

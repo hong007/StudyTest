@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json数据输出</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="style/style02.css">
+</head>
+<body>
+    <button type="button" id="btn1">按钮</button>
+    <div class="column">
+        <div class="column-head">
+            <h2 class="column-title">热门城市</h2>
+        </div>
+        <div class="column-body">
+            <ul class="category category1">
+                
+            </ul>
+        </div>
+         <div class="column-body">
+         <br><br><br>
+            <ul class="category category2">
+                
+            </ul></div>
+    </div>
+    <!-- <div id="divCustomers">
+        <div class="column-head">
+          <h2 class="column-title">其他城市<span>(可在省份里选择具体城市)</span></h2>
+        </div>
+    </div> -->
+    <button id="testBtn">点击</button>
+    <button onclick="changeProvince();">点击</button>
+
+
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/cityselect.js"></script>
+    <script type="text/javascript">
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea', '86');
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            // $("#testBtn").click(function(){
+            //     var str=$(".category li").eq(6).data("id");
+            //     var str1=str.toString().substr(0,2);
+            //     alert(str1);
+            // });
+            $(".category li").each(function(){
+                 var curIndex=$(this).index();
+                // alert("点击");
+                var curDataId=$(this).data("id");
+                changeProvince(curIndex,curDataId);
+            })
+            $(".category>li").click(function () {
+                // alert($(this).attr("data-id"));
+                $(".category li.active").removeClass("active");
+                $(this).toggleClass("active");
+                var curD = $(this).attr("data-id");
+                // $(this).children("ul").toggle().siblings("li").child("ul").hide();
+                $("#" + curD).toggle().closest("li").siblings("li").find(".category-child").hide();
+                if ($("#" + curD).is(":hidden")){
+                    // alert("隐藏了");
+                    $(".category li.active").removeClass("active");
+
+                }
+            })
+        })
+    </script>
+</body>
+</html>

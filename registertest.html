@@ -1,0 +1,230 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>注册页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <script src="scripts/jquery.js"></script>
+    <style type="text/css">
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none !important;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-reg-bg">
+        <img src="../../images/reg-bg.jpg" />
+    </div>
+    <!-- header -->
+    <div class="return-wrap">
+        <a class="return" href="javascript:history.back();">
+            <i class="am-icon-angle-left am-icon-lg"></i>
+        </a>
+    </div>
+    <!-- header end -->
+    <!-- reg content -->
+    <div class="content-wrap mt-60">
+        <form id="frm_login" method="post" action="" onsubmit="adaptValue();">
+            <div class="item item-username" id="line_phone_number">
+                <input type="number" name="phone_number" class="text-input text-username" placeholder="请输入手机号码" autocomplete="off" id="phone_number" oninput="checkTextLength(this,11)" onblur="checkTextValue(this)" />
+                <div class="none"><span></span></div>
+            </div>
+            <div class="item item-password" id="line_password">
+                <input id="password" name="password" class="text-input text-password" type="password" placeholder="密码" minlength="6" maxlength="20" />
+                <div class="none"><span></span></div>
+            </div>
+            <div class="item item-password_two" id="line_repeat">
+                <input id="repeat" name="repeat" class="text-input text-password" type="password" placeholder="确认密码" minlength="6" maxlength="20">
+                <div class="none"><span></span></div>
+            </div>
+            <div class="item item-captcha clearfix">
+                <input id="" class="text-input text-captcha" type="text" placeholder="输入验证码" value="">
+                <button type="button" class="captcha-btn" id="GetVerifyCode">获取手机验证码</button>
+            </div>
+            <div class="reg-btn-wrap1">
+                <input type="submit" id="submitIn" class="btn-ty reg-btn-primary" value="注册" />
+            </div>
+            <div class="readagreement-wrap" onclick="onReadAgreementClick();">
+                <input type="checkbox" name="agree" id="agree" onchange="v_submitbutton();" />
+                同意《<a id="readagreement" href="#agreement" onclick="showAgreement();" title="云地网使用协议">云地网使用协议</a>》
+            </div>
+            <div class="no-join">已经是会员？</div>
+            <div class="login-btn-wrap2"><a class="btn-ty login-btn-secondary" href="index.html">登录</a></div>
+    </div>
+    <!-- reg content end -->
+    <script type="text/javascript">
+        var time = 60;
+        var interval;
+        function waitEnabled() {
+            if (time === 0) {
+                $("#GetVerifyCode").html("获取验证码");
+                $('#GetVerifyCode').removeAttr('disabled');
+                window.clearInterval(interval);
+                $('#GetVerifyCode').css("background", "#444");
+                time = 60;
+            } else {
+                $("#GetVerifyCode").html("已发送(" + --time + ")");
+            }
+
+        }
+
+        function verifyCode() {
+            var mobile = $('#phone_number').val();
+            if ($.trim(mobile) === "" || $.trim(mobile).length !== 11) {
+                alert("手机号码为空或不合法");
+                return false;
+            } else {
+                //SendType = 1 表示发送验证码
+                //收到短信之后允许修改手机号码
+                $('#phone_number').attr("readonly", true);
+                $('#GetVerifyCode').attr("disabled", "disabled");
+                $('#GetVerifyCode').css("background", "#A8A8A8");
+                $('#GetVerifyCode').html("已发送(60)");
+                interval = setInterval("waitEnabled()", 1000);
+                //alert("发送成功");
+            }
+        }
+
+
+        $('#GetVerifyCode').click(function () { verifyCode(); });
+
+        // 和后台请求数据时代码
+        // function verifyCode() {
+        //     var mobile = $('#Mobile').val();
+        //     if ($.trim(mobile) === "" || $.trim(mobile).length !== 11) {
+        //         alert("手机号码为空或不合法");
+        //         return false;
+        //     }
+        //     //SendType = 1 表示发送验证码
+        //     $.post('/Ajax/Register.ashx', { action: 'SendSms', sendtype: 1, mobile: mobile }, function (resp) {
+        //         if (resp.status === 'ok') {
+        //             //收到短信之后允许修改手机号码
+        //             $('#Mobile').attr("readonly", true);
+        //             LoginInfo.SaveStorage(mobile + "Code", JSON.stringify({ code: resp.data, date: new Date().getTime() }));
+        //             $('#GetVerifyCode').attr("disabled", "disabled");
+        //             $('#GetVerifyCode').css("background", "#A8A8A8");
+        //             $('#GetVerifyCode').html("已发送(60)");
+        //             interval = setInterval("waitEnabled()", 1000);
+        //             //alert("发送成功");
+        //         }
+        //         else if (resp.status === 'have') {
+        //             alert(resp.msg);
+        //         }
+        //         else {
+        //             alert("发送失败，请稍后重试");
+        //         }
+        //     });
+        // }
+    </script>
+
+    <script type="text/javascript">
+        // 验证密码
+        var ph = 1;
+        var psw = 1;
+        var repsd = 1;
+        // 验证手机号
+        function checkTextLength(obj, length) {
+            if (obj.value.length > length) {
+                obj.value = obj.value.substr(0, length)
+            }
+        }
+        function checkTextValue(obj) {
+            // var reg= /^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}$/;
+            var reg = /^1[0-9]{10}$/;
+            if (obj.value == "") {
+                alert("手机号不能为空！");
+                ph = 1;
+                // obj.focus
+                // obj.style.borderBotttomColor=red;
+            } else if (!reg.test(obj.value)) {
+                ph = 1;
+                alert("手机格式错误！");
+                // return
+            } else {
+                // alert("手机号正确");
+                ph = 2;
+            }
+        }
+
+
+        $(function () {
+            $("#password").blur(function () {
+                $("#repeat").val("").focus();
+                if ($(this).val() == "") {
+
+                    alert("密码不能为空！")
+                } else if ($(this).val().length < 6) {
+                    alert("密码不能少于六位！")
+                } else {
+                    // alert("密码正确");
+                    // psw=2;
+                    // $("#repeat").focus();
+                }
+            });
+            $("#repeat").blur(function () {
+                if ($(this).val() == "") {
+                    repsd = 1;
+                    alert("密码不能为空！")
+                } else if ($(this).val().length < 6) {
+                    alert("密码不能少于六位！");
+                    repsd = 1;
+
+                } else if ($(this).val() != $("#password").val()) {
+                    alert("密码不一致！");
+                    $("#password").focus();
+                    repsd = 1;
+                } else {
+                    // alert("验证密码号正确");
+                    repsd = 2;
+                }
+            });
+            $("#submitIn").click(function () {
+                if (ph == 2 && repsd == 2) {
+                    alert("通过");
+                } else {
+                    alert("请先填写注册信息")
+                }
+            })
+        })
+
+    </script>
+</body>
+</html>
+
+<body>
+    <div class="column">
+        <!-- <div class="column-head">
+            <h2 class="column-title">热门城市</h2>
+        </div> -->
+        <div class="column-body">
+            <ul class="category"></ul>
+        </div>
+    </div>
+    <script src="../../scripts/jquery.js"></script>
+    <script src="../../scripts/cityselect.js"></script>
+    <script type="text/javascript">
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea', '86');
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".category li").each(function () {
+                var curIndex = $(this).index();
+                var curDataId = $(this).data("id");
+                changeProvince(curIndex, curDataId);
+            })
+            $(".category>li").click(function () {
+                $(".category li.active").removeClass("active");
+                $(this).toggleClass("active");
+                var curD = $(this).attr("data-id");
+                $("#" + curD).toggle().closest("li").siblings("li").find(".category-child").hide();
+                if ($("#" + curD).is(":hidden")) {
+                    // alert("隐藏了");
+                    $(".category li.active").removeClass("active");
+
+                }
+            })
+        })
+    </script>

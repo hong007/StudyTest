@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery-Extend使用</title>
+    <script type="text/javascript" src="jQuery.js"></script>
+    <!-- <script type="text/javascript" src="jQuery.extend.js"></script> -->
+    <style type="text/css">
+        .tabhead {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .tabspan {
+            position: relative;
+            margin: 10px;
+            /*border: 1px solid #07aab2;*/
+        }
+		.span-active{
+			color: #f15f5f;
+		}
+        .span-active:after {
+            content: "";
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            margin-left: -8px;
+            display: inline-block;
+            height: 0;
+            border-bottom: 2px solid #f15f5f;
+            width: 16px;
+        }
+
+        .tabcontent {
+            border: 1px solid red;
+            margin-top: 30px;
+        }
+
+        .tabcontent .form {
+        }
+    </style>
+</head>
+<body>
+    <div>点我</div>
+    <div class="tabhead">
+        <span id="rlsLand" class="tabspan span-active">发布土地</span>
+        <span id="rlsDemand" class="tabspan">发布需求</span>
+    </div>
+    <div class="tabcontent">
+        <form class="rlsform rls-land">内容1</form>
+        <form class="rlsform rls-land" style="display: none;">内容2</form>
+    </div>
+    <script type="text/javascript">
+    	jQuery.fn.extend({
+            tab: function () {
+            	this.index();
+            	var curIndex=this.index();
+            	alert(curIndex);
+                this.addClass("span-active").siblings("span").removeClass("span-active");
+                $(".rlsform").eq(curIndex).show().siblings(".rlsform").hide();
+            }
+        });
+    	$(function () {
+            $(".tabspan").click(function () {
+            	$(this).tab()
+                // var curI=$(this).index();
+                // $(this).addClass("span-active").siblings("span").removeClass("span-active");
+                // $(".rlsform").eq($(this).index()).show().siblings(".rlsform").hide();
+            });
+        })
+        // jQuery.extend({
+        // 	showName:function(){
+        // 		alert(name);
+        // 	}
+        // });
+        // 	jQuery.showName("深蓝");
+        // jQuery.fn.test=function(){
+        // 	alert("这是jQuery对象方法！")
+        // }
+        // jQuery("div").click(function(){
+        // 	$(this).test();//在jQuery当前对象上调用test()方法
+        // });
+
+
+        // jQuery.fn.extend({
+        //     test: function () {
+        //         return this.each(function () {
+        //             alert(this.nodeName)
+        //         });
+        //     }
+        // });
+        // jQuery("body *").click(function () {
+        //     $(this).test(); //调用jQuery对象方法
+        // });
+
+        
+    </script>
+</body>
+</html>

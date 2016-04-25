@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无背景箭头的下拉框</title>
+</head>
+<body>
+    徹底無下拉箭頭的Select選框支持IE-Firefox-Chrome<br /><br />
+    <select style="position:absolute;clip: rect(3px 30px 18px 3px);">
+        <script language="JavaScript">
+            for (i = 1; i < 13; i++)
+                document.write('<option>' + i + '月</option>')
+            //-->
+        </script>
+    </select><br />
+    <br />
+    <script type="text/javascript">
+        function get_cookie(name) {
+            search = name + "="
+            if (document.cookie.length > 0) {
+                offset = document.cookie.indexOf(search)
+                if (offset >= 0) {
+                    offset += search.length
+                    end = document.cookie.indexOf(";", offset)
+                    if (end == -1) end = document.cookie.length
+                    return unescape(document.cookie.substring(offset, end))
+                }
+            }
+            return null
+        }
+
+        function setcolor() {
+            choice = document.back.colar.selectedIndex
+            new_colar = document.back.colar.options[choice].value
+            document.bgColor = new_colar
+            document.cookie = "backgroundcolor=" + new_colar
+        }
+        if (get_cookie("backgroundcolor") != "") document.bgColor = get_cookie("backgroundcolor")
+    </script>
+    <form name="back" size="0">
+        <select name="colar" onclick="color()" style="position:absolute;clip: rect(3px 95px 18px 3px);font-size:12px">
+            <option>--默認背景顏色--</option>
+            <option value="#66aaff" style="background-color: #66aaff">33333</option>
+            <option value="#dddddd" style="background-color: #dddddd"></option>
+            <option value="blue" style="background-color: blue"></option>
+            <option value="skyblue" style="background-color: skyblue"></option>
+            <option value="#aaccff" style="background-color: #aaccff"></option>
+            <option value="green" style="background-color: green"></option>
+            <option value="#33dd33" style="background-color: #33dd33"></option>
+            <option value="#80ff80" style="background-color: #80ff80"></option>
+            <option value="#ccffcc" style="background-color: #ccffcc"></option>
+            <option value="orange" style="background-color: orange"></option>
+            <option value="#ffccdd" style="background-color: #ffccdd"></option>
+            <option value="silver" style="background-color: silver"></option>
+            <option value="yellow" style="background-color: yellow"></option>
+            <option value="#eabe83" style="background-color: #eabe83"></option>
+            <option value="#cccc66" style="background-color: #cccc66"></option>
+            <option value="#777777" style="background-color: #777777"></option>
+            <option value="#555555" style="background-color: #555555"></option>
+            <option value="#222222" style="background-color: #222222"></option>
+            </option>
+        </select>
+        <input type="button" value="確定" onclick="setcolor()" style="position:absolute;left:130px;width:40px;height:18px" />
+    </form> <br /><br />
+</body>
+</html>

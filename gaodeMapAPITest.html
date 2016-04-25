@@ -1,0 +1,166 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style type="text/css">
+        body, html {
+            height: 100%;
+            margin: 0px;
+            font: 12px Arial;
+        }
+        .com{
+           border: 1px solid #07aab2;
+           padding: 20px;
+           margin-bottom: 20px;
+        }
+        .left{
+            float: left;
+            height: auto;
+        }
+        #container{
+            height: 100%;
+            width: 80%;
+            float:left;
+            margin-left: 30px;
+        }
+        .taiwan {
+            border: solid 1px red;
+            color: red;
+            float: left;
+            width: 50px;
+            background-color: rgba(255,0,0,0.1);
+        }
+    </style>
+    <title>Marker example</title>
+    <style type="text/css">
+    .circle{
+        border-radius: 100%;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    </style>
+</head>
+<body>
+<div class="left">
+    <ul class="u1 f_l com">
+        <li class="show">
+            <a catid="0" href="javascript:;" class="level"><i class="sicon sicon_0"></i>全部</a>
+        </li>
+        <li>
+            <a title="耕地出租" catid="8" href="javascript:;" class="level"><i class="sicon sicon_1"></i>耕地</a>
+        </li>
+        <li>
+            <a title="林地出租" catid="10" href="javascript:;" class="level"><i class="sicon sicon_2"></i>林地</a>
+        </li>
+        <li>
+            <a title="住宅地出租" catid="14" href="javascript:;" class="level"><i class="sicon sicon_3"></i>住宅地</a>
+        </li>
+        <li>
+            <a title="水域出租" catid="17" href="javascript:;" class="level"><i class="sicon sicon_5"></i>水域</a>
+        </li>
+    </ul>
+    <div class="search-condit com">
+    <p>搜索条件</p>
+        <select id="select1">
+            <option option="1">1.1</option>
+            <option option="2">1.2</option>
+            <option option="3">1.3</option>
+        </select>
+
+        <select id="select2">
+            <option option="1">2.1</option>
+            <option option="2">2.2</option>
+            <option option="3">2.3</option>
+        </select>
+    </div>
+    <div class="listcont com">
+        <ul class="list-menu">
+            <li><a href="">项目1</a></li>
+            <li><a href="">项目2</a></li>
+            <li><a href="">项目3</a></li>
+            <li><a href="">项目4</a></li>
+        </ul>
+    </div>
+    
+</div>
+    <div id="container" tabindex="0"></div>
+    <script src="http://webapi.amap.com/js/marker.js"></script>
+    <script src="http://webapi.amap.com/js/marker2.js"></script>
+    <script src="http://webapi.amap.com/maps?v=1.3&key=9aa78daa0486198671819c32970cb272"></script>
+    <script type="text/javascript">
+        var mapObj = new AMap.Map('container', {
+            resizeEnable: true,
+            zoom: 5,
+            zooms: [5, 18],
+            center: [106.485352, 34.603692]
+        });
+        // mapObj.setZoom(3,18)
+        var createMarker = function (data, hide) {
+            var div = document.createElement('div');
+            div.className = 'circle';
+            var r = Math.floor(data.count / 1024);
+            div.style.backgroundColor = hide ? '#393' : '#09f';
+            div.innerHTML = data.count || 0;
+            var marker = new AMap.Marker({
+                content: div,
+                title: data.name,
+                position: data.center.split(','),
+                offset: new AMap.Pixel(-24, -15),
+                // offset: new AMap.Pixel(-24, 5),
+                zIndex: data.count
+            });
+            marker.subMarkers = [];
+            if (data.name === '北京市' || data.name === '河南省') {
+                marker.setLabel({ content: '&larr;请点击', offset: new AMap.Pixel(45, 0) })
+                mapObj.setCenter(marker.getPosition());
+            }
+            if (!hide) {
+                marker.setMap(mapObj)
+            }
+            if (data.subDistricts && data.subDistricts.length) {
+                for (var i = 0 ; i < data.subDistricts.length; i += 1) {
+                    marker.subMarkers.push(createMarker(data.subDistricts[i], true));
+                }
+            }
+            return marker;
+        }
+        var _onZoomEnd = function (e) {
+            if (mapObj.getZoom() < 6) {
+                for (var i = 0; i < markers.length; i += 1) {
+                    mapObj.remove(markers[i].subMarkers)
+                }
+                mapObj.add(markers);
+            }else{
+                for (var i = 0; i < markers.length; i += 1) {
+                    mapObj.add(markers[i].subMarkers)
+                }
+                mapObj.remove(markers);
+            }
+                // mapObj.remove(markers);
+            // mapObj.add(markers);
+            
+        }
+        var _onClick = function (e) {
+            if (e.target.subMarkers.length) {
+                mapObj.add(e.target.subMarkers);
+                mapObj.setFitView(e.target.subMarkers);
+                mapObj.remove(markers);
+            }
+            // e.style.display=none;
+        }
+        var markers = []; //province见Demo引用的JS文件
+        for (var i = 0; i < provinces.length; i += 1) {
+            var marker = createMarker(provinces[i]);
+            markers.push(marker);
+            AMap.event.addListener(marker, 'click', _onClick);
+        }
+        //mapObj.setFitView();
+        AMap.event.addListener(mapObj, 'zoomend', _onZoomEnd);
+        // AMap.event.addListener(marker, 'click', _onClick);
+    </script></body>
+</html>

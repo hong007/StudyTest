@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HTML5本地存储</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"></head>
+<body>
+	<form class="form1">
+		<label for="">
+			姓
+			<input type="text" id="lastName" />
+		</label>
+		<button type="button" id="stepOne">下一步</button>
+
+	</form>
+	<form class="form2" style="display: none;">
+		<label for="">
+			名
+			<input type="text" id="firstName"/>
+		</label>
+		<button type="button" id="returnBtn">返回</button>
+		<button type="button" id="confirmBtn">确认</button>
+	</form>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			
+			var storage=window.localStorage;
+			if(storage){
+				alert('This browser supports localStorage');
+			}else{
+				alert('This browser does NOT support localStorage');
+			}
+
+			$("#stepOne").click(function(){
+				var localLastName="";
+				var localFirstName="";
+				var lastName=$("#lastName").val();
+				var firstName=$("#firstName").val();
+
+				// 设置本地存储
+				storage.setItem("localLastName",lastName);
+				storage.setItem("localfirstName",firstName);
+
+
+				if($("#lastName").val()==""){
+					alert("贵姓");
+				}else{
+					alert(lastName);
+					// alert(firstName);
+					alert("本地存储的姓为："+storage.getItem('localLastName'));
+					// alert(localFirstName.toString());
+					$(".form1").slideUp();
+					$(".form2").slideDown();
+				}
+
+			})
+
+			$("#returnBtn").click(function(){
+				$(".form1").slideDown();
+				$(".form2").slideUp();
+			})
+			
+		})
+	</script>
+</body>
+</html>

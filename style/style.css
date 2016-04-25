@@ -1,0 +1,431 @@
+@charset "utf-8";
+html, body, h1, h2, h3, p, span, a, div, ol, ul, li, dl, dt, dd, table, tbody, tfoot, thead, tr, th, td, input, textarea, form {
+    margin: 0;
+    padding: 0;
+    font: 14px/2em microsoft yahei, arial, verdana, helvetica, sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    color: #333;
+    height: 100%;
+}
+body {
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    min-width: 320px;
+    height: 100%;
+}
+em, i {
+    font-style: normal;
+    font-weight: normal
+}
+input, textarea {
+    outline: 0
+}
+input[type="text"], input[type="text"], textarea {
+    border-radius: 0;
+    -webkit-appearance: none
+}
+textarea {
+    border: 1px solid #ccc
+}
+ul, ol, li {
+    list-style: none
+}
+select {
+    background-color: #fff
+}
+.fl {
+    float: left
+}
+.fr {
+    float: right
+}
+.hide {
+    display: none
+}
+a {
+    text-decoration: none
+}
+.red {
+    color: #f25600
+}
+.f10 {
+    font-size: 10px
+}
+.f12 {
+    font-size: 12px
+}
+.f15 {
+    font-size: 15px
+}
+.f16 {
+    font-size: 16px
+}
+.fc-gray, .fc-gray:visited {
+    color: #999
+}
+.fc-green, .fc-green:visited {
+    color: #579b00
+}
+.fc-50, .autocomp li .fc-50 {
+    color: #505050
+}
+.autocomp li.touch, .autocomp a.touch {
+    background: #f0f0f0
+}
+.clear:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+.column{
+    height: 100%;
+}
+.column-head {
+    background-color: #f4f4f4;
+    border: 1px solid #dbdbdb;
+    border-width: 1px 0;
+    border-bottom-color: #e9e9e9;
+}
+.column-title {
+    color: #878787;
+    padding: 4px 10px;
+}
+.column-title span {
+    color: #a3a3a3;
+    font-size: 12px;
+    margin-left: 5px;
+}
+.column-body{
+    padding: 10px 5px 0;
+}
+.category {
+    position: relative;
+    /*padding: 0 5px;*/
+    border:1px solid #dcdcdc;
+    border-top: none;
+    /*border: 1px solid #dcdcdc;*/
+    overflow: auto;
+    height: 100%;
+}
+.column-body .category:last-of-type::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    z-index: 1;
+}
+.category>li {
+    /*position: relative;*/
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 25%;
+    color: #8f8f8f;
+    /*border:1px solid #dcdcdc;*/
+    border-top: 1px solid #dcdcdc;
+    /*border-bottom: 1px solid #dcdcdc;*/
+    border-right: 1px solid #dcdcdc;
+    height: auto;
+}
+.category>li:nth-child(4n){
+    border-right: none;
+}
+.category>li.active{
+    background: #f0f0f0;
+}
+.category>li.active::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-bottom: 5px solid #7d8083;
+    margin-left: -5px;
+    overflow: hidden;
+}
+.category a, .category b {
+    width: 100%;
+    /*color: #505050;*/
+    color: #8f8f8f;
+    font-weight: 500;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 6px 0;
+    display: block;
+    overflow: hidden;
+}
+.category .touch {
+    background-color: #f0f0f0;
+}
+.category-child {
+    position: absolute;
+    background-color: #7d8083;
+    /*padding: 2px 5px 0;*/
+    margin-top: -1px;
+    display: none;
+    z-index: 9999;
+    width: 100%;
+    left: 0;
+    height: auto;
+}
+.category-child::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #7d8083;
+    font-size: 0;
+    display: block;
+    overflow: hidden;
+}
+.category-child.active {
+    display: block;
+}
+.category-child li {
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 25%;
+    border: 1px solid #909395;
+    border-width: 0 1px 1px 0;
+    height: auto;
+    color: #505050;
+}
+.category-child li:nth-child(4n) {
+    border-right: 0;
+}
+.category-child a {
+    width: 100%;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 6px 0;
+    display: block;
+    overflow: hidden;
+}
+.category-child .touch {
+    background-color: #b4bac0;
+}
+
+
+
+/* @charset "utf-8";
+html, body, h1, h2, h3, p, span, a, div, ol, ul, li, dl, dt, dd, table, tbody, tfoot, thead, tr, th, td, input, textarea, form {
+    margin: 0;
+    padding: 0;
+    font: 14px/2em microsoft yahei, arial, verdana, helvetica, sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    color: #333
+}
+body {
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    min-width: 320px
+}
+em, i {
+    font-style: normal;
+    font-weight: normal
+}
+input, textarea {
+    outline: 0
+}
+input[type="text"], input[type="text"], textarea {
+    border-radius: 0;
+    -webkit-appearance: none
+}
+textarea {
+    border: 1px solid #ccc
+}
+ul, ol, li {
+    list-style: none
+}
+select {
+    background-color: #fff
+}
+.fl {
+    float: left
+}
+.fr {
+    float: right
+}
+.hide {
+    display: none
+}
+a {
+    text-decoration: none
+}
+.red {
+    color: #f25600
+}
+.f10 {
+    font-size: 10px
+}
+.f12 {
+    font-size: 12px
+}
+.f15 {
+    font-size: 15px
+}
+.f16 {
+    font-size: 16px
+}
+.fc-gray, .fc-gray:visited {
+    color: #999
+}
+.fc-green, .fc-green:visited {
+    color: #579b00
+}
+.fc-50, .autocomp li .fc-50 {
+    color: #505050
+}
+.autocomp li.touch, .autocomp a.touch {
+    background: #f0f0f0
+}
+.clear:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+.column-head {
+    background-color: #f4f4f4;
+    border: 1px solid #dbdbdb;
+    border-width: 1px 0;
+    border-bottom-color: #e9e9e9;
+}
+.column-title {
+    color: #878787;
+    padding: 4px 10px;
+}
+.column-title span {
+    color: #a3a3a3;
+    font-size: 12px;
+    margin-left: 5px;
+}
+.category {
+    position: relative;
+    padding: 0 5px;
+    overflow: hidden;
+}
+.column-body .category:last-of-type::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    z-index: 1;
+}
+.category>li {
+    position: relative;
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 25%;
+    border-bottom: 1px solid #dcdcdc;
+}
+.category>li::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 14px;
+    background-color: #c2c2c2;
+    margin-top: -7px;
+    overflow: hidden;
+}
+.category>li:nth-child(4n)::after {
+    display: none;
+}
+.category-child::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-bottom: 5px solid #7d8083;
+    margin-left: -5px;
+    overflow: hidden;
+}
+.category a, .category b {
+    width: 100%;
+    color: #505050;
+    font-weight: 500;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 6px 0;
+    display: block;
+    overflow: hidden;
+}
+.category .touch {
+    background-color: #f0f0f0;
+}
+.category-child {
+    position: absolute;
+    background-color: #7d8083;
+    padding: 2px 5px 0;
+    margin-top: -1px;
+    display: none;
+    z-index: 9999;
+    width: 100%;
+    left: 0;
+}
+.category-child::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #7d8083;
+    font-size: 0;
+    display: block;
+    overflow: hidden;
+}
+.category-child.active {
+    display: block;
+}
+.category-child li {
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 25%;
+    border: 1px solid #909395;
+    border-width: 0 1px 1px 0;
+}
+.category-child li:nth-child(4n) {
+    border-right: 0;
+}
+.category-child a {
+    width: 100%;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 6px 0;
+    display: block;
+    overflow: hidden;
+}
+.category-child .touch {
+    background-color: #b4bac0;
+}
+ */

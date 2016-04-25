@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #allmap {
+            width: 100%;
+            height: 500px;
+        }
+
+        p {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+    </style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=V7IGj1FIWe5TRpqFb2H68dTiUOFYyGGi"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+	<title>百度地图API</title>
+</head>
+<body>
+	<div id="allmap"></div>
+	<p>缩放地图，查看点聚合效果</p>
+	<script type="text/javascript">
+	    // 百度地图API功能
+	    var map = new BMap.Map("allmap");
+	    map.centerAndZoom(new BMap.Point(116.404, 39.915), 4);
+	    var point = new BMap.Point(116.404, 39.915);
+	    map.enableScrollWheelZoom();
+
+	    var marker=new BMap.Marker(new BMap.Point(116.404,39.915));
+
+	    var circle=new BMap.Circle(point,500,{strokeColor:"blue",strokeWeight:2,strokeOpacity:0.5});//创建圆
+
+	    if(map.getZoom()>=5){
+	    	alert("缩放级别为："+map.getZoom())
+	    }else{
+	    	alert("12");
+	    }
+
+	    // 添加覆盖物
+	    function add_overlay(){
+			map.addOverlay(marker);            //增加点
+			map.addOverlay(polyline);          //增加折线
+			map.addOverlay(circle);            //增加圆
+			map.addOverlay(polygon);           //增加多边形
+			map.addOverlay(rectangle);         //增加矩形
+		}
+		//清除覆盖物
+		function remove_overlay(){
+			map.clearOverlays();         
+		}
+	    // var MAX = 10;
+	    // var markers = [];
+	    // var pt = null;
+	    // var i = 0;
+	    // for (; i < MAX; i++) {
+	    //     pt = new BMap.Point(Math.random() * 40 + 85, Math.random() * 30 + 21);
+	    //     markers.push(new BMap.Marker(pt));
+	    // }
+	    // //最简单的用法，生成一个marker数组，然后调用markerClusterer类即可。
+	    // var markerClusterer = new BMapLib.MarkerClusterer(map, { markers: markers });
+	</script>
+</body>
+</html>

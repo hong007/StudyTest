@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS原型链Prototype</title>
+</head>
+<body>
+    <p>原型法的主要思想是，现在有1个类A,我想要创建一个类B,这个类是以A为原型的,并且能进行扩展。我们称B的原型为A。</p>
+    <script type="text/javascript">
+        function People(name) {
+            this.name = name;
+            //对象方法
+            this.Introduce = function () {
+                alert("My name is " + this.name);
+            }
+        }
+        //类方法
+        People.Run = function () {
+            alert("I can run");
+        }
+        //原型方法
+        People.prototype.IntroduceChinese = function () {
+            alert("我的名字是" + this.name);
+        }
+
+
+        //测试
+
+        var p1 = new People("Windking");
+
+        p1.Introduce();
+
+        People.Run();
+
+        p1.IntroduceChinese();
+    </script>
+
+    <!-- 综合实例 -->
+    <script type="text/javascript">
+        function baseClass() {
+            this.showMsg = function () {
+                alert("baseClass::showMsg");
+            }
+
+            this.baseShowMsg = function () {
+                alert("baseClass::baseShowMsg");
+            }
+        }
+        baseClass.showMsg = function () {
+            alert("baseClass::showMsg static");
+        }
+
+        function extendClass() {
+            this.showMsg = function () {
+                alert("extendClass::showMsg");
+            }
+        }
+        extendClass.showMsg = function () {
+            alert("extendClass::showMsg static")
+        }
+
+        extendClass.prototype = new baseClass();
+        var instance = new extendClass();
+
+        instance.showMsg(); //显示extendClass::showMsg
+        instance.baseShowMsg(); //显示baseClass::baseShowMsg
+        instance.showMsg(); //显示extendClass::showMsg
+
+        baseClass.showMsg.call(instance);//显示baseClass::showMsg static
+
+        var baseinstance = new baseClass();
+        baseinstance.showMsg.call(instance);//显示baseClass::showMsg
+
+    </script>
+</body>
+</html>
