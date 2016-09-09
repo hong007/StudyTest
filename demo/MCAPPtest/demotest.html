@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+    	button{
+    		margin:50px;
+    	}
+    	
+    </style>
+</head>
+<body>
+	<button onclick="openWin('index')">进入</button>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+		
+	};
+	function openWin(name) {
+	var delay = 0;
+	if (api.systemType != 'ios') {
+		delay = 300;
+	}
+	api.openWin({
+		name: '' + name + '',
+		url: '' + name + '.html',
+		bounces: false,
+		delay: delay,
+		slidBackEnabled: true,
+		vScrollBarEnabled: false
+	});
+}
+</script>
+</html>

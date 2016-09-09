@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui-extend.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+</head>
+<body>
+<header>
+    <div class="header">
+        <a class="menu" tapmode onclick="closeWin()"> <span class="aui-iconfont aui-icon-left"></span>返回 </a>
+        <!--<div class="title">
+            中转箱扫码
+        </div>-->
+        <a class="menu"></a>
+    </div>
+</header>
+<div class="realtime-content">
+    <div class="transfer transferbg">
+        <section class="wrapper">
+            <ul class="finished-hook">
+                <li class="item">
+                    <h2 class="item-title"><span>运单编号：</span><span>S840320160627</span></h2>
+                    <span class="path-start"><i
+                            class="aui-iconfont aui-icon-locationfill cr1"></i>浙江省杭州市淳安县吴山村12...</span>
+                    <span class="path-end"><i
+                            class="aui-iconfont aui-icon-locationfill cr2"></i>浙江省杭州市建德市三二零国道...</span>
+                </li>
+            </ul>
+        </section>
+    </div>
+    <div class="flight">
+        <div class="flight-area">
+            <p class="flight-btn" tapmode onclick="longTouch()">长按起飞</p>
+            <div class="flight-picture"></div>
+            <div class="flight-mask">
+                <img src="../image/flightbtn02.png">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../script/api.js"></script>
+<script>
+    apiready = function () {
+        api.parseTapmode();
+        $api.fixStatusBar($api.dom('.header'));
+        api.setStatusBarStyle({
+            style: 'light',
+            color: '#fff'
+        });
+        // function longTouch(){
+        api.addEventListener({
+            name: 'longpress'
+        }, function (ret, err) {
+            alert('准备起飞喽！');
+        });
+        // }
+    };
+    function closeWin() {
+        api.closeWin();
+    }
+
+    // 打开新窗口
+    function openWin(name) {
+        var delay = 0;
+        if (api.systemType != 'ios') {
+            delay = 300;
+        }
+        api.openWin({
+            name: '' + name + '',
+            url: '' + name + '.html',
+            bounces: false,
+            delay: delay,
+            slidBackEnabled: true,
+            vScrollBarEnabled: false
+        });
+    }
+
+</script>
+</body>
+</html>

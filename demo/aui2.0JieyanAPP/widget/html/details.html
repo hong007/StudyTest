@@ -1,0 +1,178 @@
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>订单详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui-extend.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <style type="text/css">
+        .aui-bar-nav {
+            height: 54px;
+            line-height: 64px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header">
+        <a class="menu" tapmode onclick="closeWin()"> <span class="aui-iconfont aui-icon-left"></span>返回 </a>
+        <div class="title">
+            订单详情
+        </div>
+        <a class="menu"></a>
+    </div>
+</header>
+<div id="orderDetails" class="orderdetail orderlist">
+    <div id="detail-top">
+        <div class="detail-header clearfix">
+            <img class="fl" src="../image/logo02.png">
+            <div class="detail-status fl">
+                <p class="list-item para aui-text-left">无人机编号:<span class="list-item-span transfer-nub-flight" id="transferNubFlight">1231312</span>
+                </p>
+                <p class="list-item para aui-text-left">运单编号:<span class="list-item-span transfer-nub" id="transferNub">12312312312312</span>
+                </p>
+                <a class="dial" href="tel:13675832345" id="dialPhone"><i class="aui-iconfont aui-icon-phone"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="detail-cont">
+        <section class="wrapper">
+            <ul class="finished-hook">
+                <li class="item">
+                    <p class="para"><i class="aui-iconfont aui-icon-locationfill maincolor"></i><span
+                            class="start-point" id="sPoint">杭垓镇邮政局</span></p>
+                    <p class="para"><i class="aui-iconfont aui-icon-locationfill maincolor"></i><span
+                            class="end-point" id="ePoint">七管村村委会</span></p>
+                    <p class="para"><i class="aui-iconfont aui-icon-timefill maincolor"></i>飞行距离： <span id="transferDis">9</span>公里
+                    </p>
+                    <p class="para"><i class="aui-iconfont aui-icon-timefill maincolor"></i>运送耗时： <span id="transferTime">15</span>分钟</p>
+                </li>
+            </ul>
+        </section>
+        <div class="package">
+            <h2>包裹动态</h2>
+            <div class="package">
+                <ul class="status-menu">
+                    <!-- 	<li class="status-item complete-item">
+                            <span class="circ"></span>
+                            <span class="date-span"> <small class="item-day">2016.06.30</small> <em class="time-em">13:30</em> </span>
+                            <p>
+                                已完成返航，感谢使用捷雁无人机
+                            </p>
+                        </li> -->
+
+                    <!-- 该运单未起飞时 -->
+                    <li class="status-item order-no-flight" id="noFlighting" style="display: none">
+                        <span class="circ"></span>
+                        <div class="item-block date-area aui-pull-left">
+                            <p class="item-day aui-text-center">2016.06.30</p>
+                            <p class="item-time aui-text-center">12:30</p>
+                        </div>
+                        <div class="item-block item-block-right aui-pull-left">
+                            <p class="order-des">无人机等待起飞指令。</p>
+                            <p class="aui-text-center"><span class="span-group start-flight-span" tapmode
+                                                             onclick="orderReflight()">操作起飞</span><span
+                                    class="span-group cancel-flight-span" tapmode onclick="orderCancel()">取消订单</span>
+                            </p>
+                        </div>
+                    </li>
+
+                    <!-- 该运单异常时 -->
+                    <li class="status-item cancel-item" id="t3" style="display: none;">
+                        <span class="circ"></span>
+                        <div class="item-block date-area aui-pull-left">
+                            <p class="item-day aui-text-center">2016.06.30</p>
+                            <p class="item-time aui-text-center">13:30</p>
+                        </div>
+                        <div class="item-block item-block-right aui-pull-left">
+                            <p class="order-des">订单出现异常，请联系客服。</p>
+                        </div>
+                    </li>
+                    <!--订单取消-->
+                    <li class="status-item cancel-item" id="orderCancelItem" style="display: none;">
+                        <span class="circ"></span>
+                        <div class="item-block date-area aui-pull-left">
+                            <p class="item-day aui-text-center">2016.06.30</p>
+                            <p class="item-time aui-text-center">12:30</p>
+                        </div>
+                        <div class="item-block item-block-right aui-pull-left">
+                            <p class="order-des contacter">
+                                订单已取消。</p>
+                        </div>
+                    </li>
+
+                    <li class="status-item complete-item" id="t4">
+                        <span class="circ"></span>
+                        <div class="item-block date-area aui-pull-left">
+                            <p class="item-day aui-text-center">2016.06.30</p>
+                            <p class="item-time aui-text-center">12:30</p>
+                        </div>
+                        <div class="item-block item-block-right aui-pull-left">
+                            <p class="order-des contacter">
+                                包裹已送达。</p>
+                            <p class="order-des contacter">
+                                签收人 张兰 电话 <a class="dial-phone" href="tel:13675832345" id="signerPhone">13675823425</a>
+                            </p>
+                        </div>
+                    </li>
+                    <!-- <li class="status-item">
+                        <span class="circ"></span>
+                        <span class="date-span"> <small class="item-day">2016.06.30</small> <em class="time-em">12:00</em> </span>
+                        <p>
+                            正在派送中，请准备签收
+                        </p>
+                    </li>
+                    <li class="status-item">
+                        <span class="circ"></span>
+                        <span class="date-span"> <small class="item-day">2016.06.30</small> <em class="time-em">11:50</em> </span>
+                        <p>
+                            快件拣货完毕 ，等待出库
+                        </p>
+                    </li> -->
+                    <li class="status-item" id="t2">
+                        <span class="circ"></span>
+                        <div class="item-block date-area aui-pull-left">
+                            <p class="item-day aui-text-center">2016.06.30</p>
+                            <p class="item-time aui-text-center">12:30</p>
+                        </div>
+                        <div class="item-block item-block-right aui-pull-left">
+                            <p class="order-des">捷雁无人机开始运送您的包裹。</p>
+                        </div>
+                    </li>
+                    <li class="status-item" id="t0">
+                        <span class="circ"></span>
+                        <div class="item-block date-area aui-pull-left">
+                            <p class="item-day aui-text-center">2016.06.30</p>
+                            <p class="item-time aui-text-center">12:30</p>
+                        </div>
+                        <div class="item-block item-block-right aui-pull-left">
+                            <p class="order-des">成功创建无人机运送订单。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/main.js"></script>
+<script>
+//    alert('user is ' + JSON.stringify(user));
+    apiready = function () {
+        api.parseTapmode();
+        $api.fixStatusBar($api.dom('.header'));
+        api.setStatusBarStyle({
+            style: 'light',
+            color: '#fff'
+        });
+        detailData = api.pageParam;
+        initDetailData(detailData);
+    };
+</script>
+</body>
+</html>

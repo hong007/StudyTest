@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>联系人</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/listView.css"/>
+    <style>
+        .hidden{
+            display: none!important;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        .list-block .list-group-title {
+            margin-top: -1px;
+            padding: 4px 15px;
+            white-space: nowrap;
+            position: relative;
+            max-width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: #8e8e93;
+        }
+
+        .list-block .list-group-title {
+            position: relative;
+            position: -webkit-sticky;
+            top: 0;
+            z-index: 20;
+            margin-top: 0;
+        }
+
+        .sticky {
+            position: fixed !important;
+            top: 0 !important;
+        }
+
+        .item-media img {
+            height: 35px;
+            width: 35px;
+        }
+
+        .item-inner {
+            line-height: 44px;
+        }
+        .unreadcount {
+            height: 20px;
+            border-radius: 18px;
+            background-color: red;
+            color: #ffffff;
+            font-size: 12px;
+            line-height:20px;
+            text-align: center;
+            position: absolute;
+            right:10px;
+            top: 10px;
+            padding:3px;
+        }
+        #nobody{
+            height: 100%;
+            width: 100%;
+            background-image: url(../res/nobody.png);
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+    </style>
+</head>
+<body>
+<div id="nobody" >
+
+</div>
+<ul class="list-block" id="contacts">
+    <!--<li class="border-1px-bottom">
+        <div class="item-content">
+            <div class="item-media">
+                <img src="../image/photo_1.png">
+
+            </div>
+            <div class="item-inner item-detail">
+                aaa
+
+            </div>
+            <div class="unreadcount">
+                你有新消息
+            </div>
+        </div>
+    </li>-->
+</ul>
+<ul class="list-index"></ul>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/APICloud-rest-SHA1.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script>
+    var appId = 'A6983131639028', appkey = '74405CDC-BC9B-7974-07B4-AD0D768F2FF2';
+    var client = new Resource(appId, appkey);
+    var account = client.Factory("account");
+    var username = localStorage.getItem('accountName');
+    apiready = function () {
+        setOnReceiveMessageListener()
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/refresh.png',
+            bgColor: '#ccc',
+            textColor: '#fff',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...',
+            showTime: true
+        }, function(ret, err){
+            loadData(username);
+        });
+        $("#contacts").on('tap', 'li', function () {
+            var targetId = $(this).data('target');
+            var title = $(this).data('name');
+            $(this).find('.unreadcount').addClass('hidden');
+            api.openWin({
+                name: "win_conversation_detail",
+                url: 'win_conversation_detail.html',
+                pageParam: {
+                    targetId: targetId,
+                    title: title
+                },
+                slidBackEnabled: false,
+                animation: {
+                    type: "none",
+                    subType: "from_right",
+                    duration: 300
+                }
+            });
+        });
+        loadData(username);
+    };
+
+    function loadData(username){
+        api.showProgress();
+        account.query({
+            filter: {
+                where: {"name": {"ne": username},'widgetId': api.appId}
+            }
+        }, function (ret, err) {
+            api.hideProgress();
+            api.refreshHeaderLoadDone();
+            if(ret){
+                if(ret.length>0){
+                    $("#nobody").addClass('hidden');
+                    var contactHtml = '';
+                    for (var i = 0; i < ret.length; i++) {
+                        var username = ret[i].name;
+                        var targetId = ret[i].id;
+                        var gender = ret[i].gender;
+                        var top_border = i == 0 ? 'border-1px-top' : '';
+                        contactHtml += '<li tapmode="" id="'+targetId+'" data-target="'+targetId+'"   data-name="' + username + '" class=" ' + top_border + ' border-1px-bottom"><div class="item-content"><div class="item-media"><img src="../image/' + gender + '.png"></div><div class="item-inner item-detail">' + username + '</div><div class="unreadcount hidden">你有新消息</div></div></li>';
+                    }
+                    $("#contacts").html(contactHtml);
+                }else{
+                    $("#nobody").removeClass('hidden');
+                    $("#contacts").html('');
+                }
+            }else{
+                api.toast({
+                    msg:err.msg
+                })
+            }
+        });
+    }
+    function setOnReceiveMessageListener() {
+        var rong = api.require('rongCloud');
+        rong.setOnReceiveMessageListener(function (ret, err) {
+            if (ret && 'success' == ret.status) {
+                $("#nobody").addClass('hidden');
+                api.notification({
+                    vibrate: [300, 500],
+                    sound: 'default'
+                });
+                var result = ret.result;
+                var message = result.message;
+                var content = message.content;
+                var targetId = message.targetId;
+                var $targetId = $("#" + targetId);
+                if ($targetId.length > 0) {
+                    $targetId.find('.unreadcount').removeClass('hidden');
+                }else{
+                    var extra = transExtra(content.extra);
+                    var username = '未知',portrait = 'man';
+                    if (typeof extra == 'object') {
+                        username = extra.targetTitle;
+                        portrait = extra.portrait;
+                    }
+                    var bottom_border = $("li").length == 0 ? 'border-1px-bottom' : '';
+                    var html = '<li tapmode="" id="'+targetId+'" data-target="'+targetId+'"   data-name="' + username + '" class="'+bottom_border+'  border-1px-top"><div class="item-content"><div class="item-media"><img src="../image/' + portrait + '.png"></div><div class="item-inner item-detail">' + username + '</div><div class="unreadcount">你有新消息</div></div></li>';
+                    $("#contacts").prepend(html);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

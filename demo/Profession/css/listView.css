@@ -1,0 +1,137 @@
+.list-block {
+    margin: 20px 0;
+}
+.listView-swipeout{
+    background: #ffffff;
+    position: relative;
+}
+.swipeout {
+    overflow: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.list-block li {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}
+.swipeout-content {
+    position: relative;
+    z-index: 10;
+}
+.item-content {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right:60px;
+    min-height: 44px;
+    display: -webkit-box;
+    -webkit-box-pack: justify;
+    -webkit-box-align: center;
+}
+.item-media {
+    display: -webkit-box;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    -webkit-box-lines: single;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.icon.icon-f7 {
+    width: 35px;
+    height:35px;
+    background-image: url("../icon/icon150x150.png");
+}
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-style: normal;
+    position: relative;
+}
+.item-inner {
+    margin-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    width: 100%;
+    /*padding-top: 8px;
+    padding-bottom: 7px;*/
+    min-height: 44px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    -webkit-box-pack: justify;
+    /*-webkit-box-align: center;*/
+}
+.item-title,.item-subtitle{
+    -webkit-flex-shrink: 1;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.swipeout-actions-left,.swipeout-actions-right {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: -webkit-box;
+}
+.swipeout-actions-right {
+    right: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+.swipeout.transitioning .swipeout-content,.swipeout.transitioning .swipeout-actions-right div,.swipeout.transitioning .swipeout-actions-left div,.swipeout.transitioning .swipeout-overswipe {
+    -webkit-transition: 300ms;
+    transition: 300ms;
+}
+.swipeout-actions-left div.swipeout-delete,.swipeout-actions-right div.swipeout-delete {
+    background: #ff3b30;
+}
+.swipeout-actions-left div,.swipeout-actions-right div {
+    padding: 0 30px;
+    color: #fff;
+    background: #c7c7cc;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    position: relative;
+    left: 0;
+}
+.list-block .swipeout-actions-left {
+    left: 0;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+.swipeout-actions-left div.bg-green{
+    background-color: #4cd964;
+}
+.swipeout-actions-left div.bg-blue{
+    background-color: #007aff;
+}
+.list-block .swipeout-actions-left div:after, .list-block .swipeout-actions-right div:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 600%;
+    height: 100%;
+    background: inherit;
+    z-index: -1;
+}
+.list-block .swipeout-actions-left div:after {
+    right: 100%;
+    margin-right: -1px;
+}
+.list-block .swipeout.deleting {
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}

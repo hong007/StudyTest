@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="tephone=no,email=no,date=no,address=no">
+		<style type="text/css">
+			html{ background-color: white; }
+			header{ border-bottom: 1px solid #ccc; padding: 25px 0; }
+			span {
+				padding: 5px 15px;
+				margin: 10px;
+				display: inline-block;
+				background-color: #e8e8e8;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>UIMediaScanner</h1>
+			<mark>
+				使用前请详细阅读 文档 使用规则
+			</mark>
+		</header>
+		<span tapmode onclick="fnOpen()" data-name="open"></span>
+		<span tapmode onclick="fnScan()" data-name="scan"></span>
+		<span tapmode onclick="fnFetch()" data-name="show"></span>
+		<span tapmode onclick="fnTransPath()" data-name="hide"></span>
+	</body>
+	<script type="text/javascript" src="./script/api.js"></script>
+	<script type="text/javascript">
+		var UIMediaScanner;
+		function apiready() {
+			UIMediaScanner = api.require('UIMediaScanner');
+		};
+		function fnScan() {
+			UIMediaScanner.scan({
+				count : 10,
+				sort : {
+					key : 'time',
+					order : 'desc'
+				}
+			}, function(ret, err) {
+				if (ret) {
+					alert(JSON.stringify(ret));
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+
+		function fnFetch() {
+			UIMediaScanner.fetch(function(ret, err) {
+				if (ret) {
+					alert(JSON.stringify(ret));
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+
+		function fnTransPath() {
+			UIMediaScanner.transPath({
+				path : ''//要转换的图片路径（在相册库的绝对路径）
+			}, function(ret, err) {
+				if (ret) {
+					alert(JSON.stringify(ret));
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+
+		function fnOpen() {
+			UIMediaScanner.open({
+				classify : true,
+				max : 4,
+				styles : {
+					bg : '#fff',
+					mark : {
+						icon : '',
+						size : 20
+					},
+				},
+				scrollToBottom : {
+					intervalTime : 3,
+				},
+				exchange : true
+			}, function(ret, err) {
+				if (ret) {
+					alert(JSON.stringify(ret));
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+	</script>
+</html>

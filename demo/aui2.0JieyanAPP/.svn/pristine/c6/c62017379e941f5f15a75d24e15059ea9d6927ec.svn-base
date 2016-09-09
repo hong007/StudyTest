@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui-extend.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <style>
+        .aui-load-container {
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header">
+        <a class="menu" tapmode onclick="closeWin()"> <span class="aui-iconfont aui-icon-left"></span>返回 </a>
+        <div class="title">
+            实时运单
+        </div>
+        <a class="menu"></a>
+    </div>
+</header>
+<div class="realtime-content aui-load-container">
+    <div class="aui-load-wrap">
+        <div class="aui-loading-dot"></div>
+        <div class="aui-loading-circle"></div>
+        <div class="aui-loading-title"></div>
+    </div>
+    <div class="timecount realtimebg">
+        <p class="countdown txtct">
+            预计<span class="count-span" id="transferTime">15</span>分钟后到达
+        </p>
+    </div>
+    <div class="relt-item-top">
+        <!--<a href="tel:13675823425"><img src="../image/" alt="">联系收件人<span class="aui-iconfont aui-icon-right"></span></a>-->
+        <a class="contact-piker" href="tel:13675823425" id="dialPhone"><i
+                class="aui-iconfont aui-icon-phone"></i>联系收件人<span
+                class="aui-iconfont aui-icon-right aui-pull-right"></span></a>
+    </div>
+    <div class="relt-item route">
+        <div class="item-wrapper">
+            <div class="distance">
+                <div class="imgcontainer" id="imgArea">
+                    <p class="distance-area">距离返航点：<span id="transferDis">16</span>公里</p>
+                </div>
+                <!-- <img src="../image/progress01.png"> -->
+            </div>
+        </div>
+    </div>
+    <div class="relt-item bh">
+        <div class="item-wrapper">
+            <section class="wrapper">
+                <ul class="finished-hook">
+                    <li class="item">
+                        <!--  <h2 class="item-title"><span>运单编号：</span><span id="transferNub">S840320160627</span><img
+                                 class="commentimg" src="../image/gobg.png" alt=""><span class="comment"
+                                                                                         id="orderStatus">起飞</span>
+                             <span class="comment cansel-com">已取消</span></h2> -->
+                        <h2 class="item-title"><span>无人机编号：</span><span id="transferNubFlight">23460627</span><span
+                                class="comment"
+                                id="orderStatus">起飞</span></h2>
+                        <h2 class="item-title"><span>运单编号：</span><span id="transferNub">S840320160627</span>
+                            <!-- <span class="comment cansel-com">已取消</span> -->
+                        </h2>
+                        <span class="path-start"><i class="aui-iconfont aui-icon-locationfill cr1"></i>&nbsp;<span
+                                id="sPoint">杭垓镇邮政局</span></span>
+                        <span class="path-end"><i class="aui-iconfont aui-icon-locationfill cr2"></i>&nbsp;<span
+                                id="ePoint">七管村村委会</span></span>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <div class="relt-item ph">
+        <div class="item-wrapper">
+            <p class="order-opration-item aui-text-center"><span
+                    class="order-opration-btn order-package-btn aui-text-center" id="orderPackageBtn" tapmode
+                    onclick="confirmPackage()">确认收货</span><span
+                    class="order-opration-btn order-flight-btn aui-text-center" id="orderFlightBtn" tapmode
+                    onclick="confirmPackage()">确认返航</span></p>
+            <!--<p class="contact-tt">-->
+            <!--<i class="aui-iconfont aui-icon-peoplefill"></i>&nbsp;&nbsp;联系收件人-->
+            <!--</p>-->
+            <!--<p class="contact-p">-->
+            <!--<a class="dial" href="tel:13675823425" id="signerPhone"></a>-->
+            <!--</p>-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/main.js"></script>
+<script>
+    var realData;
+    //    alert(JSON.stringify(user));
+    apiready = function () {
+        $api.fixStatusBar($api.dom('.header'));
+        api.setStatusBarStyle({
+            style: 'light',
+            color: '#fff'
+        });
+        realData = api.pageParam;
+        initDetailData(realData);
+        // initRealDetail(realData);
+
+    };
+    var pullRefresh = new auiPullToRefresh({
+        callback: loadingCallback,
+        textDown: '下拉刷新'
+    })
+    realData();
+</script>
+</body>
+</html>

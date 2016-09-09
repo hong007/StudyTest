@@ -1,0 +1,7 @@
+CACHE MANIFEST//必须以这个开头
+version 1.0 //最好定义版本，更新的时候只需修改版本号
+CACHE:
+  images/vt.png
+NETWORK:
+    *
+FALLBACK

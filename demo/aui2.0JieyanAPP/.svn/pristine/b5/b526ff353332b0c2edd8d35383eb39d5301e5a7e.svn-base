@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>捷雁</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/aui-extend.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+	</head>
+	<body>
+		<div class="aui-content side-menu">
+			<ul class="aui-list-view aui-in">
+				<li class="aui-list-view-cell aui-img">
+					<img class="aui-img-object aui-pull-left portrait-img" src="../image/portrait.png">
+					<div class="aui-img-body">
+						<!-- <a class="login-link" id="userOpration" tapmode onclick="openWinlogin('login')">注册/登录</a> -->
+						<a class="login-link" id="userOpration" tapmode onclick="openWinNew('login','')">注册/登录</a>
+						<p class="login-succ tips-name" id="tipsName">
+							姓名
+						</p>
+						<p class="login-succ address-infor" id="tipsAddress">
+							<i class="aui-iconfont aui-icon-locationfill"></i>地址
+						</p>
+					</div>
+				</li>
+				<li class="aui-list-view-cell">
+					<i class="aui-iconfont aui-icon-message"></i>消息
+				</li>
+				<li class="aui-list-view-cell">
+					<i class="aui-iconfont aui-icon-settings"></i>设置
+				</li>
+				<li class="aui-list-view-cell">
+					<i class="aui-iconfont aui-icon-info"></i>帮助
+				</li>
+				<li class="aui-list-view-cell">
+					<i class="aui-iconfont aui-icon-calendar"></i>法律条款
+				</li>
+				<li class="aui-list-view-cell">
+					<i class="aui-iconfont aui-icon-shop"></i>关于我们
+				</li>
+			</ul>
+			<p class="aui-text-left quit-link" tapmode onclick="quitLogin()">
+				<i class="aui-iconfont aui-icon-shop"></i>退出登录
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/main.js"></script>
+	<script>
+		apiready = function() {
+			api.parseTapmode();
+			api.setStatusBarStyle({
+				style : 'light',
+				color : '#fff'
+			});
+			// 监听页面间传值
+			api.addEventListener({
+				name : 'myEvent'
+			}, function(ret, err) {
+				// if (ret.value.flag_status == 1){
+				if (ret) {
+					user = ret.value.user;
+					// alert(JSON.stringify(user));
+					if (user.flag_status == 1) {
+						$api.css($api.byId("userOpration"), "display:none");
+						$api.css($api.byId("tipsName"), "display:block");
+						$api.css($api.byId("tipsAddress"), "display:block");
+						$api.text($api.byId('tipsName'), user.user_name);
+					} else {
+						$api.css($api.byId("userOpration"), "display:block");
+						$api.css($api.byId("tipsName"), "display:none");
+						$api.css($api.byId("tipsAddress"), "display:none");
+					}
+				} else {
+					// api.alert({
+					// 	msg : JSON.stringify(err)
+					// })
+					api.alert({
+							title:'温馨提示',
+							msg: '错误'
+						})
+				}
+			});
+			init('fixed');
+		};
+	</script>
+</html>

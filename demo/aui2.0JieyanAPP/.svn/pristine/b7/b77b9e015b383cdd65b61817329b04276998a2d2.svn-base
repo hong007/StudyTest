@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>捷雁</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui-extend.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <style type="text/css">
+        .login-aui-dialog {
+            top: 50%;
+            width: 280px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="header">
+        <a class="menu" tapmode="" onclick="sliding()"><i class="aui-iconfont aui-icon-myfill"></i></a>
+        <div class="title logo-title">
+            JETGO
+        </div>
+        <a class="aui-pull-left" tapmode onclick="iLogin('travel')"><i class="aui-iconfont aui-icon-calendar"></i></a>
+    </div>
+</header>
+<!-- 页面主内容区开始 -->
+<div class="cont-wrapper">
+    <h1 class="wrapper-title aui-text-center">您好，请问你要寄件到哪里？</h1>
+    <p class="aui-text-center">
+        附近有<span class="maincolor" id="droneNum">1</span>架无人机
+    </p>
+    <div class="aui-content content-menu">
+        <ul class="aui-list-view location-view">
+            <li class="aui-list-view-cell">
+                <div class="aui-arrow-right" onclick="showDefault('toastAddress','startpoint')">
+                    <i class="aui-iconfont aui-icon-locationfill cr1"></i>
+                    <span class="start-point" id="sPoint">杭垓镇邮政局&nbsp;&nbsp;[自动匹配]</span>
+                    <!-- <span id="sPoint"></span> -->
+                </div>
+            </li>
+            <li class="aui-list-view-cell">
+                <div class="aui-arrow-right" onclick="showDefault('toastAddress','endpoint')">
+                    <!-- <i class="aui-iconfont aui-icon-locationfill cr2"></i><span id="ePoint"></span> -->
+                    <i class="aui-iconfont aui-icon-locationfill cr2"></i>
+                    <span class="end-point" id="ePoint">七管村村委会&nbsp;&nbsp;[智能推荐]</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="aui-btn send-btn" tapmode onclick="iLogin('')">
+        我要寄件
+    </div>
+    <div class="aui-input-row protocol-p aui-text-center">
+        <input class="aui-checkbox aui-checkbox-success bgcolors" type="checkbox" checked="">
+        <span>我已阅读并同意</span>
+        <a href="javascript:void(0)" class="maincolor">《服务协议》</a>
+    </div>
+</div>
+<!-- 页面主内容区结束 -->
+<!-- 弹框登录 -->
+<div class="aui-dialog aui-hidden login-aui-dialog" id="dialog">
+    <div class="aui-dialog-header login-item-title" style="font-size: 18px;">
+        登录<span class="close-btn" id="closeBtn" tapmode onclick="cancel()">×</span>
+    </div>
+    <div class="aui-dialog-body aui-text-center">
+        <div class="confirm-box login-box" id="boxLogin">
+            <div class="layer-content">
+                <form class="login-form" id="loginF">
+                    <ul class="login-menu">
+                        <li class="login-item">
+                            <input class="login-input" type="text" name="" id="userName" placeholder="请输入用户名"
+                                   onfocus="if($api.val($api.byId('userPwd'))!=''){$api.css($api.byId('submitBtn'), 'background:#fb8815')}">
+                            <span class="clear-value">×</span>
+                        </li>
+                        <li class="login-item">
+                            <input class="login-input" type="password" name="" id="userPwd" placeholder="请输入密码"
+                                   oninput="if($api.val($api.byId('userName'))!=''){$api.css($api.byId('submitBtn'), 'background:#fb8815')}">
+                            <span class="clear-value">×</span>
+                        </li>
+                        <li class="login-item login-submit">
+                            <a class="login-link" id="submitBtn" tapmode onclick="submitEve('dialogLogin')">登录</a>
+                        </li>
+                        <!--  <li class="login-item login-forgot">
+                            <a class="txtlt fl" href="javascript:void(0)">忘记密码？</a>
+                            </li> -->
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--  <div class="aui-dialog-footer">
+        <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
+        <div class="aui-dialog-btn aui-text-info" tapmode onclick="confirm()">确定</div>
+        </div> -->
+</div>
+<!-- 弹框操作提示 -->
+<div class="aui-dialog aui-hidden opt-aui-dialog opt-dialog" id="dialog">
+    <div class="aui-dialog-body aui-text-center">
+        <div class="confirm-box login-box opt-content" id="boxOpt">
+            <div class="layer-content">
+                <h2 class="opt-title">操作指引</h2>
+                <p class="opt-block aui-text-left">1. 将待运送货物装载至无人机</p>
+                <p class="opt-block aui-text-left">2. 为无人机安装好满电电池</p>
+                <p class="opt-block aui-text-left">3. 将无人机放置在起降区中心</p>
+                <p class="opt-block aui-text-left">4. 开启无人机电源</p>
+                <p class="opt-block aui-text-left">5. 确保起降区无人员进入</p>
+                <p class="opt-confirm-btn aui-text-center default-confirm-btn" id="optConfirmBtn"
+                   onclick="optConfirm('transfer')">确认完成</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- toast -->
+<div class="aui-toast" style="display:none" id="toastDefault">
+    <i class="aui-iconfont aui-icon-check"></i>
+    <div class="aui-toast-content" id="toastInfor">
+        成功
+    </div>
+</div>
+<div class="aui-toast"
+     style="display:none;position: fixed;z-index: 3;top: 180px;left: 50%;width:15em;min-height: 1.5em;margin-left: -7.5em;"
+     id="toastAddress">
+    <div class="aui-toast-content" id="toastAddressInfor" style="padding:6px;margin:0;">
+        暂时无法选择其他寄件地点
+    </div>
+</div>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/main.js"></script>
+<script>
+    apiready = function () {
+        api.parseTapmode();
+        $api.fixStatusBar($api.dom('.header'));
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+            api.closeWidget();
+        });
+        // 监听页面间传值
+        api.addEventListener({
+            name: 'myEvent'
+        }, function (ret, err) {
+            // if (ret.value.flag_status == 1){
+            if (ret) {
+                // alert(JSON.stringify(ret.value));
+                user = ret.value.user;
+                // alert(JSON.stringify(user));
+                getRouteInfor();
+            } else {
+                // api.alert({
+                // 	msg : JSON.stringify(err)
+                // })
+                api.alert({
+                    title: '温馨提示',
+                    msg: '错误'
+                })
+            }
+        });
+        init('slide');
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>捷雁</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/aui-extend.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+	</head>
+	<body>
+		<header>
+			<div class="header">
+				<a class="menu" tapmode onclick="closeWin()"> <span class="aui-iconfont aui-icon-left"></span>返回 </a>
+				<!-- <a class="aui-pull-left" tapmode onclick="closeWin()">关闭</a> -->
+				<div class="title">JIEGO</div>
+				<a class="menu"></a>
+			</div>
+		</header>
+		<!-- <span tapmode onclick="fnOpen()">open</span>
+		<span tapmode onclick="fnClose()">close</span>
+		<span tapmode onclick="fnShow()">show</span>
+		<span tapmode onclick="fnHide()">hide</span> -->
+		<div class="suggest visible">
+			<div class="border-1px option">
+				<div class="cancel cancel-hook" tapmode onclick="closeWin()">
+					取消
+				</div>
+				<div class="city-select city-select-wrapper-hook">
+					<div class="city-select-hook" tapmode onclick="fnOpen()" >
+						<span class="cityname" id="chooseCity" >选择城市</span>
+						<i class="aui-iconfont aui-icon-unfold" style="font-size: 12px;margin-right: 10px;"></i>&nbsp;&nbsp;
+					</div>
+					<!-- <input class="city-input city-input-hook" type="text" placeholder="城市中文名或拼音" style="display: none;"> -->
+				</div>
+				<div class="address-select address-select-hook" style="left: 96px;" tapmode onclick="fnHide()">
+					<input type="text" class="address-input address-input-hook" placeholder="您发件地址在哪？" id="txtLocation">
+					<input id="cityid" name="cityid" type="hidden" value="{$cityid}">
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/jquery.min.js"></script>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&amp;key=ac3c45852cfdc6b80b64068e03dbf36b&amp;plugin=AMap.Autocomplete"></script>
+	<script type="text/javascript">
+		var UICityList;
+		apiready = function() {
+			$api.fixStatusBar($api.dom('.header'));
+			UICityList = api.require('UICityList');
+			api.setStatusBarStyle({
+				style : 'light',
+				color : '#fff'
+			});
+		};
+		function fnClose() {
+			UICityList.close();
+		}
+
+		function fnShow() {
+			UICityList.show();
+		}
+
+		function fnHide() {
+			UICityList.hide();
+		}
+
+		function fnOpen() {
+			// alert( JSON.stringify( {
+			// 		x : 15,
+			// 		y : api.winHeight / 3 + 7,
+			// 		w : api.winWidth - 30,
+			// 		h : api.winHeight  - 10
+			// 	} ))
+			UICityList.open({
+				rect : {
+					x : 10,
+					// y : api.winHeight / 3 + 7,
+					y : 115,
+					w : api.winWidth - 20,
+					h : api.winHeight - 10
+				},
+				resource : '../res/UICityList.json',
+				styles : {
+					//					searchBar : {
+					//						bgColor : '#fff',
+					//						cancColor : '#E3E3E3'
+					//					},
+					location : {
+						color : '#7AC5CD',
+					},
+					sectionTitle : {
+						bgColor : '#fff',
+					},
+					item : {
+						bgColor : '#fff',
+					},
+					indicator : {
+						bgColor : '#fff',
+					}
+				},
+				currentCity : '北京',
+			}, function(ret, err) {
+				if (ret) {
+					alert(JSON.stringify(ret));
+				} else {
+					//					alert(JSON.stringify(err));
+				}
+			});
+		}
+
+		function closeWin() {
+			api.closeWin();
+		}
+	</script>
+	<script type="text/javascript">
+		$(function() {
+			//初始化地图
+			$("#homecity_name").val(window.parent.sCity);
+			var map = new AMap.Map("container", {
+				resizeEnable : true
+			});
+			//为地图注册click事件获取鼠标点击出的经纬度坐标
+			//var clickEventListener = map.on('click', function (e) {
+			//    document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat();
+			//});
+			var auto = new AMap.Autocomplete({
+				input : "txtLocation"
+			});
+			AMap.event.addListener(auto, "select", select);
+			//注册监听，当选中某条记录时会触发
+			function select(e) {
+				if (e.poi && e.poi.location) {
+					//map.setZoom(15);
+					//map.setCenter(e.poi.location);
+				}
+				//经纬度获取
+				$("#txtLocation").val(e.poi.name);
+				$("#hidLng").val(e.poi.location.lng);
+				$("#hidLat").val(e.poi.location.lat);
+			}
+
+
+			$("#txtLocation").focus(function() {
+				$(this).val('');
+				$("#hidLng").val('');
+				$("#hidLat").val('');
+			});
+		})
+	</script>
+</html>

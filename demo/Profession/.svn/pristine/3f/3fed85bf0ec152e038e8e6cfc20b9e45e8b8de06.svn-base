@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" href="../css/swiper.css">
+    <style>
+        .hidden {
+            display: none!important;
+        }
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .s0 {
+            background: url(../res/0.png) no-repeat;
+        }
+
+        .s10 {
+            background: url(../res/1.0.png) no-repeat;
+        }
+
+        .s11 {
+            background: url(../res/1.1.png) no-repeat;
+        }
+
+        .s12 {
+            background: url(../res/1.2.png) no-repeat;
+        }
+
+        .s20 {
+            background: url(../res/2.0.png) no-repeat;
+        }
+
+        .s21 {
+            background: url(../res/2.1.png) no-repeat;
+        }
+
+        .s22 {
+            background: url(../res/2.2.png) no-repeat;
+        }
+
+        .s30 {
+            background: url(../res/3.0.png) no-repeat;
+        }
+
+        .s31 {
+            background: url(../res/3.1.png) no-repeat;
+        }
+
+        .s32 {
+            background: url(../res/3.2.png) no-repeat;
+        }
+
+        .s40 {
+            background: url(../res/4.0.png) no-repeat;
+        }
+
+        .s41 {
+            background: url(../res/4.1.png) no-repeat;
+        }
+
+        .s42 {
+            background: url(../res/4.2.png) no-repeat;
+        }
+
+        .s50 {
+            background: url(../res/5.0.png) no-repeat;
+        }
+
+        .s51 {
+            background: url(../res/5.1.png) no-repeat;
+        }
+
+        .s52 {
+            background: url(../res/5.2.png) no-repeat;
+        }
+
+        /*.swiper-slide div {
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+            background-position: center center;
+        }*/
+        .pic1,.pic2, .pic3, .pic4{
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+            background-position: center center;
+        }
+        .pic2, .pic3, .pic4 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 20;
+            opacity: 0;
+
+        }
+
+        @-webkit-keyframes page {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes page {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes pic {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pic {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes arrow {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes arrow {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes btn1 {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes btn1 {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes btn2 {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes btn2 {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .active .pic2 {
+            -webkit-animation: page 2s forwards;
+            animation: page 2s forwards;
+        }
+
+        .active .pic3 {
+            -webkit-animation: page 2s forwards;
+            animation: page 2s forwards;
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+
+        .active .pic4 {
+            -webkit-animation: page 2s forwards;
+            animation: page 2s forwards;
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+
+        .active .btn1 {
+            -webkit-animation: page 2s forwards;
+            animation: page 2s forwards;
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+
+        .btn1 {
+            width: 90% !important;
+            height: 10% !important;;
+            display: block;
+            position: absolute;
+            bottom:80px;
+            left: 5%;
+            opacity: 0;
+            z-index: 30;
+            background: url(../res/5.3.png) no-repeat;
+            background-size: 100% 100% !important;;
+        }
+
+        /*指引器*/
+        #arrow {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            left: 0;
+            right: 0;
+            bottom: 5%;
+            margin: 0 auto;
+            border-top: 2px solid #fff;
+            border-right: 2px solid #fff;
+            z-index: 10000;
+            opacity: 0.8;
+            -webkit-animation: nextPage 1.2s linear infinite;
+        }
+
+        @-webkit-keyframes nextPage {
+            0% {
+                -webkit-transform: translateY(40px) rotate(-45deg);
+                opacity: 0.8;
+            }
+            50% {
+                -webkit-transform: translateY(20px) rotate(-45deg);
+                opacity: 0.4;
+            }
+            100% {
+                -webkit-transform: translateY(10px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        /*指引器*/
+        /*音乐*/
+        .media-wrap{
+            overflow: hidden;
+            position: fixed;
+            right: 20px;
+            z-index: 10000;
+            width: 60px;
+            height: 60px;
+            font-size: 16px;
+            top: 50px;
+        }
+        .music-btn {
+            float: right;
+            background: url('../image/music-icon.png');
+            background-size: cover;
+            width: 40px;
+            height:40px;
+        }
+
+        .music-btn.on {
+            -webkit-animation: reverseRotataZ 1.2s linear infinite;
+        }
+        @-webkit-keyframes reverseRotataZ {
+            0% {
+                -webkit-transform: rotateZ(0deg);
+            }
+            100% {
+                -webkit-transform: rotateZ(-360deg);
+            }
+        }
+        /*音乐*/
+        /*心*/
+        .heart{
+            position: absolute;
+            right: 1.375rem;
+            z-index: 10000;
+            width: 80px;
+            height: 80px;
+            font-size: 16px;
+            bottom: 25%;
+        }
+        .heart-btn{
+            float: right;
+            background-size:80%;
+            width: 50px;
+            height: 50px;
+            background-position: center;
+            background-repeat: no-repeat no-repeat;
+        }
+        .heart1{
+            background-image: url(../res/heart1.png);
+        }
+        .heart2{
+            background-image: url(../res/heart2.png);
+        }
+        .heart3{
+            background-image: url(../res/heart3.png);
+        }
+        .heart4{
+            background-image: url(../res/heart4.png);
+        }
+        /*心*/
+        .apicloud {
+            width: 249px;
+            height: 24px;
+            display: block;
+            position: absolute;
+            bottom:25px;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            opacity: 1;
+            z-index: 30;
+            background: url(../res/apicloud.png) no-repeat;
+            background-size: 50%;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+<aside class="media-wrap">
+    <span id="musicBtnTxt" style="display: none;">开始</span>
+    <i id="musicBtn" class="music-btn off"></i>
+</aside>
+<div class="swiper-container swiper-container-v">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" id="s1">
+            <div class="s10 pic1"></div>
+            <div class="s11 pic2"></div>
+            <div class="s12 pic3"></div>
+            <div class="heart">
+                <div class="heart-btn heart1" onclick="contact()" tapmode=""></div>
+            </div>
+        </div>
+        <div class="swiper-slide" id="s2">
+            <div class="s20 pic1"></div>
+            <div class="s21 pic2"></div>
+            <div class="s22 pic3"></div>
+            <div class="s0 pic4"></div>
+            <div class="heart">
+                <div class="heart-btn heart2" onclick="contact()" tapmode=""></div>
+            </div>
+        </div>
+        <div class="swiper-slide" id="s3">
+            <div class="s30 pic1"></div>
+            <div class="s31 pic2"></div>
+            <div class="s32 pic3"></div>
+            <div class="s0 pic4"></div>
+            <div class="heart">
+                <div class="heart-btn heart3" onclick="contact()" tapmode=""></div>
+            </div>
+        </div>
+        <div class="swiper-slide" id="s4">
+            <div class="s40 pic1"></div>
+            <div class="s41 pic2"></div>
+            <div class="s42 pic3"></div>
+            <div class="s0 pic4"></div>
+            <div class="heart">
+                <div class="heart-btn heart4" onclick="contact()" tapmode=""></div>
+            </div>
+        </div>
+        <div class="swiper-slide" id="s5">
+            <div class="s50 pic1"></div>
+            <div class="s51 pic2"></div>
+            <div class="s52 pic3"></div>
+            <div class="s0 pic4"></div>
+            <div id="send" class="btn1" onclick="contact()" tapmode=""></div>
+        </div>
+    </div>
+</div>
+<div id="apicloud"  class="apicloud hidden" onclick="apicloud()" tapmode=""></div>
+<div id="arrow"></div>
+<script src="../script/swiper.js"></script>
+<script src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/APICloud-rest-SHA1.js"></script>
+<script>
+    $("#s1").addClass('active');
+    var swiperH = new Swiper('.swiper-container-v', {
+        paginationClickable: true,
+        followFinger: false,
+        direction: 'vertical',
+        onInit: function (swiper) {
+        },
+        onSlideChangeEnd: function (swiper) {
+
+            var index = swiper.activeIndex+1;
+            var prevIndex = index-1 <=0?'5':index-1;
+            var nextIndex = index+1 >5 ?'1':index+1;
+
+            $("#s"+index).addClass('active');
+            $("#s"+prevIndex).removeClass('active');
+            $("#s"+nextIndex).removeClass('active');
+
+            if (index == 5) {
+                $("#arrow").addClass('hidden');
+                $("#apicloud").removeClass('hidden');
+            } else {
+                $("#arrow").removeClass('hidden');
+                $("#apicloud").addClass('hidden');
+
+            }
+        }
+    });
+
+    //操作音乐相关
+    var isPlay = false;
+    $("#musicBtn").on('tap', function () {
+        if (!isPlay) {
+            api.startPlay({
+                path: 'widget://res/tongxing.mp3'
+            }, function () {
+            });
+            $(this).addClass('on');
+            isPlay = true;
+        } else {
+            api.stopPlay();
+            $(this).removeClass('on');
+            isPlay = false;
+        }
+    });
+    var appId = 'A6983131639028', appkey = '74405CDC-BC9B-7974-07B4-AD0D768F2FF2';
+    var client = new Resource(appId, appkey);
+    var account = client.Factory("account");
+    var rong, widgetId;
+    apiready = function () {
+        api.setStatusBarStyle({
+            style: 'light'
+        });
+        api.startPlay({
+            path: 'widget://res/tongxing.mp3'
+        }, function () {
+        });
+        $("#musicBtn").addClass('on');
+        isPlay = true;
+        rong = api.require('rongCloud');
+
+    };
+
+    //融云初始化
+    function init(token) {
+        api.showProgress();
+        rong.init(function (ret, err) {
+            if ('success' == ret.status) {
+                api.toast({msg: ret ? '初始化成功' : err.msg})
+                setConnectionStatusListener();
+                connect(token)
+            }
+            if ('error' == ret.status) {
+                api.alert({msg: errcode2msg(err.code)});
+            }
+        });
+    }
+    function connect(token) {
+        rong.connect({token:token},
+                function (ret, err) {
+                    api.hideProgress();
+                    if (ret.status == 'success') {
+                        api.openWin({
+                            name: 'win_contact',
+                            url: 'win_contact.html',
+                            slidBackEnabled: false,
+                            animation: {
+                                type: "none",
+                                subType: "from_right",
+                                duration: 300
+                            }
+                        })
+                    } else {
+                        api.toast({msg: errcode2msg(err.code), location: 'center'});
+                    }
+                }
+        );
+    }
+    //融云的连接监听
+    function setConnectionStatusListener() {
+        rong.setConnectionStatusListener(function (ret, err) {
+            api.alert({
+                msg:errcode2msg(ret.result.code)
+            })
+        });
+    }
+    function register(accountName) {
+        try {
+
+            var widgetId = api.appId;
+            account.count({
+                filter: {
+                    widgetId: widgetId
+                }
+            }, function (ret, err) {
+                if (ret) {
+                    var gender = ret.count%2?'man':'woman';
+                    account.save({
+                        "name": accountName,
+                        'widgetId': widgetId,
+                        'gender': gender
+                    }, function (ret, err) {
+                        if (ret) {
+                            var userId = ret.id;
+                            localStorage.setItem('accountName', accountName);
+                            localStorage.setItem('gender', gender);
+                            var appKey = "uwd1c0sxd3961";
+                            var appSecret = "KaL2cPkDSPJy";
+                            var nonce = Math.floor(Math.random() * 1000000);
+                            var timestamp = Date.now();
+                            var signature = SHA1("" + appSecret + nonce + timestamp);
+                            var portraitUri = "http://ac71914d5e4a3a1e3730.b0.upaiyun.com/apicloud/db33759350cccbe66724ae05c77c6e1c.png";
+                            var url = "https://api.cn.rong.io/user/getToken.json";
+                            api.ajax({
+                                url: url,
+                                method: "post",
+                                headers: {
+                                    "RC-App-Key": appKey,
+                                    "RC-Nonce": "" + nonce,
+                                    "RC-Timestamp": "" + timestamp,
+                                    "RC-Signature": "" + signature,
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                data: {
+                                    values: {
+                                        userId: userId,
+                                        name: userId,
+                                        portraitUri: portraitUri
+                                    }
+                                }
+                            }, function (ret, err) {
+                                api.hideProgress();
+                                if (ret) {
+                                    var token = ret.token;
+                                    localStorage.setItem('token', token);
+                                    account.save({"_id": userId}, {token: token}, function (ret, err) {
+                                    });
+                                    init(token);
+                                } else {
+                                    alert(JSON.stringify(err))
+                                }
+                            });
+                        } else {
+                            api.toast({
+                                msg: err.msg
+                            })
+                        }
+                    });
+                } else {
+                    api.toast({
+                        msg: err.msg
+                    })
+                }
+            });
+
+
+
+        } catch (e) {
+            alert(e)
+        }
+    }
+
+
+
+    function apicloud(){
+        if(api.systemType =='ios'){
+            api.openApp({
+                iosUrl: 'http://www.apicloud.com/'
+            },function(ret,err){
+
+            });
+        }else{
+            api.openApp({
+                androidPkg: 'android.intent.action.VIEW',
+                mimeType: 'text/html',
+                uri: 'http://www.apicloud.com/'
+            },function(ret,err){
+
+            });
+        }
+    }
+    function setOnReceiveMessageListener() {
+        rong.setOnReceiveMessageListener(function (ret, err) {
+            if (ret && 'success' == ret.status) {
+                api.notification({
+                    vibrate: [300, 500],
+                    sound: 'default'
+                });
+            }
+        });
+    }
+    function contact() {
+        if (localStorage.getItem('accountName')) {
+            var token = localStorage.getItem('token');
+            init(token);
+        } else {
+            api.prompt({
+                title: "输入昵称,马上开启私密聊天!",
+                type: 'text',
+                buttons: ['确定', '取消']
+            }, function (ret, err) {
+                if (ret.buttonIndex == 1) {
+                    var text = ret.text;
+                    if ($.trim(text) == '') {
+                        api.toast({
+                            msg: '昵称不能为空'
+                        })
+                    } else {
+                        api.showProgress();
+                        account.query({
+                            filter: {
+                                where: {"name": text}
+                            }
+                        }, function (ret, err) {
+                            api.hideProgress();
+                            if(ret){
+                                if(ret.length>0){
+                                    api.alert({
+                                        msg:'昵称已占用！'
+                                    })
+                                }else{
+                                    api.showProgress({
+                                        title: "加载中",
+                                        text: ""
+                                    });
+                                    register(text);
+                                }
+                            }else{
+                                api.toast({
+                                    msg:err.msg
+                                })
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

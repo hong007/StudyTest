@@ -1,0 +1,81 @@
+	<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>捷雁</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/aui-extend.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+	</head>
+	<body>
+		<!-- 登录页面 -->
+		<div class="confirm-box login-box" id="boxLogin">
+			<div class="layer-content">
+				<form class="login-form" id="loginF">
+					<ul class="login-menu">
+						<li class="login-item">
+							<h2 class="login-item-title">登录</h2>
+							<span class="close-btn" id="closeBtn">×</span>
+						</li>
+						<li class="login-item">
+							<input class="login-input" type="text" name="" id="userName" placeholder="请输入用户名" onfocus="if($api.val($api.byId('userPwd'))!=''){$api.css($api.byId('submitBtn'), 'background:#fb8815')}">
+							<span class="clear-value">×</span>
+						</li>
+						<li class="login-item">
+							<input class="login-input" type="password" name="" id="userPwd" placeholder="请输入密码" onfocus="if($api.val($api.byId('userName'))!=''){$api.css($api.byId('submitBtn'), 'background:#fb8815')}">
+							<span class="clear-value">×</span>
+						</li>
+						<li class="login-item login-submit">
+							<a class="login-link" href="html/transfer.html" id="submitBtn">登录</a>
+						</li>
+						<li class="login-item login-forgot">
+							<a class="txtlt fl" href="javascript:void(0)">忘记密码？</a>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		<!-- 登录页面 -->
+
+		<script type="text/javascript" src="../script/api.js"></script>
+		<script>
+			function sliding() {
+				api.openSlidPane({
+					type : 'left'
+				});
+			}
+
+			apiready = function() {
+				$api.fixStatusBar($api.dom('.header'));
+				
+			};
+			var status=1;
+			
+			// 是否登录
+			function iLogin(){
+				if (status==1) {
+					openWin('travel');
+				}else{
+					openWin("boxlogin");
+				}
+			}
+			// 打开新窗口
+			function openWin(name) {
+				var delay = 0;
+				if (api.systemType != 'ios') {
+					delay = 300;
+				}
+				api.openWin({
+					name : '' + name + '',
+					url : '' + name + '.html',
+					bounces : false,
+					delay : delay,
+					slidBackEnabled : true,
+					vScrollBarEnabled : false
+				});
+			}
+		</script>
+	</body>
+</html>

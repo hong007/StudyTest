@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <style>
+        html, body {
+            background-color: transparent;
+        }
+
+        .voice-modal {
+            width: 150px;
+            height: 130px;
+            background-color: RGBA(117, 117, 117, 0.9);
+        }
+
+        .voice-modal-bg {
+            display: -webkit-box;
+            -webkit-box-align: center;
+            -webkit-box-pack: center
+        }
+
+        .voice-state {
+            background-size: 55px;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 90px;
+        }
+
+        .voice-play {
+            background-image: url("../image/voice_play.png");
+        }
+
+        .voice-cancel {
+            background-image: url("../image/voice_cancel.png");
+        }
+
+        .voice-size {
+            background-image: url("../image/voice_play.png");
+            background-size: 62px;
+            background-repeat: no-repeat;
+            background-position: 0 60%;
+        }
+    </style>
+</head>
+<body>
+<div class="voice-modal-bg ">
+    <div class="voice-modal">
+        <div class="voice-state voice-play">
+        </div>
+        <div class="voice-title" style="line-height:40px;color: #ffffff;font-size: 14px;text-align: center">
+            手指上滑，取消发送
+        </div>
+    </div>
+</div>
+<script src="../script/zepto.min.js"></script>
+<script>
+    apiready = function () {
+
+    }
+    var $voice_state = $(".voice-state");
+    var $voice_modal_bg = $(".voice-modal-bg");
+    var $voice_title = $(".voice-title");
+    function touch_in() {
+
+    }
+
+    function touch_cancel() {
+        if ($voice_state.hasClass('voice-cancel')) {
+            $voice_state.removeClass('voice-cancel');
+            $voice_title.html('手指上滑，取消发送');
+        }
+        api.setFrameAttr({
+            name: 'frm_voice_record',
+            hidden: true
+        });
+    }
+    function move_out() {
+        $voice_state.addClass('voice-cancel');
+        $voice_title.html('松开手指，取消发送');
+    }
+    function move_in() {
+        $voice_state.removeClass('voice-cancel');
+        $voice_title.html('手指上滑，取消发送');
+    }
+    function move_out_cancel() {
+        touch_cancel()
+    }
+
+</script>
+</body>
+</html>

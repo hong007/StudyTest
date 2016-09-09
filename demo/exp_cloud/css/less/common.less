@@ -1,0 +1,766 @@
+
+body {
+  font-family: "微软雅黑", "Helvetica65", "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+}
+
+.allPush {
+  width: 100%;
+  height: 100%;
+}
+
+.allHeight {
+  height: 100%;
+}
+
+.allWidth {
+  width: 100%;
+}
+
+.noPadding {
+  padding: 0;
+}
+
+.noMargin {
+  margin: 0;
+}
+
+.warning {
+  color: #fff100;
+}
+
+.error {
+  color: #fc0b22;
+}
+
+.hideShowBtn {
+  width: 50px;
+  height: 20px;
+  position: absolute;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-image: url('../images/arrow_down1.png');
+  background-size: auto 90%;
+  cursor: pointer;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+  z-index: 3;
+}
+
+.hideShowBtn:hover {
+  opacity: 0.8;
+}
+
+.rotate90 {
+  transform: rotate(90deg);
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.rotate270 {
+  transform: rotate(270deg);
+}
+
+/* 无人机图标样式 */
+.main-flight-marker-hasNO {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  div.img-div{
+    position: absolute;
+    padding:0;
+    z-index: 10;
+    left: -50px;
+    top: -50px;
+    width: 100px;
+    height: 100px;
+    img{
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+    }
+  }
+  div.id{
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 12px;
+    height: 12px;
+    font-size: 8px !important;
+    color: #fff;
+    text-align: center;
+    z-index: 11;
+  }
+  div.shadow{
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width:1px;
+    height:1px;
+    margin: auto;
+    position: absolute;
+    z-index: 9;
+  }
+  div.heart-beng-beng{
+    animation: heart-beng-beng 1s infinite;
+    opacity: 0.4;
+    box-shadow: 0px 0px 70px 35px #F7B0AE;
+  }
+  div.infos{
+    display: none;
+    background: white;
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    padding:10px 0px;
+    top: 20px;
+    left: 20px;
+    text-align: center;
+    opacity: 0.8;
+    line-height: 15px;
+    z-index: 12;
+    p{
+      font-size: 10px;
+      color: #000;
+      span{
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+/* 单机视角图 begin */
+.fly-uav {
+  height: 80px;
+  width: 80px;
+  position: relative;
+  /*left: -15px;
+  top: 5px;*/
+  left: -31px;
+  top: -7px;
+}
+
+.single-left {
+  background-image: url('../images/singlePage/zhuzhuang.png');
+  background-size: 100% 100%;
+  .single-left-block {
+    position: relative;
+    height: calc(100% / 8);
+    padding: 20px;
+    p {
+      font-size: 14px;
+    }
+    div {
+      text-align: center;
+      span {
+        font-size: 36px;
+
+      }
+      small {
+        font-size: 16px;
+      }
+    }
+    img {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+.single-center-middle {
+  height: 100px;
+  background-image: url("../images/singlePage/shujubg.png");
+  background-size: 100% 100%;
+  position: absolute;
+  bottom: 310px;
+  left: 0;
+  right: 0;
+  .block {
+    width: 24%;
+    padding: 5px;
+    float: left;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .block:first-child {
+    margin-left: 10px;
+  }
+}
+
+.single-center-left {
+  left: 10px;
+  top: 50px;
+  width: 38px;
+  .left-icon {
+    width: 38px;
+    height: 50px;
+    cursor: pointer;
+  }
+}
+
+.single-center-top {
+  position: absolute;
+  top: 0;
+  right: calc(100% / 4);
+  .menu {
+    position: relative;
+    background-image: url("../images/singlePage/menux.png");
+    background-size: 100% 100%;
+    font-size: 20px;
+    padding-left: 10px;
+    .menu-li {
+      text-align: center;
+      display: inline-block;
+      width: 110px;
+      height: 60px;
+      line-height: 60px;
+      margin: 0;
+      position: relative;
+      padding-left: 5px;
+      cursor: pointer;
+      img.left {
+        position: absolute;
+        left: -5px;
+        height: 100%;
+        width: 2px;
+      }
+      img.bottom {
+        position: absolute;
+        bottom: -5px;
+        left: -2px;
+        width: 100%;
+        height: 5px;
+      }
+      .sub-menu {
+        display: none;
+        width: 100%;
+        position: absolute;
+        padding-left: 0;
+        background-image: url("../images/singlePage/menux.png");
+        background-size: 100% 100%;
+        left: -5px;
+        top: 60px;
+        li {
+          font-size: 14px;
+          padding: 0;
+          height: 40px;
+          line-height: 40px;
+        }
+        li:hover {
+          background-image: url("../images/singlePage/hover.png");
+          background-size: 100% 100%;
+        }
+      }
+    }
+    .selected {
+      background-image: url("../images/singlePage/hover.png");
+      background-size: 100% 100%;
+    }
+    .menu-li:hover {
+      background-image: url("../images/singlePage/hover.png");
+      background-size: 100% 100%;
+    }
+  }
+}
+
+.single-center-bottom {
+  position: absolute;
+  height: 300px;
+  bottom: 0;
+
+  .left {
+    height: 100%;
+    width: 50%;
+    float: left;
+    position: relative;
+    .left-main {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      width: 100%;
+      .left-main-sky {
+        height: 45%;
+        .compass-body {
+          width: 80px;
+          height: 80px;
+          position: relative;
+          float: right;
+          background-image: url('../images/singlePage/compass_body.png');
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          background-position: center;
+          .compass {
+            width: 60px;
+            height: 60px;
+            top: 10px;
+            right: 10px;
+            position: absolute;
+            background-image: url('../images/singlePage/compass.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-position: center;
+          }
+          .compass-arrow {
+            width: 28px;
+            height: 25px;
+            top: 26px;
+            right: 27px;
+            position: absolute;
+            background-image: url('../images/singlePage/compass_arrow.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-position: center;
+            transform: rotate(-45deg);
+          }
+        }
+
+      }
+      .left-main-flight {
+        height: 120px;
+        width: 80px;
+        background-image: url('../images/singlePage/single_center_bottom_flight.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 20px;
+        margin: 0 auto;
+        transform: rotateX(65deg) rotateZ(90deg);
+      }
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      background-color: #1F3B6B;
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      top: 0;
+      z-index: 1;
+    }
+  }
+  .right {
+    height: 100%;
+    width: 50%;
+    float: right;
+    background-image: url('../images/singlePage/zhuzhuang.png');
+    background-size: 100% 100%;
+    table {
+      width: 100%;
+      height: 300px;
+      tr {
+        width: 25%;
+        vertical-align: middle;
+        td {
+          margin: 0;
+          text-align: center;
+          width: 49%;
+          line-height: 39px;
+          img {
+            width: 45px;
+            float: left;
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.map-marker {
+  position: absolute;
+  width: 19px;
+  height: 33px;
+  opacity: 1;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  img {
+    //width:19px;
+    height: 33px;
+  }
+  .point {
+    margin-left: -7px;
+  }
+}
+
+.map-marker.point {
+  img {
+    margin-left: -7px !important;
+  }
+  div {
+    color: black;
+    top: 2px;
+  }
+}
+
+.map-marker div {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.single-right {
+  background-image: url('../images/singlePage/zhuzhuang.png');
+  background-size: 100% 100%;
+  .single-right-up {
+    overflow-y: auto;
+    .single-right-up-sub {
+      position: relative;
+      margin: 20px;
+      .single-right-up-hidden {
+        display: none;
+        background-image: url('../images/singlePage/randos.png');
+        background-size: 100% 100%;
+        margin: -20px;
+        padding: 20px;
+        p {
+          margin: 10px;
+          text-align: center;
+        }
+        table {
+          margin: auto;
+          padding: 0;
+          .info {
+            width: 35%;
+            text-align: right;
+            padding-right: 15px;
+          }
+          .input {
+            width: 65%;
+            input {
+              color: #000000;
+              width: 70%;
+            }
+          }
+        }
+      }
+      .sanjiao {
+        height: 20px;
+        width: 20px;
+        float: right;
+        position: absolute;
+        top: 23px;
+        right: 0px;
+        bottom: 0;
+        cursor: pointer;
+      }
+    }
+    .single-right-up-sub.select {
+      position: relative;
+      .single-right-up-block {
+        background-image: url('../images/singlePage/6blue.png');
+        margin: 0px -10px;
+        line-height: 50px;
+      }
+      .single-right-up-hidden {
+        display: block;
+      }
+    }
+    .single-right-up-block {
+      cursor: pointer;
+      height: 60px;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      padding: 0px 20px;
+      line-height: 60px;
+      background-image: url('../images/singlePage/rightrouter.png');
+      font-size: 16px;
+      .number {
+        margin-right: 20px;
+      }
+    }
+    .sanjiao {
+      height: 20px;
+      width: 20px;
+      float: right;
+      position: absolute;
+      top: 20px !important;
+      right: 0px;
+      bottom: 0;
+      cursor: pointer;
+    }
+    .sanjiao:hover {
+      color: #FFF;
+    }
+  }
+
+  .single-right-down {
+    position: relative;
+    height: 300px;
+    bottom: 0;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+}
+
+/* 单机视角图 end */
+
+@media screen and (max-width: 1400px) and (min-width: 1024px) {
+  .single-center-middle {
+    bottom: 50px;
+  }
+
+  .single-center-bottom {
+    bottom: -270px;
+  }
+
+  .single-md-2 {
+    width: 120px;
+    .single-left-block {
+      padding: 10px;
+      p {
+        font-size: 12px;
+        margin-bottom: 2px;
+      }
+      div {
+        span {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  .single-center-left {
+    margin-left: 130px;
+  }
+
+  .single-md-3 {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .single-md-2 {
+    width: 80px;
+    .single-left-block {
+      p {
+        display: none;
+      }
+    }
+  }
+
+  .single-center-middle {
+    bottom: 50px;
+    margin-left: 85px;
+    width: 80%;
+  }
+
+  .single-center-bottom {
+    bottom: -270px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 70%;
+  }
+
+  .single-md-2 {
+    width: 120px;
+    .single-left-block {
+      padding: 10px;
+      p {
+        font-size: 12px;
+        margin-bottom: 2px;
+      }
+      div {
+        span {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  .single-center-top {
+    right: 120px;
+  }
+
+  .single-center-left {
+    margin-left: 90px;
+  }
+
+  .single-md-3 {
+    width: 120px;
+    .single-right-up {
+      height: 100%;
+    }
+    .single-right-down {
+      display: none;
+    }
+  }
+}
+
+.real-time-data {
+  width: 100%;
+  height: 420px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  .data-block {
+  }
+  .data-info {
+    .data-setting {
+      margin-top: 50px;
+      div {
+        margin-bottom: 10px;
+      }
+    }
+    span {
+      font-size: 14px;
+    }
+    select {
+      padding: 5px;
+      width: 120px;
+    }
+  }
+}
+//main page
+/*.main-margin-top{
+  top: 70px!important;
+}*/
+.main-input-search{
+  width: 400px;
+  height: 45px;
+  position: relative;
+  top: 20px;
+  left: 20px;
+  background-image: url('../images/main/inputbottom.png');
+  background-size: 100% 100%;
+  input{
+    width: 300px;
+    margin-left: 40px;
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+  }
+  .main-input-search-btn{
+    position: absolute;
+    right:0;
+    top: 0;
+    height: 100%;
+    width: 60px;
+    background-image: url('../images/main/inputsearch.png');
+    background-size: 100% 100%;
+    cursor: pointer;
+  }
+}
+.main-flight-no{
+  position: absolute;
+  right:490px;
+  top: 20px;
+  width:80px;
+  line-height:45px;
+  background-image: url('../images/main/box.png');
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  font-size: 20px;
+  color: #444;
+  font-weight: bold;
+  padding-left:50px ;
+}
+.main-package-no{
+  position: absolute;
+  right:380px;
+  top: 20px;
+  width:80px;
+  height:45px;
+  line-height:45px;
+  background-image: url('../images/main/flightblue.png');
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  font-size: 20px;
+  color: #444;
+  padding-left:50px ;
+  font-weight: bold;
+}
+.main-map-change{
+  position: absolute;
+  bottom:5px;
+  right:25px;
+  height: 100px;
+  .mapList{
+    position: relative;
+    padding: 10px;
+    .map1{
+      position: absolute;
+      right:10px;
+      width:80px;
+      height: 55px;
+      background: url("../images/main/map_nor.png") no-repeat;
+      background-size: 100% 100%;
+      z-index:99;
+      cursor: pointer;
+    }
+    .map1:hover{
+      background: url("../images/main/map_sel.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .map1.selected{
+      background: url("../images/main/map_sel.png") no-repeat;
+      background-size: 100% 100%;
+      z-index:99;
+    }
+    .map2{
+      position: absolute;
+      right:10px;
+      width:80px;
+      height: 55px;
+      background: url("../images/main/satellite_map_nor.png") no-repeat;
+      background-size: 100% 100%;
+      z-index:99;
+      cursor: pointer;
+    }
+    .map2:hover{
+      background: url("../images/main/satellite_map_sel.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .map2.selected{
+      background: url("../images/main/satellite_map_sel.png") no-repeat;
+      background-size: 100% 100%;
+      z-index:99;
+      right:10px;
+    }
+    .under{
+      z-index:98!important;
+    }
+  }
+  .mapList:hover{
+    height:75px;
+    width:200px;
+    background: url("../images/main/allpushbg.png") no-repeat;
+    background-size: 100% 100%;
+    padding: 10px;
+    background-position-x: 10px;
+    .under{
+      animation: leftEnter .3s ease-in-out 0s 1;
+      right:100px;
+    }
+  }
+}

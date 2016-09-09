@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <style>
+        .unreadcount{
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            background-color: red;
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            position: absolute;
+            left: 40px;
+            bottom: 14px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header">
+        <div tapmode="btn-active" class="back header-icon" onclick="closeWin()">
+        </div>
+        <div class="header-title">
+            勇敢爱，放胆说
+        </div>
+        <div  tapmode="btn-active" class=" header-icon" onclick="">
+        </div>
+    </div>
+</header>
+
+</body>
+<script src="../script/common.js"></script>
+<script src="../script/zepto.min.js"></script>
+<script>
+    apiready=function(){
+        //setOnReceiveMessageListener()
+        var $header = $(".header");
+        fixIos7Bar($header);
+        api.openFrame({
+            name:'frm_contact',
+            url:'frm_contact.html',
+            rect:{
+                x:0,
+                y:$header.height(),
+                w:'auto',
+                h:'auto'
+            },
+            bounces:true
+        })
+    };
+    function closeWin(){
+        api.execScript({
+            name:'root',
+            frameName:'main',
+            script:'setOnReceiveMessageListener();'
+        });
+        api.closeWin();
+    }
+    function setOnReceiveMessageListener() {
+        var rong = api.require('rongCloud');
+        rong.setOnReceiveMessageListener(function (ret, err) {
+            if (ret && 'success' == ret.status) {
+                api.notification({
+                    vibrate: [300, 500],
+                    sound: 'default'
+                });
+            }
+        });
+    }
+</script>
+</html>

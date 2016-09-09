@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <style>
+        .unreadcount{
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            background-color: red;
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            position: absolute;
+            left: 40px;
+            bottom: 14px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header">
+        <div tapmode="btn-active" class="back header-icon" onclick="closeWin()">
+        </div>
+        <div class="header-title">
+
+        </div>
+        <div  tapmode="btn-active" class=" header-icon" onclick="">
+        </div>
+    </div>
+</header>
+
+</body>
+<script src="../script/common.js"></script>
+<script src="../script/zepto.min.js"></script>
+<script>
+    apiready=function(){
+        //chatbox的高度，ios是50，android是40
+        var CHATBOXH = api.systemType=='ios'?50:40;
+        var pageParam = api.pageParam;
+        $(".header-title").html(pageParam.title);
+        var $header = $(".header");
+        fixIos7Bar($header);
+        api.openFrame({
+            name:'frm_conversation_detail',
+            url:'frm_conversation_detail.html',
+            rect:{
+                x:0,
+                y:$header.height(),
+                w:'auto',
+                h:api.winHeight-$header.height()-CHATBOXH
+            },
+            bounces:true,
+            pageParam:{
+                targetId: pageParam.targetId,
+                headerH:$header.height()
+            }
+        })
+    };
+    function closeWin(){
+        api.execScript({
+            name:'win_contact',
+            frameName:'frm_contact',
+            script:'setOnReceiveMessageListener();'
+        });
+        api.closeWin();
+    }
+</script>
+</html>

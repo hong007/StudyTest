@@ -1,0 +1,1007 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <style>
+        html, body {
+            background-color: #FFFFFF;
+        }
+
+        .content {
+            padding: 20px 0;
+        }
+
+        .items {
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .item {
+            display: -webkit-box;
+            margin: 0 0 10px 0;
+        }
+
+        .message {
+            -webkit-box-flex: 1;
+            display: -webkit-box;
+            -webkit-box-align: center;
+            font-size: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .detail {
+            color: #373737;
+            line-height: 21px;
+            position: relative;
+            max-width: 200px;
+        }
+
+        .text {
+            background-color: #e3f5ff;
+            padding: 5px 10px;
+            border-radius: 3px;
+            word-wrap: break-word;
+            color: #373737;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .text img {
+            width: 24px;
+            height: 24px;
+            vertical-align: bottom;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            background-size: 50px;
+
+        }
+
+        .man.icon{
+            background-image: url("../image/man.png");
+        }
+        .woman.icon{
+            background-image: url("../image/woman.png");
+        }
+
+
+        .arrow {
+            margin-top: 20px;
+            width: 0;
+            height: 0;
+            border-top: 9px solid #e3f5ff;
+            border-right: 9px solid transparent;
+        }
+
+        .ui-loading {
+            position: relative;
+            margin-right: 6px;
+            margin-left: 6px;
+            width: 20px;
+            height: 20px;
+            display: block;
+            background: url(../image/loading_sprite.png);
+            -webkit-background-size: auto 20px;
+            -webkit-animation: rotate 1s steps(12) infinite;
+        }
+
+        /*自己发的*/
+        .self {
+            margin-left: 46px;
+        }
+
+        .self .message {
+            -webkit-box-pack: end;
+            /* text-align: end;*/
+        }
+
+        .self .ui-loading {
+            margin-left: -26px;
+        }
+
+        .self .text {
+            background-color: #A2E563;
+        }
+
+        .self .arrow {
+            border-top: 8px solid #A2E563;
+            border-left: 8px solid transparent;
+            -webkit-transform: rotate(270deg);
+            margin-left: -5px;
+        }
+
+        .self .icon {
+            /*background-image: url("../image/photo_6.png");*/
+        }
+
+        /*对方发的*/
+        .other {
+            -webkit-box-direction: reverse;
+            margin-right: 46px;
+        }
+
+        .other .icon {
+            /*background-image: url("../image/photo_1.png");*/
+        }
+
+        .other .arrow {
+            border-left: 9px solid transparent;
+            -webkit-transform: rotate(90deg);
+            margin-right: -5px;
+            border-top: 15px solid #e3f5ff;
+            margin-top: 30px;
+        }
+
+        /*图片消息*/
+        .imageMsg {
+            display: -webkit-box;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            width: 60%;
+            border-radius: 5px;
+        }
+
+        .imageMsg img {
+            display: block;
+            width: 100%;
+        }
+
+        .self .imageMsgWrap {
+            -webkit-box-pack: end;
+        }
+
+        /*loading*/
+
+        @-webkit-keyframes rotate {
+            from {
+                background-position: 0 0
+            }
+            to {
+                background-position: -240px 0
+            }
+        }
+
+        /*loading*/
+        .imageMsgWrap {
+            min-width: 100px;
+            min-height: 100px;
+            display: -webkit-box;
+            /*-webkit-box-align: center;*/
+        }
+
+        /*讨论组*/
+        .discuss-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .discuss-title-text {
+            line-height: 25px;
+            background-color: #CECECE;
+            color: #ffffff;
+            font-size: 13px;
+            border-radius: 5px;
+            padding: 0 10px;
+            text-align: start;
+        }
+
+        /*讨论组*/
+        /*隐藏箭头*/
+        .invisible {
+            visibility: hidden;
+        }
+
+        /*地图*/
+        .location {
+
+        }
+
+        .location_img {
+            width: 100%;
+            height: 123px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 5px;
+        }
+
+        .location_desc {
+            width: 100%;
+            height: 25px;
+            line-height: 25px;
+            margin-top: -25px;
+            color: #fff;
+            font-size: 14px;
+            background-color: rgba(51, 51, 51, 0.5);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-radius: 0 0 5px 5px;
+        }
+
+        /*图文消息*/
+        .richContent {
+            background-color: #F2F2F2;
+            padding: 10px;
+            border-radius: 3px;
+            text-align: start;
+        }
+
+        .richContent .title {
+            margin-bottom: 5px;
+            line-height: 15px;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .richContent .right {
+            -webkit-box-direction: normal;
+            display: -webkit-box;
+            -webkit-box-align: center;
+        }
+
+        .richContent .image img {
+            width: 50px;
+            height: 50px
+        }
+
+        .richContent .desc {
+            -webkit-box-flex: 1;
+            font-size: 14px;
+            padding-left: 20px;
+            line-height: 16px;
+            word-break: break-all;
+        }
+
+        /*语音*/
+        .voice {
+            display: -webkit-box;
+            -webkit-box-align: center;
+        }
+
+        .point {
+            width: 8px;
+            height: 8px;
+            background: red;
+            border-radius: 8px;
+            margin-right: 8px;
+        }
+
+        .second {
+            color: #328ED6;
+            font-size: 14px;
+        }
+
+        .self .second {
+            padding-right: 8px;
+        }
+
+        .other .second {
+            padding-left: 8px;
+        }
+
+        .self .icon-playing {
+            transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+        }
+
+        .icon-playing {
+            max-width: 100%;
+            display: inline-block;
+            background: url(../image/stoping.png) left center no-repeat;
+            min-width: 25px;
+            height: 25px;
+            background-size: contain;
+        }
+
+        .self .voice {
+            -webkit-box-pack: end;
+        }
+
+        .play {
+            background-image: url(../image/playing.gif);
+        }
+
+        .voice .text {
+            max-width: 73%;
+        }
+
+        .item-con {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-box-flex: 1;
+        }
+
+        .targetTitle {
+            height: 20px;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <ul class="items" id="history">
+        <!--        &lt;!&ndash;刚进入讨论组显示信息&ndash;&gt;
+                <li class=" discuss-title">
+                     <span class="discuss-title-text">
+                         aaaaa
+                     </span>
+                </li>
+                &lt;!&ndash;对方文本聊天&ndash;&gt;
+                <li class="item other">
+                    <div class="item-con">
+                        <div class="message ">
+                            <i class="ui-loading"></i>
+
+                            <div class="detail">
+                                <span class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+                            </div>
+                        </div>
+                        <div class="targetTitle">aaaa</div>
+                    </div>
+                    <div class="arrow"></div>
+                    <div class="icon"></div>
+                </li>
+                &lt;!&ndash;自己文本聊天 带loading&ndash;&gt;
+                <li class="item self">
+                    <div class="item-con">
+                        <div class="message">
+                            <i class="ui-loading"></i>
+
+                            <div class="detail">
+                                <span class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow"></div>
+                    <div class="icon"></div>
+                </li>
+                &lt;!&ndash;&ndash;&gt;
+                &lt;!&ndash;自己图片聊天 带loading&ndash;&gt;
+                <li tapmode="" onclick="openImage()" class="item self">
+                    <div class="message ">
+
+                        <div class="detail imageMsgWrap">
+                            <div class="imageMsg">
+                                <i class="ui-loading"></i>
+                                <img src="../image/2.jpg"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow invisible"></div>
+                    <div class="icon" style="background-image: url(../image/photo_1.png);"></div>
+                </li>
+                &lt;!&ndash;对方图片聊天&ndash;&gt;
+                <li tapmode="" onclick="openImage()" class="item other">
+                    <div class="item-con">
+                        <div class="message ">
+                            <div class="detail imageMsgWrap">
+                                <div class="imageMsg">
+                                    <i class="ui-loading"></i>
+                                    <img src="../image/1.jpg"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="targetTitle">aaaa</div>
+                    </div>
+
+                    <div class="arrow invisible"></div>
+                    <div class="icon"></div>
+                </li>
+                &lt;!&ndash;自己地图&ndash;&gt;
+                <li class="item self">
+                    <div class="message">
+                        <i class="ui-loading"></i>
+
+                        <div class="detail location">
+                            <span class="location_img"></span>
+                            <span class="location_desc">西城区西单北大街大悦城购物中心10层</span>
+                        </div>
+                    </div>
+                    <div class="arrow invisible"></div>
+                    <div class="icon"></div>
+                </li>
+                &lt;!&ndash;对方地图&ndash;&gt;
+                <li class="item other">
+                    <div class="message">
+                        <i class="ui-loading"></i>
+
+                        <div class="detail location">
+                            <div class="location_img"></div>
+                            <div class="location_desc">西城区西单北大街大悦城购物中心10层</div>
+                        </div>
+                    </div>
+                    <div class="arrow invisible"></div>
+                    <div class="icon"></div>
+                </li>
+                &lt;!&ndash;自己图文&ndash;&gt;
+                <li class="item self">
+                    <div class="message">
+                        <i class="ui-loading"></i>
+
+                        <div class="detail richContent">
+                            <div class="title">
+                                Big NewsBig NewsBig NewsBig NewsBig NewsBig News
+                            </div>
+                            <div class="right">
+                                <div class="image">
+                                    <img src="../image/2.jpg">
+                                </div>
+                                <div class="desc">
+                                    I am Ironman.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow invisible"></div>
+                    <div class="icon"></div>
+                </li>
+                &lt;!&ndash;对方图文&ndash;&gt;
+                <li class="item other">
+                    <div class="message">
+                        <i class="ui-loading"></i>
+
+                        <div class="detail richContent">
+                            <div class="title">
+                                Big NewsBig NewsBig NewsBig NewsBig NewsBig News
+                            </div>
+                            <div class="right">
+                                <div class="image">
+                                    <img src="../image/2.jpg">
+                                </div>
+                                <div class="desc">
+                                    I am Ironman.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow invisible"></div>
+                    <div class="icon"></div>
+                </li>
+                &lt;!&ndash;自己语音&ndash;&gt;
+                <li class="item self">
+                    <div class="message">
+                        <i class="ui-loading"></i>
+
+                        <div class="detail voice">
+                            <div class="point"></div>
+                            <div class="second">5''</div>
+                            <div class="text">
+                                <i class="icon-playing"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow invisible"></div>
+                    <div class="icon"></div>
+                </li>
+                &lt;!&ndash;对方语音&ndash;&gt;
+                <li class="item other">
+                    <div class="item-con">
+                        <div class="message">
+                            <i class="ui-loading"></i>
+
+                            <div class="detail voice">
+                                <div class="point"></div>
+                                <div class="second">5''</div>
+                                <div class="text">
+                                    <i class="icon-playing"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="targetTitle">aaaa</div>
+                    </div>
+                    <div class="arrow invisible"></div>
+                    <div class="icon"></div>
+                </li>
+
+                <li class="item ' + from + '" data-messageId="' + messageId + '">
+                    <div class="item-con">
+                        <div class="message">
+                            <div class="detail voice">' +
+                                '
+                                <div class="second">' + duration + '\'\'</div>
+                                <div class="text"><i  class="icon-playing"></i></div>
+                            </div>
+                        </div>
+                        ' + targetTitleHtml + '
+                    </div>
+                    <div class="arrow invisible"></div>
+                    <div class="icon"></div>
+                </li>-->
+    </ul>
+</div>
+
+</body>
+<script src="../script/zepto.min.js"></script>
+<script src="../script/APICloud-rest-SHA1.js"></script>
+<script src="../script/common.js"></script>
+<script>
+    var targetId, conversationType = 'PRIVATE', rong, fs;
+    apiready = function () {
+        fs = api.require('fs');
+        targetId = api.pageParam.targetId;
+        rong = api.require('rongCloud');
+        setOnReceiveMessageListener();
+        getLatestMessages(targetId, conversationType);
+        //下拉刷新
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/refresh.png',
+            bgColor: '#fff',
+            textColor: '#c2c2c2',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...',
+            showTime: false
+        }, function (ret, err) {
+            //从服务器加载数据，完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+            getHistoryMessages();
+            api.refreshHeaderLoadDone()
+        });
+        var chatBox = api.require('chatBox');
+        chatBox.open({
+            switchButton: {
+                faceNormal: "widget://image/chatBox/face1.png",
+                faceHighlight: 'widget://image/chatBox/face2.png',
+                addNormal: "widget://image/chatBox/add1.png",
+                addHighlight: "widget://image/chatBox/add2.png",
+                keyboardNormal: "widget://image/chatBox/key1.png",
+                keyboardHighlight: 'widget://image/chatBox/key2.png'
+            },
+            sourcePath: "widget://image/chatBox/emotion",
+            addButtons: addButtonAry,
+            leftButton: {
+                normal: "widget://image/chatBox/ToolViewInputVoice@2x.png",
+                selected: "widget://image/chatBox/key1.png",
+                record: {
+                    normal: '#ffffff',
+                    highlight: "#C6C7CB",
+                    titleSize: 12
+                }
+            }
+        }, function (ret, err) {
+            //打开发送语音相关的提示frame 初始的高度是0
+            api.openFrame({
+                name: 'frm_voice_warn',
+                url: 'frm_voice_warn.html',
+                rect: {
+                    x: 0,
+                    y: api.winHeight / 2 - 65,
+                    w: 'auto',
+                    h: 0
+                },
+                bounces: false,
+                bgColor: 'rgba(255,255,255,0)'
+            });
+            api.openFrame({
+                name: 'frm_voice_record',
+                url: 'frm_voice_record.html',
+                rect: {
+                    x: 0,
+                    y: api.winHeight / 2 - 65,
+                    w: 'auto',
+                    h: 0
+                },
+                bounces: false,
+                bgColor: 'rgba(255,255,255,0)'
+            });
+            var eventType = ret.eventType;
+            if (eventType == 'addBoard') {
+                if (ret.index == 0) {
+                    getPicture('library');
+                } else if (ret.index == 1) {
+                    getPicture('camera');
+                } else if (ret.index == 2) {
+                    getLocation();
+                } else if (ret.index == 3) {
+                    getImgText();
+                }
+            } else if (eventType == 'send') {
+                //发送文本消息
+                if ($.trim(ret.msg) == '') {
+                    api.toast({
+                        msg: '不能发送空白消息',
+                        duration: 1000,
+                        location: 'center'
+                    });
+                } else {
+                    var data = {targetId: targetId, text: ret.msg, conversationType: conversationType};
+                    sendTextMessage(data, function (ret) {
+                        var message = ret.result.message;
+                        var resultHtml = '';
+                        var text = message.content.text.replace(reg, function (a, b) {
+                            return face[a] ? face[a] : a;
+                        });
+                        var portrait = localStorage.getItem('gender');
+                        resultHtml += '<li class="item self"><div class="message "><i class="ui-loading"></i><div class="detail">' +
+                        '<span class="text">' + text + '</span></div></div><div class="arrow"></div><div class="icon '+portrait+'" ></div></li>';
+                        $("#history").append(resultHtml);
+                        pageDown(300);
+                    });
+                }
+            }
+        });
+        var recordTimer = null, js = '';
+        chatBox.setRecordButtonListener(function (ret, err) {
+            var eventType = ret.eventType;
+            log(eventType);
+            if (eventType == 'touch_in') {
+                date1 = new Date().getTime();
+                var savePath = 'fs://voice_' + targetId + '_' + (+new Date()) + '.amr';
+                api.startRecord({
+                    path: savePath
+                });
+                recordTimer = setTimeout(function () {
+                    showRecordFrame();
+                }, 210)
+            } else if (eventType == 'touch_cancel') {
+                var date2 = new Date().getTime() - date1;
+                if (date2 < 200) {
+                    showWarnFrame();
+                    stopRecord();
+                    clearTimeout(recordTimer);
+                } else if (date2 > 220 && date2 <= 1000) {
+                    showWarnFrame();
+                    stopRecord();
+                } else {
+                    api.stopRecord(function (ret, err) {
+                                if (ret) {
+                                    log(ret);
+                                    if (ret.duration > 0) {
+                                        js = 'touch_cancel()';
+                                        //发送录音
+                                        var data = {
+                                            filePath: ret.path,
+                                            duration: ret.duration
+                                        };
+                                        sendVoiceMessage(data);
+                                        api.execScript({
+                                            frameName: 'frm_voice_record',
+                                            script: js
+                                        })
+                                    }
+                                }
+                            }
+                    );
+                }
+            } else if (eventType == 'move_out') {
+                js = 'move_out()';
+            } else if (eventType == 'move_in') {
+                js = 'move_in()';
+            } else if (eventType == 'move_out_cancel') {
+                //取消发送 删除文件
+                stopRecord();
+                js = 'move_out_cancel()'
+            }
+
+            api.execScript({
+                frameName: 'frm_voice_record',
+                script: js
+            })
+
+        });
+        chatBox.setInputFieldListener(function (ret, err) {
+            var headerH = api.pageParam.headerH;
+            var h = api.winHeight - headerH - ret.chatViewH - ret.inputFieldH;
+            api.setFrameAttr({
+                name: 'frm_conversation_detail',
+                rect: {
+                    x: 0,
+                    y: headerH,
+                    w: 'auto',
+                    h: h
+                }
+            });
+            if (ret.eventType == 'move') {
+                pageDown(300);
+            }
+        });
+    };
+    // 获取某一回话的历史消息
+    function getLatestMessages(targetId, conversationType) {
+        api.showProgress({
+            title: "加载中",
+            text: ""
+        });
+        rong.getLatestMessages({
+            conversationType: conversationType,
+            targetId: targetId,
+            count: 10
+        }, function (ret, err) {
+            api.hideProgress();
+            if (ret) {
+                log(JSON.stringify(ret));
+                //alert(username);
+                var result = ret.result;
+                if (result && result.length > 0) {
+                    var resultHtml = '';
+                    for (var i = result.length - 1; i >= 0; i--) {
+                        var from = result[i].messageDirection == 'SEND' ? 'self' : 'other';
+                        var content = result[i].content;
+                        var extra = transExtra(content.extra);
+                        var targetTitle = '未知', targetTitleHtml = '',portrait = 'man';
+                        if (typeof extra == 'object') {
+                            targetTitle = extra.targetTitle;
+                            portrait = extra.portrait;
+                        }
+                        if (from == 'other') {
+                            targetTitleHtml = '<div class="targetTitle">' + targetTitle + '</div>';
+                        }
+                        var objectName = result[i].objectName;
+                        var messageId = result[i].messageId;
+                        if (objectName == 'RC:TxtMsg') {
+                            var text = content.text.replace(reg, function (a, b) {
+                                return face[a] ? face[a] : a;
+                            });
+                            resultHtml += '<li class="item ' + from + '" data-messageId="' + messageId + '"><div class="item-con"><div class="message"><div class="detail">' +
+                            '<span class="text">' + text + '</span></div></div>' + targetTitleHtml + '</div><div class="arrow"></div><div class="icon '+portrait+'" ></div></li>';
+
+                        } else if (objectName == 'RC:ImgMsg') {
+                            var imageUrl = content.imageUrl;
+                            var thumbPath = content.thumbPath;
+                            resultHtml += '<li  class="item ' + from + '" data-messageId="' + messageId + '"><div class="item-con"><div class="message "><div class="detail imageMsgWrap">' +
+                            '<div class="imageMsg"><img tapmode="" onclick="openImage(\'' + imageUrl + '\')" src="' + thumbPath + '"/></div></div></div>' + targetTitleHtml + '</div><div class="arrow invisible"></div><div class="icon '+portrait+'" ></div></li>';
+                            //' +imageUrl+ thumbPath + '
+                        } else if (objectName == 'RC:VcMsg') {
+                            var voicePath = content.voicePath;
+                            var duration = content.duration;
+                            var width = (duration * 2.4) + 25;
+                            resultHtml += '<li class="item ' + from + '" data-messageId="' + messageId + '" ><div class="item-con"><div class="message"><div class="detail voice">' +
+                            '<div class="second">' + duration + '\'\'</div><div class="text"><i tapmode="" onclick="play(this,\'' + voicePath + '\')" style="width:' + width + 'px" class="icon-playing"></i></div></div></div>' + targetTitleHtml + '</div><div class="arrow invisible"></div><div class="icon '+portrait+'" ></div></li>'
+                        }
+                    }
+                    //alert(resultHtml)
+                    $("#history").html(resultHtml);
+                    pageDown(500);
+                }
+            } else {
+                alert(JSON.stringify(err));
+            }
+        })
+    }
+    //上拉加载历史数据
+    function getHistoryMessages(count) {
+        api.showProgress({
+            title: "加载中",
+            text: ""
+        });
+        var oldestMessageId = $(".item").first().data("messageid");
+        rong.getHistoryMessages({
+                    conversationType: conversationType,
+                    targetId: targetId,
+                    oldestMessageId: oldestMessageId,
+                    count: count || 10
+                }, function (ret, err) {
+                    api.hideProgress();
+                    if (ret) {
+                        var result = ret.result;
+                        log(result)
+                        if (result && result.length > 0) {
+                            var resultHtml = '';
+                            for (var i = result.length - 1; i >= 0; i--) {
+                                var from = result[i].messageDirection == 'SEND' ? 'self' : 'other';
+                                var content = result[i].content;
+                                var extra = transExtra(content.extra);
+                                var targetTitle = '未知', targetTitleHtml = '',portrait='man';
+                                if (typeof extra == 'object') {
+                                    targetTitle = extra.targetTitle;
+                                    portrait = extra.portrait;
+                                }
+                                if (from == 'other') {
+                                    targetTitleHtml = '<div class="targetTitle">' + targetTitle + '</div>';
+                                }
+                                var objectName = result[i].objectName;
+                                var messageId = result[i].messageId;
+                                if (objectName == 'RC:TxtMsg') {
+                                    var text = content.text.replace(reg, function (a, b) {
+                                        return face[a] ? face[a] : a;
+                                    });
+                                    resultHtml += '<li class="item ' + from + '" data-messageId="' + messageId + '"><div class="item-con"><div class="message "><div class="detail">' +
+                                    '<span class="text">' + text + '</span></div></div>' + targetTitleHtml + '</div><div class="arrow"></div><div class="icon '+portrait+'"></div></li>';
+
+                                } else if (objectName == 'RC:ImgMsg') {
+                                    var imageUrl = content.imageUrl;
+                                    var thumbPath = content.thumbPath;
+                                    resultHtml += '<li  class="item ' + from + '" data-messageId="' + messageId + '"><div class="item-con"><div class="message "><div class="detail imageMsgWrap">' +
+                                    '<div class="imageMsg"><img tapmode="" onclick="openImage(\'' + imageUrl + '\')" src="' + thumbPath + '"/></div></div></div>' + targetTitleHtml + '</div><div class="arrow invisible"></div><div class="icon '+portrait+'"></div></li>';
+                                    //' +imageUrl+ thumbPath + '
+                                } else if (objectName == 'RC:VcMsg') {
+                                    var voicePath = content.voicePath;
+                                    var duration = content.duration;
+                                    var width = (duration * 2.4) + 25;
+                                    resultHtml += '<li class="item ' + from + '" data-messageId="' + messageId + '" ><div class="item-con"><div class="message"><div class="detail voice">' +
+                                    '<div class="second">' + duration + '\'\'</div><div class="text"><i tapmode="" onclick="play(this,\'' + voicePath + '\')" style="width:' + width + 'px" class="icon-playing"></i></div></div></div>' + targetTitleHtml + '</div><div class="arrow invisible"></div><div class="icon '+portrait+'" ></div></li>'
+                                }
+                            }
+                            $("#history").prepend(resultHtml);
+                        } else {
+                            api.toast({msg: '没有更多了'});
+                        }
+                    } else {
+                        api.toast({msg: errcode2msg(err.code)});
+                    }
+                }
+        )
+    }
+    function openImage(path) {
+        var imageBrowser = api.require('imageBrowser');
+        imageBrowser.openImages({
+            imageUrls: [path]
+        });
+    }
+    function setOnReceiveMessageListener() {
+        rong.setOnReceiveMessageListener(function (ret, err) {
+            if (ret && 'success' == ret.status) {
+                api.notification({
+                    vibrate: [300, 500],
+                    sound: 'default'
+                });
+                // alert(JSON.stringify(ret))
+                var result = ret.result;
+                var message = result.message;
+                var content = message.content;
+                var extra = transExtra(content.extra);
+                var targetTitle = '未知',portrait = 'man';
+                if (typeof extra == 'object') {
+                    targetTitle = extra.targetTitle;
+                    portrait = extra.portrait;
+                }
+                var targetTitleHtml = '<div class="targetTitle">' + targetTitle + '</div>';
+                //if (targetId == message.targetId) {
+                //标记已读
+                rong.clearMessagesUnreadStatus({
+                    conversationType:conversationType,
+                    targetId: targetId
+                }, function (ret, err) {
+                });
+                var resultHtml = '';
+                var objectName = message.objectName;
+                if (objectName == 'RC:TxtMsg') {
+                    var text = message.content.text.replace(reg, function (a, b) {
+                        return face[a] ? face[a] : a;
+                    });
+                    resultHtml += '<li class="item other"><div class="item-con"><div class="message "><div class="detail">' +
+                    '<span class="text">' + text + '</span></div></div>' + targetTitleHtml + '</div><div class="arrow"></div><div class="icon '+portrait+'" ></div></li>';
+                } else if (objectName == 'RC:ImgMsg') {
+                    var imageUrl = message.content.imageUrl;
+                    var thumbPath = message.content.thumbPath;
+                    resultHtml += '<li   class="item other"><div class="item-con"><div class="message "><div class="detail imageMsgWrap">' +
+                    '<div class="imageMsg"><img tapmode="" onclick="openImage(\'' + imageUrl + '\')" src="' + thumbPath + '"/></div></div></div>' + targetTitleHtml + '</div><div class="arrow invisible"></div><div class="icon '+portrait+'" ></div></li>';
+                    //' +imageUrl+ thumbPath + '
+                } else if (objectName == 'RC:VcMsg') {
+                    var voicePath = message.content.voicePath;
+                    var duration = message.content.duration;
+                    resultHtml += '<li class="item other"  ><div class="item-con"><div class="message"><div class="detail voice">' +
+                    '<div class="second">' + duration + '\'\'</div><div class="text"><i tapmode="" onclick="play(this,\'' + voicePath + '\')" class="icon-playing"></i></div></div></div>' + targetTitleHtml + '</div><div class="arrow invisible"></div><div class="icon '+portrait+'" ></div></li>'
+                }
+                $("#history").append(resultHtml);
+            }
+            pageDown(300);
+            /*} else {
+             api.toast({msg: err.code});
+             }*/
+        })
+    }
+
+    function sendVoiceMessage(data) {
+        var extra = {
+            targetTitle: localStorage.getItem('accountName'),
+            portrait :localStorage.getItem('gender')
+        };
+        rong.sendVoiceMessage({
+                    conversationType: conversationType,
+                    targetId: targetId,
+                    voicePath: data.filePath,
+                    duration: data.duration,
+                    extra: JSON.stringify(extra)
+                }, function (ret, err) {
+                    if (ret.status == 'prepare') {
+                        log(ret)
+                        var result = ret.result;
+                        var message = result.message;
+                        var voicePath = message.content.voicePath;
+                        var duration = message.content.duration;
+                        var portrait = localStorage.getItem('gender');
+
+                        var resultHtml = '<li class="item self" ><div class="message"><i class="ui-loading"></i><div class="detail voice"><!--<div class="point"></div>-->' +
+                                '<div class="second">' + duration + '\'\'</div><div class="text"><i onclick="play(this,\'' + voicePath + '\')" class="icon-playing"></i></div></div><div class="arrow invisible"></div><div class="icon '+portrait+'"></div></li>';
+                        $("#history").append(resultHtml);
+                        pageDown(300);
+                    } else if (ret.status == 'success') {
+                        $(".ui-loading").last().remove();
+                    } else if (ret.status == 'error') {
+                        api.toast({msg: err.code});
+                    }
+                }
+        );
+    }
+
+    function play(obj, path) {
+        var $play = $(obj);
+        $play.addClass('play');
+        api.startPlay({
+            path: path
+        }, function () {
+            $play.removeClass('play');
+        });
+    }
+
+    /*
+     * 操作frm_voice_modal.html
+     *
+     * */
+    var isWarnOpened = false;
+    function showWarnFrame() {
+        hideRecordFrame();
+        if (!isWarnOpened) {
+            api.setFrameAttr({
+                name: 'frm_voice_warn',
+                rect: {
+                    x: 0,
+                    y: api.winHeight / 2 - 65,
+                    w: 'auto',
+                    h: 130
+                }
+            });
+            isWarnOpened = true;
+        } else {
+            api.setFrameAttr({
+                name: 'frm_voice_warn',
+                hidden: false
+            });
+        }
+        setTimeout(function () {
+            api.setFrameAttr({
+                name: 'frm_voice_warn',
+                hidden: true
+            });
+        }, 500)
+    }
+
+    var isRecordOpened = false;
+    function showRecordFrame() {
+        if (!isRecordOpened) {
+            api.setFrameAttr({
+                name: 'frm_voice_record',
+                rect: {
+                    x: 0,
+                    y: api.winHeight / 2 - 65,
+                    w: 'auto',
+                    h: 130
+                }
+            });
+            isRecordOpened = true;
+        } else {
+            api.setFrameAttr({
+                name: 'frm_voice_record',
+                hidden: false
+            });
+        }
+    }
+
+    function hideRecordFrame() {
+        api.setFrameAttr({
+            name: 'frm_voice_record',
+            hidden: true
+        });
+    }
+    //因声音短，或者取消发送 而停止录音，并删除录音文件
+    function stopRecord() {
+        api.stopRecord(function (ret, err) {
+                    if (ret) {
+                        fs.remove({path: ret.path});
+                    }
+                }
+        );
+    }
+
+</script>
+</html>

@@ -1,0 +1,158 @@
+﻿<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>我的行程</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui-extend.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <style type="text/css">
+        body {
+            background: #eee;
+        }
+
+        .aui-swipe-handle {
+            height: auto;
+        }
+
+        .aui-arrow-right:after {
+            top: 80px;
+        }
+
+        .aui-list-view {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header">
+        <a class="menu" tapmode onclick="closeWin()"> <span class="aui-iconfont aui-icon-left"></span>返回 </a>
+        <div class="title">
+            我的订单
+        </div>
+        <a class="aui-pull-right"> <span class="aui-iconfont"></span>编辑</a>
+    </div>
+</header>
+<div class="aui-content orderlist aui-load-container">
+    <div class="aui-load-wrap">
+        <div class="aui-loading-dot"></div>
+        <div class="aui-loading-circle"></div>
+        <div class="aui-loading-title"></div>
+    </div>
+    <div class="orderlist-cont orderlist-item orderlist-realtime" id=orderListTime>
+        <h2 class="order-title">今天</h2>
+        <ul class="aui-list-view">
+            <li class="aui-list-view-cell aui-img" id="1">
+                <div class="aui-swipe-handle aui-arrow-right" tapmode onclick="openWin('details')">
+                    <div class="aui-img-body order-item">
+                        <h2 class="item-title"><span>运单编号：</span><span id="">S840320160627</span><span
+                                class="comment commentdone">已完成</span></h2>
+                        <span class="path-start"><i
+                                class="aui-iconfont aui-icon-locationfill cr1"></i>杭垓镇邮政局</span><span
+                            class="path-end"><i class="aui-iconfont aui-icon-locationfill cr2"></i>七管村村委会</span>
+                        <div class="deltips">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="aui-swipe-right-btn aui-bg-danger" tapmode onclick="deleteItem(this)">
+                    <i class="aui-iconfont aui-icon-delete"></i>
+                </div> -->
+            </li>
+        </ul>
+    </div>
+    <div class="orderlist-cont orderlist-item">
+        <h2 class="order-title">今天</h2>
+        <ul class="aui-list-view" id=orderList>
+            <!-- <li class="aui-list-view-cell aui-img" id="1">
+                <div class="aui-swipe-handle aui-arrow-right" tapmode onclick="openDetailWin(this)">
+                    <div class="aui-img-body order-item">
+                        <h2 class="item-title"><span>运单编号：</span><span id="boxId">S840320160627</span><span class="comment"><strong class="ban go">去</strong>起飞</span></h2>
+                        <span class="path-start"><i class="aui-iconfont aui-icon-locationfill cr1"></i><span id="sPoint">杭垓镇邮政局</span></span><span class="path-end"><i class="aui-iconfont aui-icon-locationfill cr2"></i><span id="ePoint">七管村村委会</span></span>
+                        <div class="deltips">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-swipe-right-btn aui-bg-danger" tapmode onclick="deleteItem(this)">
+                    <i class="aui-iconfont aui-icon-delete"></i>
+                </div>
+            </li> -->
+            <!-- <li class="aui-list-view-cell aui-img" id="2">
+                <div class="aui-swipe-handle aui-arrow-right" tapmode onclick="openDetailWin(this)">
+                    <div class="aui-img-body order-item">
+                        <h2 class="item-title"><span>运单编号：</span><span>S840320160627</span><span class="comment"><strong class="ban go">去</strong>起飞</span></h2>
+                        <span class="path-start"><i class="aui-iconfont aui-icon-locationfill cr1"></i>杭垓镇邮政局</span><span class="path-end"><i class="aui-iconfont aui-icon-locationfill cr2"></i>七管村村委会</span>
+                        <div class="deltips">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-swipe-right-btn aui-bg-danger" tapmode onclick="deleteItem(this)">
+                    <i class="aui-iconfont aui-icon-delete"></i>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+    <!-- <div class="orderlist-cont orderlist-item">
+        <h2 class="order-title">更早前</h2>
+        <ul class="aui-list-view" id="list">
+            <li class="aui-list-view-cell aui-img">
+                <div class="aui-swipe-handle aui-arrow-right">
+                    <div class="aui-img-body order-item" tapmode onclick="openWin('realtimedetail')">
+                        <h2 class="item-title"><span>运单编号：</span><span>S840320160627</span><span class="comment">已完成</span></h2>
+                        <span class="path-start"><i class="aui-iconfont aui-icon-locationfill cr1"></i>杭垓镇邮政局</span><span class="path-end"><i class="aui-iconfont aui-icon-locationfill cr2"></i>七管村村委会</span>
+                        <div class="deltips">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-swipe-right-btn aui-bg-danger">
+                    <i class="aui-iconfont aui-icon-delete"></i>
+                </div>
+            </li>
+        </ul>
+    </div> -->
+    <div class="orderlist-cont">
+        <h2 class="order-title" id="orderNone">您还没有运单记录</h2>
+        <!-- <h2 class="order-title">没有更多运单了</h2> -->
+    </div>
+</div>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="../script/main.js"></script>
+<script>
+    //    alert(JSON.stringify(user));
+    apiready = function () {
+        $api.fixStatusBar($api.dom('.header'));
+        $api.css($api.dom('.header'), "background-color:#000");
+        api.setStatusBarStyle({
+            style: 'light',
+            color: '#fff'
+        });
+        api.parseTapmode();
+        api.addEventListener({
+            name: 'scrolltobottom',
+            extra: {
+                threshold: 0 //设置距离底部多少距离时触发，默认值为0，数字类型
+            }
+        }, function (ret, err) {
+            // loadMdata();
+            api.alert({
+                msg: "没有更多数据"
+            })
+        });
+        orderListInit();
+    };
+    var pullRefresh = new auiPullToRefresh({
+        callback: orderListRefresh,
+        textDown: '下拉刷新'
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,669 @@
+﻿<html>
+
+<head>
+    <title>信安</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="js/Swiper/css/swiper.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="js/Swiper/swiper.min.js"></script>
+    <style id="style-1-cropbar-clipper">
+    /* Copyright 2014 Evernote Corporation. All rights reserved. */
+    
+    .en-markup-crop-options {
+        top: 18px !important;
+        left: 50% !important;
+        margin-left: -100px !important;
+        width: 200px !important;
+        border: 2px rgba(255, 255, 255, .38) solid !important;
+        border-radius: 4px !important;
+    }
+    
+    .en-markup-crop-options div div:first-of-type {
+        margin-left: 0px !important;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container swiper-container-horizontal main-swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide-active">
+                <div class="page-item pageone"></div>
+            </div>
+            <div class="swiper-slide swiper-slide-next">
+                <div class="page-item pagetwo">
+                    <div class="page-item-content">
+                        <ul class="rules-menu">
+                            <li class="rules-menu-item">
+                                <h2 class="rule-title cr1">活动规则</h2>
+                            </li>
+                            <li class="rules-menu-item">
+                                <span class="square"></span>
+                                <span class="item-span">
+                                    通过扫描“信安在线服务”二维码进入公众号中，
+                                    点击“有奖答题”模块，进行在线答题；
+                                </span>
+                            </li>
+                            <li class="rules-menu-item">
+                                <span class="square"></span>
+                                <span class="item-span">题目难度分为“入门”、“基础”、“专业”；</span>
+                            </li>
+                            <li class="rules-menu-item">
+                                <span class="square"></span>
+                                <span class="item-span">
+                                    “入门”题目达到9分及以上分数时，获得兑奖码，
+                                    凭兑奖码进行兑奖；
+                                </span>
+                            </li>
+                            <li class="rules-menu-item">
+                                <span class="square"></span>
+                                <span class="item-span">
+                                    “基础”题目达到8分及以上分数时，获得兑奖码，
+                                    凭兑奖码进行兑奖；
+                                </span>
+                            </li>
+                            <li class="rules-menu-item">
+                                <span class="square"></span>
+                                <span class="item-span">
+                                    “专业”题目达到7分及以上分数时，获得兑奖码，
+                                    凭兑奖码进行兑奖；
+                                </span>
+                            </li>
+                            <li class="rules-menu-item cr1">
+                                <span class="square"></span>
+                                <span class="item-span">一个微信账号只可兑奖一次，但答题难度和次数不限；</span>
+                            </li>
+                            <li class="rules-menu-item">
+                                <span class="square"></span>
+                                <span class="item-span">
+                                    无论何种题目，只要获得兑奖分数，即可在公账号首
+                                    页的“兑奖码”模块中显示兑奖页面；
+                                </span>
+                            </li>
+                            <li class="rules-menu-item">
+                                <span class="square"></span>
+                                <span class="item-span">
+                                    兑奖者将该活动转发朋友圈后，根据获得的“兑奖码”
+                                    找现场工作人员进行奖品兑换，一码一奖，兑过无效；
+                                </span>
+                            </li>
+                            <li class="rules-menu-item">
+                                <span class="square"></span>
+                                <span class="item-span">活动最终解释权归属于信安在线。</span>
+                            </li>
+                        </ul>
+                        <div class="page-item-bottom" style="position: inherit;left:0;right: 0;bottom:0;">
+                            <p class="logo-area txtct">
+                                <img src="image/logo02.png">
+                            </p>
+                            <p class="location-area txtct">武汉国际博览中心 A6-1 馆 D30展台</p>
+                            <p class="date-area txtct">2016年9月19日 9:00 -- 2016年9月25日 15:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="page-item pagethree">
+                    <div class="page-item-content">
+                        <div class="container">
+                            <div class="top">
+                                <p class="top-logo txtct">
+                                    <img src="image/logo01.png">
+                                </p>
+                                <!-- <h2 class="title txtlt">信安在线资讯——有奖大问答</h2> -->
+                                <p class="xinanqt txtct">
+                                    <img src="image/xinanqt.png">
+                                </p>
+                            </div>
+                            <div class="content">
+                                <!--  <div class="section section-one">
+                                 <div class="tips">
+                                     <p>
+                                         社会生活对网络的依赖程度越来越高，网络安全对现实社会的影响也日益凸显。为提高大众对信息安全的保密意识和网络安全应用技能，信安在线推出“增强网络安全意识普及网络安全知识”网上安全知识竞答活动。通过该活动向全社会宣传网络安全理念，使网络安全文化覆盖到网络的每一个角落。期待您的参与，精美大奖等你来拿！
+                                     </p>
+                                 </div>
+
+                                 <p class="default-p txtct">
+                                     <button class="default-btn txtct" type="button" id="beginAnw" onclick="nextPart($(this))">开始答题</button>
+                                 </p>
+                             </div> -->
+                                <div class="section section-two" style="display: block;">
+                                    <div class="section-two-item">
+                                        <p class="default-p txtct">
+                                            <button class="default-btn txtct" type="button" onclick="nextPart($(this), 0)">
+                                                入
+                                                <span>门</span>
+                                                <p></p>
+                                            </button>
+                                        </p>
+                                        <p class="item-tips txtct">（普通大众可以掌握和理解的知识）</p>
+                                    </div>
+                                    <div class="section-two-item">
+                                        <p class="default-p txtct">
+                                            <button class="default-btn txtct" type="button" onclick="nextPart($(this), 1)">
+                                                基
+                                                <span>础</span>
+                                            </button>
+                                        </p>
+                                        <p class="item-tips txtct">（IT行业从业人员应了解的知识）</p>
+                                    </div>
+                                    <div class="section-two-item">
+                                        <p class="default-p txtct">
+                                            <button class="default-btn txtct" type="button" onclick="nextPart($(this), 2)">
+                                                专
+                                                <span>业</span>
+                                            </button>
+                                        </p>
+                                        <p class="item-tips txtct">（安全行业专业人员掌握的知识）</p>
+                                    </div>
+                                </div>
+                                <div class="section section-three" id="qtContainer">
+                                    <div class="swiper-container swiper-container-horizontal qt-swiper-container">
+                                        <div class="swiper-wrapper qt-swiper-wrapper">
+                                            <div class="swiper-slide swiper-slide-active">
+                                                <div class="swiper-item" id="num1" data-option="singlechoose">
+                                                    <div class="qt-block-title">
+                                                        <p class="qt color1 txtlt">
+                                                            <input class="qt-input" type="radio" name="num1">
+                                                            <span>1、</span> “肉鸡”的正确解释？
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input" type="radio" name="num1">
+                                                            <span>A</span> 比较慢的电脑
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input" type="radio" name="num1">
+                                                            <span>B</span> 被黑客控制的电脑
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input" type="radio" name="num1">
+                                                            <span>C</span> 肉食鸡
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input" type="radio" name="num1">
+                                                            <span>D</span> 烤鸡
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <p class="default-p next-qt txtrt">
+                                                    <button class="default-btn txtct" type="button" onclick="nextQust($(this))">下一题
+                                                    </button>
+                                                </p>
+                                            </div>
+                                            <div class="swiper-slide swiper-slide-next">
+                                                <div class="swiper-item" id="num2" data-option="multichoose">
+                                                    <div class="qt-block">
+                                                        <p class="qt color1 txtlt">
+                                                            <span>2、</span> “肉鸡”的正确解释？
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input qt-checkbox" type="checkbox" name="num2">
+                                                            <span>A</span> 比较慢的电脑
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input qt-checkbox" type="checkbox" name="num2">
+                                                            <span>B</span> 被黑客控制的电脑
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input qt-checkbox" type="checkbox" name="num2">
+                                                            <span>C</span> 肉食鸡
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input qt-checkbox" type="checkbox" name="num2">
+                                                            <span>D</span> 烤鸡
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <p class="default-p next-qt txtrt">
+                                                    <button class="default-btn txtct" type="button" onclick="nextQust($(this))">下一题
+                                                    </button>
+                                                </p>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="swiper-item" id="num3" data-option="singlechoose">
+                                                    <div class="qt-block-title">
+                                                        <p class="qt color1 txtlt">
+                                                            <span>3、</span> “肉鸡”的正确解释？
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input" type="radio" name="num3">
+                                                            <span>A</span> 比较慢的电脑
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input" type="radio" name="num3">
+                                                            <span>B</span> 被黑客控制的电脑
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input" type="radio" name="num3">
+                                                            <span>C</span> 肉食鸡
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input" type="radio" name="num3">
+                                                            <span>D</span> 烤鸡
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <p class="default-p next-qt txtrt">
+                                                    <button class="default-btn txtct" type="button" onclick="nextQust($(this))">下一题
+                                                    </button>
+                                                </p>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="swiper-item" id="num4" data-option="multichoose">
+                                                    <div class="qt-block">
+                                                        <p class="qt color1 txtlt">
+                                                            <span>4、</span> “肉鸡”的正确解释？
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input qt-checkbox" type="checkbox" name="num4">
+                                                            <span>A</span> 比较慢的电脑
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input qt-checkbox" type="checkbox" name="num4">
+                                                            <span>B</span> 被黑客控制的电脑
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input qt-checkbox" type="checkbox" name="num4">
+                                                            <span>C</span> 肉食鸡
+                                                        </p>
+                                                    </div>
+                                                    <div class="qt-block">
+                                                        <p class="qt txtlt">
+                                                            <input class="qt-input qt-checkbox" type="checkbox" name="num4">
+                                                            <span>D</span> 烤鸡
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <p class="default-p next-qt txtrt">
+                                                    <button class="default-btn txtct" type="button" onclick="nextQust($(this))">下一题
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section section-four">
+                                    <div class="successblock">
+                                        <!-- 未兑换 -->
+                                        <p class="no-exchange  result txtct">恭喜您！</p>
+                                        <p class="no-exchange  result score txtct">
+                                            获得
+                                            <span id="userScores"></span> 分&nbsp;&nbsp;&nbsp;
+                                        </p>
+                                        <p class="no-exchange default-p txtct">
+                                            <button class="default-btn txtct" type="button" onclick="window.location.href='index.html?tryagin=true'">再来一次</button>
+                                        </p>
+                                        <p class="no-exchange contact txtct cr1" id="rewardCode2">
+                                            奖品兑换码：
+                                            <span class="rewardcode-span" id="rewardCode"></span>
+                                        </p>
+                                        <p class="no-exchange result scoretips txtct">请凭借以上兑换码兑换奖品！</p>
+                                        <!-- 已兑换 -->
+                                        <p class="exchanged result txtct">恭喜您本次</p>
+                                        <p class="exchanged result result-score txtct">答题获得<span id="lastScore"></span>分</p>
+                                        <p class="exchanged result-qt result txtct" id="continueQt">欢迎继续参与答题</p>
+                                        <p class="exchanged  default-p txtct">
+                                            <button class="default-btn txtct" type="button" onclick="window.location.href='index.html?tryagin=true'">再来一次</button>
+                                        </p>
+                                    </div>
+                                    <div class="failblock">
+                                        <p class="result score txtct">
+                                            获得
+                                            <span id="userFailScores"></span> 分&nbsp;&nbsp;&nbsp;
+                                        </p>
+                                        <p class="result fail-title txtct">&nbsp;很遗憾！</p>
+                                        <p class="result fail-infor txtct">您未能获得奖品</p>
+                                        <p class="fail-encour txtct cr1">请您再接再厉</p>
+                                        <p class="default-p txtct">
+                                            <button class="default-btn txtct" type="button" onclick="window.location.href='index.html?tryagin=true'">再来一次</button>
+                                        </p>
+                                    </div>
+                                    <div class="bottom-color" style="bottom:-100%;height:68%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-item-bottom">
+                            <p class="logo-area txtct">
+                                <img src="image/logo02.png">
+                            </p>
+                            <p class="location-area txtct">武汉国际博览中心 A6-1 馆 D30展台</p>
+                            <p class="date-area txtct">2016年9月19日 9:00 -- 2016年9月25日 15:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var openid = '1111111111';
+    wx.config({
+        debug: false,
+        appId: 'wx48b2010286366dbb',
+        timestamp: 2222222222,
+        nonceStr: '3333333333',
+        signature: '5555555555',
+        jsApiList: [
+            'onMenuShareTimeline'
+        ]
+    });
+    var nb = ["牛逼大了", "完败", "漂亮", "偶像", "就是这么牛逼", "不服来战", "come on", "想怎样"];
+    var dex = Math.floor(Math.random() * nb.length);
+    wx.ready(function() {
+        wx.onMenuShareTimeline({
+            title: '击败了全国' + (Math.random() * 5 + 95).toFixed(1) + '%的人,' + nb[dex] + '!',
+            link: 'http://quiz.cnmstl.net/api/wxlogin',
+            imgUrl: 'http://quiz.cnmstl.net/image/logo.png',
+            success: function() {},
+            cancel: function() {}
+        });
+    });
+    var mySwiper = null;
+    var mainSwiper = null;
+    var answerList = [];
+    var answerSingl = {
+        qust_num: '',
+        qust_type: '',
+        qust_value: ''
+    }
+
+    function show_result(score, code, exchange) {
+        // $("#qtContainer").css("opacity", 0);
+        $("#qtContainer").hide();
+        $(".section-four").show();
+        $("#userScores").text(score);
+        if (score < 9 - glvl) {
+            $(".successblock").hide();
+            $(".bottom-color").hide();
+            $(".failblock").show();
+            $("#userFailScores").text(score);
+        } else {
+            $(".successblock").show();
+            $(".bottom-color").show();
+            $(".failblock").hide();
+            if (exchange == 0) {
+                $("#rewardCode").text(code).css("font-size", "24px");
+            } else {
+                $("#continueQt").show();
+                $(".no-exchange").hide();
+
+                $(".exchanged").show();
+                $("#lastScore").text(score);
+                // $("#rewardCode2").hide();
+            }
+        }
+    }
+    $(function() {
+        // 页面初始化
+        var tmp = location.search.match(/score=(\d+)/);
+        var tmp1 = location.search.match(/codex=(\d+)/);
+        var exchange = location.search.match(/exchange=(\d+)/);
+        var tryagin = location.search.match(/tryagin=true/);
+        if(tryagin){
+            $(".main-swiper-container .swiper-slide").hide();
+            $(".main-swiper-container .swiper-slide").eq(2).show();
+        }
+        if (tmp && tmp1) {
+            // alert(tmp[1] > 9 -glvl);
+            if (tmp[1] > 6) {
+                $(".main-swiper-container .swiper-slide").hide();
+                $(".main-swiper-container .swiper-slide").eq(2).show();
+                $(".section").hide();
+                $(".section").eq(2).show();
+
+                $(".xinanqt").hide();
+                $(".failblock").hide();
+                $(".no-exchange").show();
+
+                $(".page-item-bottom").hide();
+
+                // $(".exchanged").show();
+                $("#userScores").text(tmp[1]);
+                // $("#userScores").text("1234567");
+                $("#rewardCode").text(tmp1[1]);
+                $(".no-exchange.default-p ").hide();
+
+            } else {
+                $(".main-swiper-container .swiper-slide").hide();
+                $(".main-swiper-container .swiper-slide").eq(2).show();
+            }
+            // show_result(tmp[1], tmp1[1], exchange);
+        }
+        loadSwiper();
+
+    });
+
+    function chooseItem(eve) {
+        $(eve).find("input").prop("checked", true);
+        if ($(eve).find("input").hasClass("qt-checkbox")) {
+            $(eve).toggleClass("activecolor")
+        } else {
+            $(eve).addClass("activecolor");
+            $(eve).siblings(".qt-block").removeClass("activecolor");
+        }
+    }
+    var glvl = 0;
+
+    function nextPart(eve, lvl) {
+        if (lvl !== undefined) {
+            glvl = lvl;
+            var all_question = [];
+
+            //console.log(lvl, all_question[lvl]);
+            var content = '';
+            for (var k in all_question[lvl]) {
+                var ques = all_question[lvl][k];
+                content += '<div class="swiper-slide ';
+                if (k == 0) {
+                    content += 'swiper-slide-active"><div class="swiper-item" id="';
+                } else {
+                    content += 'swiper-slide-next"><div class="swiper-item" id="';
+                }
+                content += ques.id;
+                content += '" data-option="';
+                content += (ques.type == 2 ? "multichoose" : "singlechoose");
+                content += ('"><div class="qt-block-title"><p class="qt color1 txtlt"><input class="qt-input" type="radio" name="' + ques.id + '"><span>' + (parseInt(k) + 1) + '、</span>');
+                content += ((ques.type == 0 ? "判断题-" : (ques.type == 1 ? "单选题-" : "多选题-")) + ques.title);
+                content += '</p></div>';
+
+                var tb = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+                for (var i in ques.list) {
+                    if (ques.type == 2) {
+                        content += '<div class="qt-block" onclick="chooseItem($(this));"><p class="qt txtlt"><input class="qt-input qt-checkbox" type="checkbox" name="' + ques.id + '"><span>' + tb[i] + '</span>' + ques.list[i] + '</p></div>';
+                    } else {
+                        content += '<div class="qt-block" onclick="chooseItem($(this));"><p class="qt txtlt"><input class="qt-input" type="radio" name="' + ques.id + '"><span>' + tb[i] + '</span>' + ques.list[i] + '</p></div>';
+                    }
+                }
+                if (k == all_question[lvl].length - 1) {
+                    content += '</div><p class="default-p next-qt txtrt"><button class="default-btn txtct" type="button" onclick="nextQust($(this))">提交</button></p></div>\n';
+                } else {
+                    content += '</div><p class="default-p next-qt txtrt"><button class="default-btn txtct" type="button" onclick="nextQust($(this))">下一题</button></p></div>\n';
+                }
+            }
+            $(".qt-swiper-wrapper").html(content);
+        }
+        var curSect = eve.closest(".section");
+        curSect.hide().next().addClass("active");
+        if (curSect.index() == 0) {
+            $(".xinanqt").hide();
+            $(".page-item-bottom").hide();
+            $("#qtContainer").css("opacity", 1);
+        } else {
+            heightAuto();
+        }
+        loadSwiper();
+        mySwiper = new Swiper('.qt-swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true
+        });
+    }
+
+    // 滑动插件动态加载（异步）
+    function loadSwiper() {
+        var oHead = document.getElementsByTagName('HEAD').item(0);
+        var oScript = document.createElement("script");
+        oScript.type = "text/javascript";
+        oScript.src = "js/Swiper/swiper.min.js";
+        oHead.appendChild(oScript);
+        setTimeout(function() {
+            mainSwiper = new Swiper('.main-swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true
+            });
+        }, 500);
+    }
+
+
+    //下一题，触发滑动事件
+    // function nextQust(eve) {
+    //     var curObj = eve.closest(".swiper-slide");
+    //     var totalNum = $(".swiper-item").length;
+    //     $("#" + totalNum).next("p").find(".default-btn").text("提交");
+    //     var curPageId = curObj.index();
+    //     answerSingle = {};
+    //     answerSingle.qust_num = curObj.find(".swiper-item").attr("id");
+    //     answerSingle.qust_type = curObj.find(".swiper-item").attr("data-option");
+    //     var inputs = curObj.find("input:checked");
+    //     answerSingle.qust_value = '';
+    //     for (var i = 0; i < inputs.length; i++) {
+    //         answerSingle.qust_value += String.fromCharCode(inputs.eq(i).next("span").text().charCodeAt(0) - 17);
+    //     }
+    //     answerList.push(answerSingle);
+    //     console.log('answerList is ', answerList);
+    //     mySwiper.slideTo(curPageId + 1, 300, false);
+
+    //     console.log(totalNum, curPageId);
+    //     if (curPageId == totalNum - 1) {
+    //         $.ajax({
+    //             url: 'http://quiz.cnmstl.net/api/question?action=calc&openid=' + openid + '&lvl=' + glvl,
+    //             type: 'post',
+    //             data: { "data": JSON.stringify(answerList) },
+    //             success: function (result) {
+    //                 result = JSON.parse(result);
+    //                 show_result(result.score, result.code, result.exchange);
+    //             },
+    //             error: function (result) {
+    //                 alert('错误：' + result.msg);
+    //             }
+    //         })
+    //     }
+    // }
+
+    function nextQust(eve) {
+        var curObj = eve.closest(".swiper-slide");
+        var totalNum = $(".swiper-item").length;
+        // $("#" + totalNum).next("p").find(".default-btn").text("提交");
+        var curPageId = curObj.index();
+        mySwiper.slideTo(curPageId + 1, 300, false);
+
+        console.log(totalNum, curPageId);
+        if (curPageId == totalNum - 1) {
+            submitAnwsers();
+        }
+    }
+
+    // 提交保存答案
+    function submitAnwsers() {
+        var answerObj = $(".swiper-item");
+        var totalNum = answerObj.length;
+        for (var j = 0; j < totalNum; j++) {
+            answerSingle = {};
+            answerSingle.qust_num = answerObj.eq(j).attr("id");
+            answerSingle.qust_type = answerObj.eq(j).attr("data-option");
+            var inputs = answerObj.eq(j).find("input:checked");
+            answerSingle.qust_value = '';
+            for (var i = 0; i < inputs.length; i++) {
+                answerSingle.qust_value += String.fromCharCode(inputs.eq(i).next("span").text().charCodeAt(0) - 17);
+            }
+            answerList.push(answerSingle);
+        }
+        console.log('answerList is ', answerList);
+
+        $.ajax({
+            url: 'http://quiz.cnmstl.net/api/question?action=calc&openid=' + openid + '&lvl=' + glvl,
+            type: 'post',
+            data: {
+                "data": JSON.stringify(answerList)
+            },
+            success: function(result) {
+                result = JSON.parse(result);
+                show_result(result.score, result.code, result.exchange);
+            },
+            error: function(result) {
+                alert('错误：' + result.msg);
+            }
+        })
+    }
+
+    // 再试一次
+    // function tryAgin(event) {
+    //     $(".main-swiper-container .swiper-slide").hide();
+    //     $(".main-swiper-container .swiper-slide").eq(2).show().css("opacity", 1);
+
+    //     $(".xinanqt").show();
+    //     $(".page-item-bottom").show();
+    //     $("#qtContainer").show();
+    //     $(".section-two").show().css("opacity", 1);
+    //     $(".section-four").hide();
+    // }
+
+    function checkAnswer(curvalue) {
+        for (var i = 0; i < answerList.length - 1; i++) {
+            if (answerList[i].qust_num == curvalue.qust_num) {
+                answerList.splice(i, 1, curvalue);
+            }
+        }
+    }
+
+    // 高度自适应不同不同屏幕
+    function heightAuto() {
+        var BtmHeight = Math.abs(document.body.clientHeight - $(".container").height());
+        // alert(BtmHeight);
+        if (BtmHeight < 55) {
+            // $(".container").height($(".top").height()+$(".content").height()+55)
+            $(".bottom").removeClass("active-height")
+            $(".bottom").css('margin-top', BtmHeight);
+        } else {
+            $(".bottom").css('margin-top', 0);
+            $(".bottom").addClass("active-height")
+        }
+    }
+    heightAuto();
+    </script>
+    <div id="cntvlive2-is-installed"></div>
+</body>
+
+</html>

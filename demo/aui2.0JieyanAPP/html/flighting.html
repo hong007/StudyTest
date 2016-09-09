@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui-extend.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+</head>
+<body>
+<header>
+    <div class="header">
+        <a class="menu" tapmode> <span class="aui-iconfont aui-icon-left" id="flightingBackBtn"></span>返回 </a>
+        <div class="title">
+            飞机起飞
+        </div>
+        <a class="menu"></a>
+    </div>
+</header>
+<div class="realtime-content">
+    <div class="transfer transferbg flightingbg">
+        <section class="wrapper">
+            <ul class="finished-hook">
+                <li class="item">
+                    <!-- <button class="transfer-btn" type="button" id="transerBtnFlight" tapmode onclick="openFrame()" ><i class="aui-iconfont aui-icon-scan"></i>打开frame</button> -->
+                    <h2 class="item-title" id="titlePackage"><span>运单编号：</span><span
+                            class="transfer-nub" id="transferNub">S840320160627</span></h2>
+                    <h2 class="item-title" id="titleFlight"><span>飞机编号：</span><span class="transfer-nub-flight" id="transferNubFlight">S840320160627</span>
+                    </h2>
+                    <span class="path-start"><i class="aui-iconfont aui-icon-locationfill"></i>&nbsp;&nbsp;<span
+                            class="start-point" id="sPoint">杭垓镇邮政局</span></span>
+                    <span class="path-end"><i class="aui-iconfont aui-icon-locationfill"></i>&nbsp;&nbsp;<span
+                            class="end-point" id="ePoint">七管村村委会</span></span>
+                </li>
+            </ul>
+        </section>
+    </div>
+    <div class="flight-area" id="flightAera">
+        <div class="relt-item-top">
+            <!--<a href="tel:13675823425"><img src="../image/" alt="">联系收件人<span class="aui-iconfont aui-icon-right"></span></a>-->
+            <a class="contact-piker" href="tel:13675823425" id="pickerUpMan"><i class="aui-iconfont aui-icon-phone"></i>联系收件人<span
+                    class="aui-iconfont aui-icon-right aui-pull-right"></span></a>
+        </div>
+        <div class="flight">
+            <div class="flight" id="flightAera">
+                <div class="flight-area">
+                    <p class="flight-btn" id="longPress" tapmode onclick="longTouch()">
+                        起飞
+                    </p>
+                    <!--<div class="flight-picture"></div>-->
+                    <div class="flight-mask" id="flightMask">
+                        <!-- <img src="../image/flightbtn02.png"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="flight-infor aui-text-center"><span class="flight-infor-img">!</span><span id="flightInfo">长按3秒</span>
+        </p>
+        <!--<p class="flight-infor aui-text-center"><span class="flight-infor-img">!</span><span id="flightInfo">正在与无人机通讯...</span></p>-->
+        <!--<p class="flight-infor aui-text-center"><span class="flight-infor-img">!</span><span id="flightInfo">成功连接无人机,正在发送起飞指令...</span></p>-->
+        <!--<p class="flight-infor aui-text-center"><span class="flight-infor-img">!</span><span id="flightInfo">指令已确认,即将起飞</span></p>-->
+        <!--<p class="flight-infor aui-text-center"><span class="flight-infor-img">!</span><span id="flightInfo">抱歉,起飞出现异常,请联系客服</span></p>-->
+    </div>
+</div>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/main.js"></script>
+<script type="text/javascript">
+    var flightData;
+//    alert('user is ' + JSON.stringify(user));
+    var FNScanner;
+    var scanneRresult;
+    apiready = function () {
+        var fnsX = api.frameWidht / 2 - 100;
+        var fnsY = api.frameHeight / 2 - 100;
+        api.parseTapmode();
+        $api.fixStatusBar($api.dom('.header'));
+        api.setStatusBarStyle({
+            style: 'light',
+            color: '#fff'
+        });
+
+        FNScanner = api.require('FNScanner');
+        // 长按起飞
+        api.addEventListener({
+            name: 'longpress'
+        }, function (ret, err) {
+//            interval = setInterval("waitEnabled()", 1000);
+//            $api.text($api.byId('longPress'), '5s');
+            $api.addCls($api.byId('flightMask'), 'active');
+            setTimeout(function () {
+                $api.text($api.byId('longPress'), '起飞中');
+                $api.removeCls($api.byId('flightMask'), 'active');
+                getFlight();
+            }, 3000)
+        });
+        flightData = api.pageParam;
+        setFlightData(flightData);
+    };
+
+</script>
+</body>
+</html>

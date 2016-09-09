@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			html{ background-color: white; }
+			header{ border-bottom: 1px solid #ccc; padding: 25px 0; }
+			span {
+				padding: 5px 15px;
+				margin: 10px;
+				display: inline-block;
+				background-color: #e8e8e8;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="header">
+				<a class="menu" tapmode onclick="closeWin()"> <span class="aui-iconfont aui-icon-left"></span>返回 </a>
+				<div class="title">
+					中转箱扫码
+				</div>
+				<a class="menu"></a>
+			</div>
+		</header>
+		<h2>UIMediaScanner</h2>
+		<span tapmode onclick="fnOpen()" data-name="open">打开</span>
+		<span tapmode onclick="fnScan()" data-name="scan">扫描</span>
+		<span tapmode onclick="fnFetch()" data-name="show"></span>
+		<span tapmode onclick="fnTransPath()" data-name="hide"></span>
+
+
+		<h2>FNScanner</h2>
+		<span tapmode onclick="FNSOpen()" data-name="open">打开</span>
+
+		<script type="text/javascript" src="./../script/api.js"></script>
+		<script type="text/javascript">
+			var UIMediaScanner;
+			var FNScanner;
+
+			function apiready() {
+				UIMediaScanner = api.require('UIMediaScanner');
+				FNScanner = api.require('FNScanner');
+			};
+			function FNSOpen(){
+				FNScanner.openScanner({
+				    autorotation: true
+				}, function(ret, err){        
+				    if( ret ){
+				        alert( JSON.stringify( ret ) );
+				    }else{
+				        alert( JSON.stringify( err ) );
+				    }
+				});
+			}
+			// apiready = function() {
+			// 	api.parseTapmode();
+			// 	// $api.fixStatusBar($api.dom('.header'));
+			// 	// api.setStatusBarStyle({
+			// 	// 	style : 'light',
+			// 	// 	color : '#fff'
+			// 	// });
+			// 	UIMediaScanner = api.require('UIMediaScanner');
+			// 	// var FNScanner = api.require('FNScanner');
+			// 	// FNScanner.openScanner({
+			// 	//     autorotation: true
+			// 	// }, function(ret, err){        
+			// 	//     if( ret ){
+			// 	//         alert( JSON.stringify( ret ) );
+			// 	//     }else{
+			// 	//         alert( JSON.stringify( err ) );
+			// 	//     }
+			// 	// });
+			// };
+
+		function fnScan() {
+			UIMediaScanner.scan({
+				count : 10,
+				sort : {
+					key : 'time',
+					order : 'desc'
+				}
+			}, function(ret, err) {
+				if (ret) {
+					alert(JSON.stringify(ret));
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+
+		function fnFetch() {
+			UIMediaScanner.fetch(function(ret, err) {
+				if (ret) {
+					alert(JSON.stringify(ret));
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+
+		function fnTransPath() {
+			UIMediaScanner.transPath({
+				path : ''//要转换的图片路径（在相册库的绝对路径）
+			}, function(ret, err) {
+				if (ret) {
+					alert(JSON.stringify(ret));
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+
+		function fnOpen() {
+			UIMediaScanner.open({
+				classify : true,
+				max : 4,
+				styles : {
+					bg : '#fff',
+					mark : {
+						icon : '',
+						size : 20
+					},
+				},
+				scrollToBottom : {
+					intervalTime : 3,
+				},
+				exchange : true
+			}, function(ret, err) {
+				if (ret) {
+					alert(JSON.stringify(ret));
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+			function closeWin() {
+				api.closeWin();
+			}
+
+			// 打开新窗口
+			function openWin(name) {
+				var delay = 0;
+				if (api.systemType != 'ios') {
+					delay = 300;
+				}
+				api.openWin({
+					name : '' + name + '',
+					url : '' + name + '.html',
+					bounces : false,
+					delay : delay,
+					slidBackEnabled : true,
+					vScrollBarEnabled : false
+				});
+			}
+		</script>
+	</body>
+</html>
