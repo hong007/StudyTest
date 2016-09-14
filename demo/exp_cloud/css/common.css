@@ -185,12 +185,39 @@ body {
 .single-center-middle .block:first-child {
   margin-left: 10px;
 }
-.curcontrol-status{
+.top-status{
   position: absolute;
   top: -38px;
-  left: -6px;
-  width:120px;
+  /*left: -6px;*/
+  left: 50px;
+  width:240px;
   color:red;
+}
+.communicate-cont p{
+  color:#000;
+  height:24px;
+  line-height:24px;
+  margin:0;
+}
+.ss-span{
+  text-align: right;
+  /*width:80px;*/
+  display: inline-block;
+}
+.singnal-status{
+  width:16px;
+  height:16px;
+  display: inline-block;
+  border-radius:100%;
+  background-color: green;
+  margin-right:22px;
+  vertical-align: -2px;
+}
+.singnal-status-gp{
+
+}
+.singnal-error{
+  background-color: red;
 }
 .single-center-left {
   left: 10px;

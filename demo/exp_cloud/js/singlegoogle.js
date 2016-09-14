@@ -218,6 +218,8 @@ var imageReturn = {};
 var imageNum = 9;
 var imageAllData = '';
 
+var groundTimeout;
+
 var flightPointClick = function (ele) {
     var sub = $(ele).parents('.single-right-up-sub');
     var cur_position = {
@@ -248,6 +250,9 @@ if (window.location.search.split('?')[1]) {
 var ws = null;
 var curDataTime, lastDataTime, dataTime;
 var flagTime = 0;
+var timeOuts = {};
+var timeOutsId = document.getElementById('heartbeat.id_uav_xyi').innerText;
+timeOuts[timeOutsId] = {};
 
 function connect() {
     ws = new WebSocket(server);
@@ -327,6 +332,8 @@ function connect() {
             if (dv.getUint8(begin) == document.getElementById('heartbeat.id_uav_xyi').innerText) {
                 infos['heartbeat'] = {};
                 infos['heartbeat']['id_uav_xyi'] = dv.getUint8(begin);
+
+
                 begin += 1;
                 infos['heartbeat']['id_iso_xyi'] = dv.getUint8(begin);
                 begin += 1;
@@ -344,19 +351,28 @@ function connect() {
                     drapExpFlightMarker();
                 }
             }
+
+            if (system_status_flag[infos.heartbeat.base_mode] == "离线") {
+                $("#signalWS").addClass("singnal-error");
+                $("#signal3G").addClass("singnal-error");
+            }
+            // else{
+            //     $("#signalWS").removeClass("singnal-error");
+            //     $("#signal3G").removeClass("singnal-error");
+            // }
+
+            // 设置滚动log信息
+            if ($("#logList p").length == 0) {
+                setLogInfor(formatDateTime(), system_status_flag[infos.heartbeat.base_mode]);
+            } else if (system_status_flag[infos.heartbeat.base_mode] != document.getElementById("heartbeat.base_mode").innerText) {
+                // console.log("飞机新的状态是  ", system_status_flag[infos.heartbeat.base_mode], "飞机上一个状态是 ", document.getElementById("heartbeat.base_mode").innerText);
+                setLogInfor(formatDateTime(), system_status_flag[infos.heartbeat.base_mode]);
+            }
+
             setValueFromInfos('heartbeat', 'id_uav_xyi');
             setValueFromInfos('heartbeat', 'base_mode', system_status_flag[infos.heartbeat.base_mode], true);
             // console.log(" infos['heartbeat']['system_status'] is ", infos['heartbeat']['system_status']);
             changeCtlIcons(infos['heartbeat']['system_status']);
-
-            // 设置滚动log信息
-            if (document.getElementById("heartbeat.base_mode").innerText == "上线" && $("#logList li").length == 0) {
-                setLogInfor(formatDateTime(), system_status_flag[infos.heartbeat.base_mode]);
-                console.log($("#infoList li").length)
-            } else if (system_status_flag[infos.heartbeat.base_mode] != document.getElementById("heartbeat.base_mode").innerText) {
-                console.log("system_status_flag[infos.heartbeat.base_mode] is ", system_status_flag[infos.heartbeat.base_mode], "document.getElementById('heartbeat.base_mode').innerText is ", document.getElementById("heartbeat.base_mode").innerText);
-                setLogInfor(formatDateTime(), system_status_flag[infos.heartbeat.base_mode]);
-            }
 
             //降落后，起点为降落点
             if (infos['heartbeat'] && infos['heartbeat']['base_mode'] == 11) {
@@ -548,13 +564,13 @@ function connect() {
                 begin += 4;
                 infos['gps_raw']['fix_type'] = dv.getUint8(begin);
                 begin += 1;
-                var lat = parseFloat(dv.getInt32(begin, LE)) / 1E7
+                var lat = parseFloat(dv.getInt32(begin, LE)) / 1E7;
                 infos['gps_raw']['lat_gps'] = lat;
                 begin += 4;
-                var lon = parseFloat(dv.getInt32(begin, LE)) / 1E7
+                var lon = parseFloat(dv.getInt32(begin, LE)) / 1E7;
                 infos['gps_raw']['lon_gps'] = lon;
                 begin += 4;
-                var alt = parseFloat(dv.getInt32(begin, LE)) / 1E7
+                var alt = parseFloat(dv.getInt32(begin, LE)) / 1E7;
                 infos['gps_raw']['alt_gps'] = alt;
                 begin += 4;
                 infos['gps_raw']['eph'] = dv.getUint16(begin, LE);
@@ -592,11 +608,47 @@ function connect() {
                     flight.setPosition(lineArr[0]);
                 }
 
-                $('#start input[name=lon]').val(infos['gps_raw']['lon_gps']);
-                $('#start input[name=lat]').val(infos['gps_raw']['lat_gps']);
+                // $('#start input[name=lon]').val(infos['gps_raw']['lon_gps']);
+                // $('#start input[name=lat]').val(infos['gps_raw']['lat_gps']);
 
                 // console.log(infos.gps_raw);
             }
+        } else if (msgid == 81) {
+            //地面站heartbeat解析
+            console.info('msgid is ', dv.getUint8(begin), "地面站~~~");
+            // console.log(dv.byteLength, dv.getUint8(begin++), dv.getUint8(begin++), dv.getUint8(begin++), dv.getUint8(begin++), dv.getUint8(begin++), dv.getUint8(begin++));
+            // begin += 1;
+            // $("#signalGround").removeClass("singnal-error");
+            // if (infos['heartbeat']['groundTimeout']) {
+            //     // console.log("清除定时器");
+            //     window.clearTimeout(infos['heartbeat']['groundTimeout']);
+            //     // infos['heartbeat']['groundTimeout']=null;
+            //     // $("#signalGround").removeClass("singnal-error");
+            // }
+            // infos['heartbeat'] = {};
+            // infos['heartbeat']['id_uav_xyi'] = dv.getUint8(begin);
+            // begin += 1;
+            // infos['heartbeat']['id_iso_xyi'] = dv.getUint8(begin);
+            // begin += 1;
+            // //新协议
+            // infos['heartbeat']['base_mode'] = dv.getUint8(begin);
+            // begin += 1;
+            // infos['heartbeat']['system_status'] = dv.getUint8(begin);
+            // begin += 1;
+            // //新协议结束
+            // infos['heartbeat']['xylink_version'] = dv.getUint8(begin);
+            // begin += 1;
+            // if (infos['heartbeat']['base_mode'] == 0) {
+            //     // console.log(infos['heartbeat']['base_mode']);
+            //     // $("#signalGround").removeClass("singnal-error");
+            //     if (!infos['heartbeat']['groundTimeout']) {
+            //         // console.log(infos['heartbeat']['base_mode']);
+            //         infos['heartbeat']['groundTimeout'] = window.setTimeout(function () {
+            //             $("#signalGround").addClass("singnal-error");
+            //         }, 5000);
+            //     }
+            // }
+            //连接信号
         } else if (msgid == 101) {
         } else if (msgid == 102) {
             //command_xyi_long解析
@@ -776,11 +828,11 @@ function connect() {
                         pic += String.fromCharCode(arr[i]);
                     }
                     imageAllData += pic;
-                    console.log(imageReturn[imageId]['image_data']);
-                    console.log('imageReturn[imageId]["image_data"]["image_id"] is ', imageReturn[imageId]['image_data']['image_id']);
+                    // console.log(imageReturn[imageId]['image_data']);
+                    // console.log('imageReturn[imageId]["image_data"]["image_id"] is ', imageReturn[imageId]['image_data']['image_id']);
                     if (imageReturn[imageId]['image_data']['image_piece_id'] + 1 == imageReturn[imageId]['image_data']['image_piece_num']) {
                         // console.log(imageReturn[imageId]['image_data']['image_piece_num'], imageReturn[id]['image_data']['image_piece_id'] + 1);
-                        console.log(imageReturn[imageId]['image_data']['image_piece_id']);
+                        // console.log(imageReturn[imageId]['image_data']['image_piece_id']);
                         imageAllData = btoa(imageAllData);
 
                         if (infos.heartbeat && infos.heartbeat.base_mode && infos.heartbeat.base_mode == 33) {
@@ -796,8 +848,6 @@ function connect() {
                             $('#leftMainImg').attr('src', 'data:image/jpg;base64,' + imageAllData);
                             imageAllData = '';
                         }
-
-
                     }
                 }
             }
@@ -894,13 +944,90 @@ function connect() {
             if (infos['heartbeat']['id_uav_xyi'] == id) {
                 begin += 4;
                 var type = dv.getUint8(begin);
-                console.info(type);
+                console.info("254type is " ,type);
                 infos['flight-type'] = type;
+
+                // if (timeOuts[timeOutsId]['WSsetTimeout']) {
+                //     window.clearTimeout(timeOuts[timeOutsId]['WSsetTimeout']);
+                //     $("#signalWS").removeClass("singnal-error");
+                //     $("#signal3G").removeClass("singnal-error");
+                // }
+                // if (timeOuts[timeOutsId]['ThirdTimeoutShow']) {
+                //     window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeout']);
+                //     $("#signalWS").removeClass("singnal-error");
+                //     $("#signal3G").removeClass("singnal-error");
+                // }
+
                 if (type == 1) {
                     $('#losttime').text('0');
+                    $("#signalWS").removeClass("singnal-error");
+                    $("#signal3G").removeClass("singnal-error");
+
+                }
+                if (type == 3) {
+                    if (!timeOuts[timeOutsId]['WSsetTimeout']) {
+                        if ($("#signalWS").hasClass("singnal-error") == false) {
+                            timeOuts[timeOutsId]['WSsetTimeout'] = window.setTimeout(function () {
+                                $("#signalWS").addClass("singnal-error");
+                            }, 5000);
+                        }
+                    }
+                    if (timeOuts[timeOutsId]['WSsetTimeoutShow']) {
+                        // console.log("12");
+                        window.clearTimeout(timeOuts[timeOutsId]['WSsetTimeoutShow']);
+                        timeOuts[timeOutsId]['WSsetTimeoutShow'] = null;
+
+                    }
+                    // console.log(!timeOuts[timeOutsId]['WSsetTimeoutShow']);
+                    if (!timeOuts[timeOutsId]['WSsetTimeoutShow']) {
+                        timeOuts[timeOutsId]['WSsetTimeoutShow'] = window.setTimeout(function () {
+                            $("#signalWS").removeClass("singnal-error");
+                            // console.log(1)
+                        }, 10000);
+                    }
                 } else {
                     if (infos['time_step']) {
                         $('#losttime').text((new Date().getTime() / 1000).toFixed(0) - infos['time_step'].toFixed(0) - infos['last_date']);
+
+                        // if (!timeOuts[timeOutsId]['ThirdTimeout']) {
+                        //     timeOuts[timeOutsId]['ThirdTimeout'] = window.setTimeout(function () {
+                        //         $("#signal3G").addClass("singnal-error");
+                        //     }, 5000);
+                        // }
+                        //
+                        // if (!timeOuts[timeOutsId]['ThirdTimeoutShow']) {
+                        //     timeOuts[timeOutsId]['ThirdTimeoutShow'] = window.setTimeout(function () {
+                        //         $("#signal3G").removeClass("singnal-error");
+                        //     }, 5000);
+                        // } else {
+                        //     window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeoutShow']);
+                        //
+                        //     timeOuts[timeOutsId]['ThirdTimeoutShow'] = window.setTimeout(function () {
+                        //         $("#signal3G").removeClass("singnal-error");
+                        //     }, 5000);
+                        // }
+
+                        if (!timeOuts[timeOutsId]['ThirdTimeout']) {
+                            if ($("#signal3G").hasClass("singnal-error") == false) {
+                                timeOuts[timeOutsId]['ThirdTimeout'] = window.setTimeout(function () {
+                                    $("#signal3G").addClass("singnal-error");
+                                }, 5000);
+                            }
+                        }
+                        if (timeOuts[timeOutsId]['ThirdTimeoutShow']) {
+                            // console.log("12");
+                            window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeoutShow']);
+                            timeOuts[timeOutsId]['ThirdTimeoutShow'] = null;
+
+                        }
+                        console.log(!timeOuts[timeOutsId]['ThirdTimeoutShow']);
+                        if (!timeOuts[timeOutsId]['ThirdTimeoutShow']) {
+                            timeOuts[timeOutsId]['ThirdTimeoutShow'] = window.setTimeout(function () {
+                                $("#signal3G").removeClass("singnal-error");
+                                // console.log(1)
+                            }, 10000);
+                        }
+
                     }
                 }
             }
@@ -1802,8 +1929,8 @@ var drawSearchPoint = function (draggable, curcount, curpoint) {
     // var counts = infos.mission_ack_2.count;
     // var points = infos.mission_ack_2.point;
 
-    console.info("加载的counts is", counts);
-    console.info("加载的points is", points);
+    // console.info("加载的counts is", counts);
+    // console.info("加载的points is", points);
     Local_count = 1;
     lineArr = [];
     if (counts == 1) {
@@ -2107,22 +2234,30 @@ var setLogInfor = function (time, log) {
     // if (window.location.search.split('?')[1]) {
     //     var tempinfos = window.location.search.split('?')[1];
     //     if (tempinfos.split('&').length == 2) {
-    var curHtml = '<li><span class = "date-infor">' + time + ' </span ><span class = "log-infor">' + log + '</span ></li >';
-    $("#logList").append(curHtml);
-    // if ($("#logList li").length == 5) {
-    jQuery(".txtMarquee-top").slide({
-        mainCell: ".bd ul",
-        autoPlay: true,
-        effect: "topMarquee",
-        vis: 5,
-        interTime: 50
-    });
-    // }
-    //     }else(
-    //         // alert("抱歉,没有权限")
-    //     )
-    // }
+    // $("#logList").remove();
 
+    // $("#logList .clone").remove();
+    // console.log($("#logList .clone").length);
+    // var oldHtml=$("#logList li").clone();
+    // console.log(oldHtml.length);
+    //var curHtml = '<li><span class = "date-infor">' + time + ' </span ><span class = "log-infor">' + log + '</span ></li >';
+    // $("#logList").empty();
+    // $("#logList").append(oldHtml).append(curHtml);
+    // $("#logList").append(curHtml);
+    // if($("#logList li").length==5){
+    //     jQuery(".txtMarquee-top").slide({
+    //         mainCell: ".bd ul",
+    //         autoPlay: true,
+    //         effect: "topMarquee",
+    //         vis: 5,
+    //         interTime: 50
+    //     });
+    // }
+    //console.log($("#logList li").length);
+    //console.log($("#logList li.clone").length);
+
+    var curHtml = '<p class="noMargin"><span class = "date-infor">' + time + ' </span ><span class = "log-infor">' + log + '</span ></p>';
+    $("#logList").append(curHtml);
 }
 // 时间显示
 var formatDateTime = function () {
@@ -2268,8 +2403,9 @@ $("#searchLineBtn").on('click', function () {
                         var tr = $('<tr onclick="checkTr($(this))"><td><input type="radio" data-id="' + value.id + '" name="radioline"></td><td>' + value.name + '</td><td>' + point.length + '</td></tr>').data('points', value);
                         $("#infobody").append(tr);
 
-                        setLogInfor(formatDateTime(), '查询航路');
                     });
+                    setLogInfor(formatDateTime(), '查询航路');
+
                 } else {
                     $("#bodynone").show();
                 }

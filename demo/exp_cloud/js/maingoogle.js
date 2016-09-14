@@ -63,11 +63,11 @@ function finished() {
     var Info = new google.maps.InfoWindow({
         content: div
     });
-    marker.addListener('click', function() {
+    marker.addListener('click', function () {
         Info.open(map, marker);
     });
 }
-var drapExpFlightMarker = function(id, bettery, deg, weight) {
+var drapExpFlightMarker = function (id, bettery, deg, weight) {
     if (flights[id].gps_raw && flights[id].gps_raw.lon_gps && flights[id].gps_raw.lat_gps) {
         // var position={
         //     // lat: flights[id].gps_raw.lat_gps,
@@ -114,12 +114,12 @@ var drapExpFlightMarker = function(id, bettery, deg, weight) {
         var Info = new google.maps.InfoWindow({
             content: div
         });
-        overlay[id].addListener('click', function() {
+        overlay[id].addListener('click', function () {
             Info.open(map, overlay[id]);
         });
         // console.log(overlay[id]);
         flights[id]['plain_marker'] = overlay[id];
-        // marker.addListener('click', function() {
+        // marker.addListener('click', function() {`
         //     Info.open(map, marker);
         // });
         // flights[id]['plain_marker'] = marker;
@@ -136,13 +136,13 @@ function mainConnect() {
         window.close();
     }
     ws.binaryType = "arraybuffer";
-    ws.onopen = function() {
+    ws.onopen = function () {
         console.log('websocket connected', server);
     };
-    ws.onerror = function(error) {
+    ws.onerror = function (error) {
         console.log("websocket", error);
     };
-    ws.onmessage = function(res) {
+    ws.onmessage = function (res) {
         if (res.data == 'undefined') {
             return;
         }
@@ -285,6 +285,11 @@ function mainConnect() {
                     });
                 }
             }
+        } else if (msgid == 81) {
+            //地面站heartbeat解析
+            console.info('msgid is ', dv.getUint8(begin), "地面站~~~");
+            console.log(dv.getUint8(begin++),dv.getUint8(begin++),dv.getUint8(begin++),dv.getUint8(begin++),dv.getUint8(begin++),dv.getUint8(begin++));
+
         } else if (msgid == 250) {
             console.log('msgid', msgid);
             //gps_raw解析
@@ -307,7 +312,7 @@ function mainConnect() {
             for (var i = 0; i < flightItem.length; i++) {
                 if (flightItem.eq('' + i).attr("id") == id) {
                     if (!flights[id]['setTimeout']) {
-                        flights[id]['setTimeout'] = window.setTimeout(function() {
+                        flights[id]['setTimeout'] = window.setTimeout(function () {
                             // if (!flights[id]['heartbeat']) {
                             // flightItem.eq('' + id).remove();
                             $('#' + id).remove();
@@ -324,7 +329,7 @@ function mainConnect() {
             }
         }
     };
-    ws.onclose = function() {
+    ws.onclose = function () {
         console.log('websocket disconnected, prepare reconnect');
         ws = null;
         setTimeout(mainConnect, 100);
@@ -390,7 +395,7 @@ function templete(p1, id) {
         return;
     }
 }
-$('#confirm #ok').on('click', function() {
+$('#confirm #ok').on('click', function () {
     var confirm = $('#confirm');
     if ($('#pwd').val() && confirm.data('value')) {
         $('#templateTarget').attr('href', 'singlegoogle.html?id=' + confirm.data('value') + '&t=' + encodeURIComponent($('#pwd').val()));
@@ -400,6 +405,6 @@ $('#confirm #ok').on('click', function() {
         alert('口令你不输入？(ノಠ益ಠ)ノ彡┻━┻');
     }
 });
-$("#flight-no").click(function() {
+$("#flight-no").click(function () {
     $("#flightList").toggle();
 })
