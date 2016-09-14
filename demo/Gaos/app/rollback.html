@@ -1,152 +1,168 @@
 <!DOCTYPE html>
 <html manifest="index.appcache">
-  <head>
+<head>
     <title>Google Maps</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/main.css"> 
-    <link rel="stylesheet" href="css/zepto.mdatetimer.css"> 
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/zepto.mdatetimer.css">
 
-    <style> 
-    html, body, #map_canvas{
-        margin: 0; padding: 0; height: 100%;
-    }
-    .gm-svpc{
-      display: none;
-    }
-    .gm-style-cc{
-        display: none;
-    }
+    <style>
+        html, body, #map_canvas {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .gm-svpc {
+            display: none;
+        }
+
+        .gm-style-cc {
+            display: none;
+        }
+
         /* google map */
-    .view-link{
-        display: none;
-    }
-    .gm-china a img{
-        display: none!important;
-        height: 0!important;
-        width:0!important;
-    }
-    .gmnoprint span{
-        display: none!important;
-    }
-    .gmnoprint a{
-         display: none!important;
-    }
-    .gm-style-mtc span{
-        display: inline-block!important;
-    }
-    /*.gmnoprint{bottom: 10px!important;}*/
+        .view-link {
+            display: none;
+        }
+
+        .gm-china a img {
+            display: none !important;
+            height: 0 !important;
+            width: 0 !important;
+        }
+
+        .gmnoprint span {
+            display: none !important;
+        }
+
+        .gmnoprint a {
+            display: none !important;
+        }
+
+        .gm-style-mtc span {
+            display: inline-block !important;
+        }
+
+        /*.gmnoprint{bottom: 10px!important;}*/
     </style>
     <script src="http://ditu.google.cn/maps/api/js?language=zh-CN&libraries=drawing&key=AIzaSyDEK4XKx_F2_R76kuxE_igcWbZpu1n14BQ&sensor=false"></script>
-  </head>
-  <body>
+</head>
+<body>
 <!-- 地图 -->
-    <div id="map_canvas"></div>
+<div id="map_canvas"></div>
 <!-- 右上标签 -->
-    <ul class="right-float-menu">
-        
-        <li class="right-float-menu-li">
-            <div class="flight-sky" id="factorTap" title="要素" onclick="factorTap();">
-            </div>
-        </li>
-         <li class="right-float-menu-li">
-            <a class="flight-sky" href="index.html" title="监视" id="surTap">
-            </a>
-        </li>
-        <li class="right-float-menu-li" title="回放">
-            <a class="flight-sky" id="backTap">
-            </a>
-        </li>
-    </ul>
-    <!-- 飞行要素显示选择 -->
-    <div class="float-dialog settingspanel" id="elementspanel">
-        <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="255">
-        <label>多边形空域</label></br>
-        <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="253">
-        <label>圆形空域</label></br>
-        <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="254">
-        <label>航线</label></br>
-        <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="252">
-        <label>往返</label></br>
-        <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="0">
-        <label>起降点</label>
-    </div>
-    <!-- 测距 -->
+<ul class="right-float-menu">
 
-    <!-- 底部信息 -->
-    <div class="bottom-msg" style="">
-        <div id="bottom-con">
+    <li class="right-float-menu-li">
+        <div class="flight-sky" id="factorTap" title="要素" onclick="factorTap();">
         </div>
-         
-      </div>
+    </li>
+    <li class="right-float-menu-li">
+        <a class="flight-sky" href="index.html" title="监视" id="surTap">
+        </a>
+    </li>
+    <li class="right-float-menu-li" title="回放">
+        <a class="flight-sky" id="backTap">
+        </a>
+    </li>
+</ul>
+<!-- 飞行要素显示选择 -->
+<div class="float-dialog settingspanel" id="elementspanel">
+    <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="255">
+    <label>多边形空域</label></br>
+    <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="253">
+    <label>圆形空域</label></br>
+    <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="254">
+    <label>航线</label></br>
+    <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="252">
+    <label>往返</label></br>
+    <input type="checkbox" checked="" onclick="refreshElements(this)" name="mapStyle" value="0">
+    <label>起降点</label>
+</div>
+<!-- 测距 -->
+
+<!-- 底部信息 -->
+<div class="bottom-msg" style="">
+    <div id="bottom-con">
     </div>
-    <!-- 回放设备选择 -->
-    <div class="modal-box closeBoxDiv">
-        <div class="modal-nav">
+
+</div>
+</div>
+<!-- 回放设备选择 -->
+<div class="modal-box closeBoxDiv">
+    <div class="modal-nav">
         <span style="float:right;" class="closeBox">关闭</span>
-            回放
+        回放
+    </div>
+    <div class="modal-con">
+        <div class="modal-con-hkgs">
+            <span class="modal-con-span">航空公司</span>
+            <input name="cars" id='cid' value="航空公司">
         </div>
-        <div class="modal-con">
-            <div class="modal-con-hkgs">
-                <span class="modal-con-span">航空公司</span>
-                    <input name="cars" id='cid' value="航空公司">
-            </div>
-            <div class="modal-con-date">
-                <span class="modal-con-span">起飞日期</span>
-                <input type="text" id="flightday" value="2016/08/06">
-            </div>
-            <div class="modal-con-id">
-                <span class="modal-con-span">飞行器ID</span>
-                <input name="fid" id="fid" value="B-7541">
-            </div>
-            <div class="modal-con-time">
-                <span class="modal-con-span">回放时间</span><input type="text" style="width:32%;margin-left:6%;" id="backend" value="13:00:00"><input type="text" id="backbegin" style="width:32%;" value="08:00:00">
-            </div>
-            <div class="modal-con-btn">
-                <button id="confirm">查询</button>
-            </div>
+        <div class="modal-con-date">
+            <span class="modal-con-span">起飞日期</span>
+            <input type="text" id="flightday" value="2016/08/06">
+        </div>
+        <div class="modal-con-id">
+            <span class="modal-con-span">飞行器ID</span>
+            <input name="fid" id="fid" value="B-7541">
+        </div>
+        <div class="modal-con-time">
+            <span class="modal-con-span">回放时间</span><input type="text" style="width:32%;margin-left:6%;" id="backend"
+                                                           value="13:00:00"><input type="text" id="backbegin"
+                                                                                   style="width:32%;" value="08:00:00">
+        </div>
+        <div class="modal-con-btn">
+            <button id="confirm">查询</button>
         </div>
     </div>
-    <!-- 回放 -->
-    <div class="rollback-footer">
-        <div class="rollback-footer-main">
-            <div class="rollback-footer-radios big" data-play="true"><i class="fa fa-pause" aria-hidden="true"></i></div>
-            <div class="rollback-footer-radios small back" onclick="back(this)"><i class="fa fa-fast-backward" aria-hidden="true"></i></div>
-            <div class="rollback-footer-radios small fast" onclick="fast(this)"><i class="fa fa-fast-forward" aria-hidden="true"></i></div>
-            <div class="rollback-footer-radios long">
-                <div class="now" style="left: calc(-19px);">00:00:00</div>
-                <div class="start">00:00:00</div>
-                <div class="end">15:39:35</div>
-                <div class="rollback-footer-long">
-                    <div class="jindu"></div>
-                    <div class="begin"></div>
-                    <div class="button" style="left: 0%;"></div>
-                    <div class="read" style="width: 0%;"></div>
-                </div>
+</div>
+<!-- 回放 -->
+<div class="rollback-footer">
+    <div class="rollback-footer-main">
+        <div class="rollback-footer-radios big" data-play="true"><i class="fa fa-pause" aria-hidden="true"></i></div>
+        <div class="rollback-footer-radios small back" onclick="back(this)"><i class="fa fa-fast-backward"
+                                                                               aria-hidden="true"></i></div>
+        <div class="rollback-footer-radios small fast" onclick="fast(this)"><i class="fa fa-fast-forward"
+                                                                               aria-hidden="true"></i></div>
+        <div class="rollback-footer-radios long">
+            <div class="now" style="left: calc(-19px);">00:00:00</div>
+            <div class="start">00:00:00</div>
+            <div class="end">15:39:35</div>
+            <div class="rollback-footer-long">
+                <div class="jindu"></div>
+                <div class="begin"></div>
+                <div class="button" style="left: 0%;"></div>
+                <div class="read" style="width: 0%;"></div>
             </div>
-            <div class="rollback-footer-radios info" style="margin-right: 10px;width: 20px;height: 20px;line-height: 20px;margin-top: 2px;">x1</div>
+        </div>
+        <div class="rollback-footer-radios info"
+             style="margin-right: 10px;width: 20px;height: 20px;line-height: 20px;margin-top: 2px;">x1
         </div>
     </div>
+</div>
 
-  </body>
-    <script src='script/fastclick.js'></script>
-    <!-- zepto -->
-    <script src='script/zepto.min.js'></script>
-    <!-- zepto.select插件 -->
-    <script src='script/zepto.mdatetimer.js'></script>
-    <!-- 通用数据处理、时间转换 -->
-    <script src='script/common.js'></script>
-    <script src='script/CustomMapMarker.js'></script>
-    
+</body>
+<script src='script/fastclick.js'></script>
+<!-- zepto -->
+<script src='script/zepto.min.js'></script>
+<!-- zepto.select插件 -->
+<script src='script/zepto.mdatetimer.js'></script>
+<!-- 通用数据处理、时间转换 -->
+<script src='script/common.js'></script>
+<script src='script/CustomMapMarker.js'></script>
 
-    <script src='script/wsrollback.js'></script> 
-    <script src='script/flights.js'></script>
-    <script src='script/index.js'></script>
-    <!-- <script src='script/icon.js'></script> -->
-    <script src='script/coordtransform.js'></script>
-    <script src='script/rollbackWeb.js'></script>
-        <script>
 
-    </script>
+<script src='script/wsrollback.js'></script>
+<script src='script/flights.js'></script>
+<script src='script/index.js'></script>
+<!-- <script src='script/icon.js'></script> -->
+<script src='script/coordtransform.js'></script>
+<script src='script/rollbackWeb.js'></script>
+<script>
+
+</script>
 
 </html>
