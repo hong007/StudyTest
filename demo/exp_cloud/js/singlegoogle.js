@@ -683,7 +683,7 @@ function connect() {
                         }
                     }
 
-                } else if ((infos['command_ack']['command'] == 7 || infos['command_ack']['command'] == 8 || infos['command_ack']['command'] == 9) && infos['command_ack']['result'] == 0) {
+                } else if ((infos['command_ack']['command'] == 7 || infos['command_ack']['command'] == 8 || infos['command_ack']['command'] == 9 || infos['command_ack']['command'] == 10) && infos['command_ack']['result'] == 0) {
                     if (window.location.search.split('?')[1]) {
                         var tempinfos = window.location.search.split('?')[1];
                         if (tempinfos.split('&').length == 2) {
