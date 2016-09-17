@@ -59,6 +59,10 @@ body {
     color: #fff;
     margin-right:30px;
 }
+.version-area:hover{
+    text-decoration: none;
+    color:#fff;
+}
 
 .bg-content{
     background: url("../images/new/bg.jpg") no-repeat center center;

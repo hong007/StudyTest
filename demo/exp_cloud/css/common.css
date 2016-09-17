@@ -187,11 +187,14 @@ body {
 }
 .top-status{
   position: absolute;
-  top: -38px;
+  top: -84px;
   /*left: -6px;*/
-  left: 50px;
+  left: 2px;
   width:240px;
   color:red;
+}
+.top-status p{
+  margin:0;
 }
 .communicate-cont p{
   color:#000;
@@ -221,7 +224,7 @@ body {
 }
 .single-center-left {
   left: 10px;
-  top: 50px;
+  top: 94px;
   width: 38px;
 }
 .single-center-left .left-icon {

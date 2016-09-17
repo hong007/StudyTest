@@ -218,7 +218,7 @@ var imageReturn = {};
 var imageNum = 9;
 var imageAllData = '';
 
-var groundTimeout;
+// var groundTimeout;
 
 var flightPointClick = function (ele) {
     var sub = $(ele).parents('.single-right-up-sub');
@@ -333,7 +333,39 @@ function connect() {
                 infos['heartbeat'] = {};
                 infos['heartbeat']['id_uav_xyi'] = dv.getUint8(begin);
 
+                if (timeOuts[timeOutsId]['offlineTime']) {
+                    // console.log(12);
+                    window.clearTimeout(timeOuts[timeOutsId]['offlineTime']);
+                    timeOuts[timeOutsId]['offlineTime'] = null;
+                }
+                // 没有心跳包清除所有定时器
+                if (!timeOuts[timeOutsId]['offlineTime']) {
+                    timeOuts[timeOutsId]['offlineTime'] = window.setTimeout(function () {
 
+
+                        if (timeOuts[timeOutsId]['ThirdTimeout']) {
+                            window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeout']);
+                            timeOuts[timeOutsId]['WSsetTimeout'] = null;
+                        }
+                        if (timeOuts[timeOutsId]['ThirdTimeoutShow']) {
+                            window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeoutShow']);
+                            timeOuts[timeOutsId]['ThirdTimeoutShow'] = null;
+                        }
+                        if (timeOuts[timeOutsId]['WSsetTimeout']) {
+                            window.clearTimeout(timeOuts[timeOutsId]['WSsetTimeout']);
+                            timeOuts[timeOutsId]['WSsetTimeout'] = null;
+                        }
+                        if (timeOuts[timeOutsId]['WSsetTimeoutShow']) {
+                            window.clearTimeout(timeOuts[timeOutsId]['WSsetTimeoutShow']);
+                            timeOuts[timeOutsId]['WSsetTimeoutShow'] = null;
+                        }
+                        $("#signalWS").addClass("singnal-error");
+                        $("#signal3G").addClass("singnal-error");
+                        document.getElementById('heartbeat.id_uav_xyi').innerText = "离线";
+
+                    }, 5000);
+                    // console.log(121232);
+                }
                 begin += 1;
                 infos['heartbeat']['id_iso_xyi'] = dv.getUint8(begin);
                 begin += 1;
@@ -356,10 +388,6 @@ function connect() {
                 $("#signalWS").addClass("singnal-error");
                 $("#signal3G").addClass("singnal-error");
             }
-            // else{
-            //     $("#signalWS").removeClass("singnal-error");
-            //     $("#signal3G").removeClass("singnal-error");
-            // }
 
             // 设置滚动log信息
             if ($("#logList p").length == 0) {
@@ -603,13 +631,18 @@ function connect() {
                 };
                 if (infos['heartbeat']['system_status'] == 0) {
                     map.setCenter(lineArr[0]);
+
+                }
+                if (infos['heartbeat']['system_status'] == 1) {
+
                 }
                 if (flight) {
                     flight.setPosition(lineArr[0]);
                 }
 
-                // $('#start input[name=lon]').val(infos['gps_raw']['lon_gps']);
-                // $('#start input[name=lat]').val(infos['gps_raw']['lat_gps']);
+                $('#start input[name=lon]').val(infos['gps_raw']['lon_gps']);
+                $('#start input[name=lat]').val(infos['gps_raw']['lat_gps']);
+
 
                 // console.log(infos.gps_raw);
             }
@@ -944,89 +977,71 @@ function connect() {
             if (infos['heartbeat']['id_uav_xyi'] == id) {
                 begin += 4;
                 var type = dv.getUint8(begin);
-                console.info("254type is " ,type);
+                console.info("254type is ", type);
                 infos['flight-type'] = type;
-
-                // if (timeOuts[timeOutsId]['WSsetTimeout']) {
-                //     window.clearTimeout(timeOuts[timeOutsId]['WSsetTimeout']);
-                //     $("#signalWS").removeClass("singnal-error");
-                //     $("#signal3G").removeClass("singnal-error");
-                // }
-                // if (timeOuts[timeOutsId]['ThirdTimeoutShow']) {
-                //     window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeout']);
-                //     $("#signalWS").removeClass("singnal-error");
-                //     $("#signal3G").removeClass("singnal-error");
-                // }
 
                 if (type == 1) {
                     $('#losttime').text('0');
                     $("#signalWS").removeClass("singnal-error");
                     $("#signal3G").removeClass("singnal-error");
 
-                }
-                if (type == 3) {
-                    if (!timeOuts[timeOutsId]['WSsetTimeout']) {
-                        if ($("#signalWS").hasClass("singnal-error") == false) {
-                            timeOuts[timeOutsId]['WSsetTimeout'] = window.setTimeout(function () {
-                                $("#signalWS").addClass("singnal-error");
-                            }, 5000);
-                        }
-                    }
-                    if (timeOuts[timeOutsId]['WSsetTimeoutShow']) {
-                        // console.log("12");
-                        window.clearTimeout(timeOuts[timeOutsId]['WSsetTimeoutShow']);
-                        timeOuts[timeOutsId]['WSsetTimeoutShow'] = null;
-
-                    }
-                    // console.log(!timeOuts[timeOutsId]['WSsetTimeoutShow']);
-                    if (!timeOuts[timeOutsId]['WSsetTimeoutShow']) {
-                        timeOuts[timeOutsId]['WSsetTimeoutShow'] = window.setTimeout(function () {
-                            $("#signalWS").removeClass("singnal-error");
-                            // console.log(1)
-                        }, 10000);
-                    }
-                } else {
-                    if (infos['time_step']) {
-                        $('#losttime').text((new Date().getTime() / 1000).toFixed(0) - infos['time_step'].toFixed(0) - infos['last_date']);
-
-                        // if (!timeOuts[timeOutsId]['ThirdTimeout']) {
-                        //     timeOuts[timeOutsId]['ThirdTimeout'] = window.setTimeout(function () {
-                        //         $("#signal3G").addClass("singnal-error");
-                        //     }, 5000);
-                        // }
-                        //
-                        // if (!timeOuts[timeOutsId]['ThirdTimeoutShow']) {
-                        //     timeOuts[timeOutsId]['ThirdTimeoutShow'] = window.setTimeout(function () {
-                        //         $("#signal3G").removeClass("singnal-error");
-                        //     }, 5000);
-                        // } else {
-                        //     window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeoutShow']);
-                        //
-                        //     timeOuts[timeOutsId]['ThirdTimeoutShow'] = window.setTimeout(function () {
-                        //         $("#signal3G").removeClass("singnal-error");
-                        //     }, 5000);
-                        // }
-
+                } else if (type == 2) {
+                    if (infos['heartbeat'] && infos['heartbeat']['base_mode'] != 0) {
                         if (!timeOuts[timeOutsId]['ThirdTimeout']) {
                             if ($("#signal3G").hasClass("singnal-error") == false) {
                                 timeOuts[timeOutsId]['ThirdTimeout'] = window.setTimeout(function () {
                                     $("#signal3G").addClass("singnal-error");
+                                    window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeout']);
+                                    timeOuts[timeOutsId]['WSsetTimeout'] = null;
                                 }, 5000);
                             }
                         }
                         if (timeOuts[timeOutsId]['ThirdTimeoutShow']) {
-                            // console.log("12");
                             window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeoutShow']);
                             timeOuts[timeOutsId]['ThirdTimeoutShow'] = null;
-
+                            console.log("清空上一次收到254  3G断开");
                         }
-                        console.log(!timeOuts[timeOutsId]['ThirdTimeoutShow']);
+                        // console.log(!timeOuts[timeOutsId]['ThirdTimeoutShow']);
                         if (!timeOuts[timeOutsId]['ThirdTimeoutShow']) {
                             timeOuts[timeOutsId]['ThirdTimeoutShow'] = window.setTimeout(function () {
                                 $("#signal3G").removeClass("singnal-error");
-                                // console.log(1)
-                            }, 10000);
+                                console.log("最后一次收到254  3G断开");
+                            }, 5000);
                         }
+                    }
+
+
+                } else if (type == 3) {
+                    if (infos['heartbeat'] && infos['heartbeat']['base_mode'] != 0) {
+
+                        if (!timeOuts[timeOutsId]['WSsetTimeout']) {
+                            if ($("#signalWS").hasClass("singnal-error") == false) {
+                                timeOuts[timeOutsId]['WSsetTimeout'] = window.setTimeout(function () {
+                                    $("#signalWS").addClass("singnal-error");
+                                    window.clearTimeout(timeOuts[timeOutsId]['WSsetTimeout']);
+                                    timeOuts[timeOutsId]['WSsetTimeout'] = null;
+                                }, 5000);
+                            }
+                        }
+                        if (timeOuts[timeOutsId]['WSsetTimeoutShow']) {
+                            window.clearTimeout(timeOuts[timeOutsId]['WSsetTimeoutShow']);
+                            timeOuts[timeOutsId]['WSsetTimeoutShow'] = null;
+                            console.log("清空上一次收到254  WS断开");
+
+                        }
+                        // console.log(!timeOuts[timeOutsId]['WSsetTimeoutShow']);
+                        if (!timeOuts[timeOutsId]['WSsetTimeoutShow']) {
+                            timeOuts[timeOutsId]['WSsetTimeoutShow'] = window.setTimeout(function () {
+                                $("#signalWS").removeClass("singnal-error");
+                                // console.log(1)
+                                console.log("最后一次收到254  WS断开");
+                            }, 5000);
+                        }
+                    }
+
+                } else {
+                    if (infos['time_step']) {
+                        $('#losttime').text((new Date().getTime() / 1000).toFixed(0) - infos['time_step'].toFixed(0) - infos['last_date']);
 
                     }
                 }
@@ -1627,11 +1642,11 @@ var enterLonLatValues = function (eve) {
 var flightPointOperate = function (eve, name) {
     var paretObj = $('.single-right-up-sub');
     var sub = $(eve).parents(".single-right-up-sub");
-    if (sub.nextAll('.single-right-up-sub').length == 0) {
-        alert('最后一个航点无法插入，请手动添加！');
-    } else {
-        // alert('现在开始插入航点');
-        if (name == "insertpoint") {
+    // alert('现在开始插入航点');
+    if (name == "insertpoint") {
+        if (sub.nextAll('.single-right-up-sub').length == 0) {
+            alert('最后一个航点无法插入，请手动添加！');
+        } else {
             var nextPoint = sub.next(".single-right-up-sub");
 
             var insertNum = sub.find(".number").text() * 1 + 1;
@@ -1650,38 +1665,38 @@ var flightPointOperate = function (eve, name) {
             var insertPoint = '<div class="single-right-up-sub"><span class="sanjiao glyphicon glyphicon-plus-sign" title="插入航点" onclick="flightPointOperate(this,\'insertpoint\')">&nbsp;</span><span class="sanjiao glyphicon glyphicon-remove-circle" title="删除航点" onclick="flightPointOperate(this,\'delete\')">&nbsp;</span><div class="single-right-up-block" onclick="flightPointClick(this)"><span class="number">' + insertNum + '</span><span class="infos">航点</span></div><div class="single-right-up-hidden"><table><tbody><tr><td class="info">经度 :</td><td class="input"><input name="lon" onkeyup="enterLonLatValues(this)" type="text" style="width: 90%;" value="' + insertLon + '"></td></tr><tr><td class="info">纬度 :</td><td class="input"><input name="lat" onkeyup="enterLonLatValues(this)" style="width: 90%;" value="' + insertLat + '" type="text"></td></tr><tr><td class="info">速度 :</td><td class="input"><input name="speed" type="text" value="' + insertSpeed + '"><span>m/s</span></td></tr><tr><td class="info">高度 :</td><td class="input"><input name="altitude" value="' + insertAltitude + '" type="text"><span>m</span></td></tr></tbody></table></div></div>';
 
             sub.after(insertPoint);
-        } else if (name == "delete") {
-            if (confirm('确认删除该航点？')) {
-                sub.remove();
-            }
         }
-        var curPoints = $('.single-right-up-sub');
-        var savecounts = curPoints.length;
-        var points = [];
-        for (var i = 0; i < savecounts; i++) {
-            var savepoints = {
-                lat: '',
-                lon: '',
-                alt: '',
-                v: '',
-            };
-            var inputs = curPoints.eq(i).find('input');
-            savepoints.lat = inputs[1].value * 1;
-            savepoints.lon = inputs[0].value * 1;
-            savepoints.alt = inputs[3].value * 1;
-            savepoints.v = inputs[2].value * 1;
 
-            points.push(savepoints);
+    } else if (name == "delete") {
+        if (confirm('确认删除该航点？')) {
+            sub.remove();
         }
-        console.log("counts is ", savecounts);
-        console.log("points is", points)
-        // points = JSON.stringify(points);
-
-        drawSearchPoint(true, savecounts, points);
-
-
-        // // pointsOpration();
     }
+    var curPoints = $('.single-right-up-sub');
+    var savecounts = curPoints.length;
+    var points = [];
+    for (var i = 0; i < savecounts; i++) {
+        var savepoints = {
+            lat: '',
+            lon: '',
+            alt: '',
+            v: '',
+        };
+        var inputs = curPoints.eq(i).find('input');
+        savepoints.lat = inputs[1].value * 1;
+        savepoints.lon = inputs[0].value * 1;
+        savepoints.alt = inputs[3].value * 1;
+        savepoints.v = inputs[2].value * 1;
+
+        points.push(savepoints);
+    }
+    console.log("counts is ", savecounts);
+    console.log("points is", points)
+    // points = JSON.stringify(points);
+
+    drawSearchPoint(true, savecounts, points);
+    // pointsOpration();
+    // }
 
 }
 var pointsOpration = function () {
@@ -2353,7 +2368,7 @@ $('#saveAirLine').on('click', function () {
             if (result.err * 1 == 0) {
                 alert('添加成功');
                 console.log('正确', result);
-                $('input').val('');
+                // $('input').val('');
                 // $("#routeLine").modal('hide');
                 setLogInfor(formatDateTime(), '保存航路');
 
