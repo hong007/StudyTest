@@ -1,0 +1,302 @@
+/*
+
+Theme Name: Heroic
+Theme URI: http://themeforest.net
+Description: Responsive One Page Portfolio
+Version: 1.0.2
+Author: bitfade
+Author URI: http://themeforest.net/user/bitfade
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: photoblogging
+
+*/
+
+.alignright{
+	float:right;
+	clear:right;
+	margin-left:20px;
+	margin-bottom:10px;
+}
+
+.alignleft{
+	float:left;
+	clear:left;
+	margin-right:20px;
+	margin-bottom:10px;
+}
+
+.aligncenter{
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:10px;
+}
+
+
+/*WPML*/
+    
+/*drop list*/
+#lang_sel,
+#lang_sel_click{
+	height: 20px;
+	z-index:2000;
+}
+
+#lang_sel_click img.iclflag {
+	float: left;
+	padding-top:5px;
+	margin-right:5px;
+}
+
+#lang_sel_click ul ul img.iclflag {
+	padding-top:0px;
+	top:2px;
+	margin-right:0;
+}
+
+#lang_sel ul ul li a:hover,
+#lang_sel ul ul li,
+#lang_sel ul ul li a:hover span{
+    color:#666;
+}
+
+#lang_sel ul ul li:hover a,
+#lang_sel_click ul ul li:hover a{
+    color:#666;
+    background-color:#fff;
+}
+
+#lang_sel a, 
+#lang_sel a:visited{
+    border-color:#e9e9e9;
+}
+
+.sidebar #lang_sel li{
+	width:100%;
+}
+
+.sidebar #lang_sel{
+	display:block;
+	height:34px;
+}
+
+#lang_sel ul ul a, 
+#lang_sel ul ul a:visited,
+#lang_sel_click ul ul a, 
+#lang_sel_click ul ul a:visited {
+    background-color:#fff;
+    border-color:#e9e9e9;
+    color:#666;
+}
+
+
+.widget #lang_sel ul ul a,
+.widget #lang_sel ul ul a:visited,
+.widget #lang_sel a.lang_sel_sel,
+.widget #lang_sel_click ul ul a,
+.widget #lang_sel_click ul ul a:visited,
+.widget #lang_sel_click a.lang_sel_sel {
+	background-color:#fff;
+	border-color:#e9e9e9;
+	color:#666;
+}
+
+
+
+.widget #lang_sel ul ul a{
+	padding:8px;
+	display:block;
+}
+
+.widget #lang_sel a.lang_sel_sel:hover,
+.widget #lang_sel ul ul li:hover a,
+.widget #lang_sel_click a.lang_sel_sel:hover,
+.widget #lang_sel_click ul ul li:hover a{
+	background-color:#fdfdfd;
+    border-color:#e9e9e9;
+    color:#666;
+}
+
+.widget #lang_sel ul ul li:hover a span{
+	color:#666 !important;
+}
+
+.widget #lang_sel ul ul li:hover,
+.widget #lang_sel ul ul li:hover a{
+	border-color:#e9e9e9;
+}
+
+.widget #lang_sel a.lang_sel_sel{
+	padding:4px 4px 4px 8px;
+}
+
+
+#lang_sel ul ul,
+#lang_sel_click ul ul{
+	border-top-color:#777;
+}
+
+.widget #lang_sel ul ul a,
+#lang_sel ul ul a,
+#lang_sel_click ul ul a{
+	line-height:16px !important;
+}
+
+#lang_sel ul ul, #lang_sel_click ul ul{
+	border-top-color:#e9e9e9;
+}
+
+/*#lang_sel ul ul:hover{
+	border-top-color:#666;
+}*/
+
+#lang_sel,
+#lang_sel_click{
+	z-index:1990;
+}
+
+.sidebar #lang_sel ul ul{
+	top:33px;
+	width:100%;
+}
+
+#lang_sel ul ul a:hover{
+	background-color:#fff;
+	color:#666;
+}
+
+#lang_sel a span.icl_lang_sel_current{
+    /*color:#c0c0c0 !important;*/
+    display:inline;
+}
+
+#lang_sel a span{
+	font-style: normal;
+	color:#444;
+	font-size:11px;
+	display:inline;
+}
+
+/*normal list*/
+
+#lang_sel{
+	font-family: 'Open Sans', arial, sans-serif;
+	font-weight:400;
+}
+
+#lang_sel a{
+	font-size:12px;
+}
+
+#lang_sel a.lang_sel_sel,
+#lang_sel_click a.lang_sel_sel{
+	background-color:#fff;
+	background-position:90% 50%;
+	color: #666;
+	border-color:#e9e9e9;
+}
+
+#lang_sel a.lang_sel_sel:hover,
+#lang_sel_click a.lang_sel_sel:hover{
+	color:#666;
+	background-color:#fff;
+}
+
+#lang_sel_list{
+    position:absolute;
+    top:10px;
+    right:30px;
+    width:auto;
+}
+
+#lang_sel_list ul{
+    width:auto;
+    border:none;
+}
+
+#lang_sel_list li{
+    width:auto;
+}
+
+#lang_sel_list a, #lang_sel_list a:visited{
+    border:none;
+}
+
+#lang_sel img.iclflag{
+	display:inline;
+	top:0;
+	margin-right:3px;
+}
+
+#lang_sel_list a.lang_sel_sel,
+#lang_sel_list a span{
+    color:#c2c2c2 !important;
+}
+
+#lang_sel_list a:hover span{
+    color:#D73300 !important;
+}
+
+#lang_sel_list a span.icl_lang_sel_current,
+#lang_sel_list a:hover span.icl_lang_sel_current{
+    color:#333 !important;
+    cursor:default;
+}
+
+.pe-wpml-lang-selector{
+	position:absolute;
+	margin-left:35px;
+	top:16px;
+	display:inline-block;
+}
+
+/*media query to hide language names in iphone portrait and leave only flags*/
+@media (max-width: 479px) {
+	nav #lang_sel a span.icl_lang_sel_current{
+		display:none;
+	}
+
+	nav #lang_sel a.lang_sel_sel, 
+	nav #lang_sel_click a.lang_sel_sel{
+		width:38px;
+		padding-left:4px;
+	}
+
+	nav #lang_sel li{
+		width:auto;
+	}
+
+	nav #lang_sel ul ul a,  
+	nav #lang_sel_click ul ul a,
+	nav #lang_sel_click ul ul{
+		width:38px;
+		padding-left:4px;
+	}
+
+	nav #lang_sel ul ul a,  
+	nav #lang_sel_click ul ul a{
+		height:26px;
+	}
+
+	nav #lang_sel ul ul{
+		width:38px;
+	}
+
+	nav #lang_sel a span{
+		font-size:1px;
+		display:none;
+		color:#fff;
+	}
+
+	nav #lang_sel a.lang_sel_sel{
+		background-position:100% 50%;
+	}
+}
+
+
+
+
+/* to go on top of wp admin bar */
+.peFlareLightbox {
+	z-index: 99999 !important;
+}

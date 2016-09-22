@@ -1,0 +1,165 @@
+ul, ol{
+	padding-left:10px;
+}
+
+a{
+	color:#88b7b3;
+}
+
+a:hover{
+	color:#68a49f;
+	text-decoration:none;
+}
+
+img {
+vertical-align: middle;
+max-width: 100%;
+height: auto;
+}
+
+section p{
+	margin-bottom:15px;
+}
+
+
+
+/*portfolio pager*/
+.section-type-portfolio .post-pagination > .span12{
+	display:inline-block;
+	left:50%;
+	position:relative;
+}
+
+.section-type-portfolio .post-pagination{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.section-type-portfolio .post-pagination .pagination{
+	display:inline-block;
+	position:relative;
+	left:-50%;
+	margin:20px 0;
+}
+
+.filters button {
+  margin-right:3px;
+  margin-left:3px;
+}
+
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  background-color: transparent;
+}
+
+
+@media (max-width:768px) {
+
+	.comment .children {
+		margin-left: 25px;
+	}
+
+}
+
+.notification-wrap {
+	margin-top: 25px;
+	display: none;
+}
+
+.vendor iframe {
+	height: auto;
+	max-width: 100%;
+}
+
+.project-gallery.flexslider {
+	background: transparent;
+	border: 0;
+	margin-bottom: 10px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	-o-border-radius: 0;
+	border-radius: 0;
+}
+
+.project-gallery.flexslider img {
+	height: auto;
+	display: block;
+	margin: 0 auto;
+}
+
+.intro {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: relative;
+}
+
+section {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+section.padding-top {
+	padding-bottom: 0;
+}
+
+section.padding-bottom {
+	padding-top: 0;
+}
+
+section.padding-none {
+	padding-bottom: 0;
+	padding-top: 0;
+}
+
+.testimonials ul {
+	margin: 0;
+}
+
+.plan-title h3 sup {
+	margin-right: -0.8em;
+}
+
+.plan-title h3 sub {
+	margin-left: -0.9em;
+}
+
+section > .container,
+section > .page-header {
+	position: relative;
+	z-index: 1;
+}
+
+section.dark.pricing .plan .plan-title p {
+	color: #333333;
+}
+
+section.dark.testimonials ul li a span {
+	color: #fff;
+}
+
+.notification-wrap {
+	color: #fff;
+	display: none;
+}
+
+.section-type-blog .page-header h2 {
+	font-size: 3em;
+}
+
+.testimonials ul li div {
+	font-size: 13px;
+	font-weight: 500;
+	color: #88b7b3;
+}
+
+.featurette-image {
+	margin: 0 auto;
+}
