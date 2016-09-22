@@ -10,29 +10,6 @@ lineArr.push({
 var flagMap = 0;
 var flagRight = 0;
 var redrawFlight = 0;
-
-// 本地存储
-// var GPSpolyLine,GPSlineArr,GPSStorage, GPSLocalData;
-// var storage = window.localStorage;
-// if (storage) {
-//     storage.getItem("GPS");
-// } else {
-//     alert('This browser does NOT support localStorage');
-// }
-// function setGPSData(lon, lat) {
-//     var GPSSingledata;
-//     GPSSingledata.g_lon = lon;
-//     GPSSingledata.g_lat = lat;
-//     // GPSSingledata.g_alt = alt;
-//
-//     GPSLocalData.push(GPSSingledata);
-//     storage.setItem("GPS", GPSLocalData);
-// }
-// function showGPSData() {
-//     var curGPSData = storage.getItem("GPS");
-//     GPSpolyLine.setPath(curGPSData);
-// }
-
 function initMap() {
     map = new google.maps.Map(document.getElementById('container'), {
         center: {
@@ -78,8 +55,15 @@ function initMap() {
                             lineArr[num] = e.latLng;
                             polyLine.setPath(lineArr);
                             var inputs = $('.single-right-up-sub').eq(num).find('input');
-                            inputs[0].value = e.latLng.lng().toFixed(6);
-                            inputs[1].value = e.latLng.lat().toFixed(6);
+
+                            console.log("火星坐标转wgs84前 clickPointLatLng is ", clickPointLatLng.lng(), clickPointLatLng.lat());
+                            var curcoordpoint = coordTransform(clickPointLatLng.lng(), clickPointLatLng.lat(), 1);
+                            console.log("火星坐标转wgs84后 gcj02towgs84 is ", curcoordpoint);
+
+                            inputs[0].value = curcoordpoint[0].toFixed(6);
+                            inputs[1].value = curcoordpoint[1].toFixed(6);
+                            // inputs[0].value = e.latLng.lng().toFixed(6);
+                            // inputs[1].value = e.latLng.lat().toFixed(6);
                         }
 
                     }
@@ -109,19 +93,7 @@ function initMap() {
                 flagRight = 0;
             }
         }
-        // console.log("flagMap is",flagMap);
-        // console.log("flagRight is", flagRight);
-
     });
-    // GPSpolyLine = new google.maps.Polyline({
-    //     map: map,
-    //     path: lineArr,
-    //     strokeColor: common.colors.FlightLine,
-    //     strokeOpacity: 1,
-    //     strokeWeight: 3,
-    //     strokeStyle: "solid"
-    // });
-
     polyLine = new google.maps.Polyline({
         map: map,
         path: lineArr,
@@ -301,16 +273,6 @@ function connect() {
     ws.onerror = function (error) {
         console.log("websocket", error);
     };
-
-    // function abandonData(curtime,lasttime){
-    //     curDataTime=curtime;
-    //     lastDataTime=lasttime;
-    //     if(curDataTime<lastDataTime){
-    //         return
-    //     }else{
-    //         lastDataTime=curDataTime;
-    //     }
-    // }
     ws.onmessage = function (res) {
         losingTime = 0;
         results = res;
@@ -342,7 +304,6 @@ function connect() {
                 if (!timeOuts[timeOutsId]['offlineTime']) {
                     timeOuts[timeOutsId]['offlineTime'] = window.setTimeout(function () {
 
-
                         if (timeOuts[timeOutsId]['ThirdTimeout']) {
                             window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeout']);
                             timeOuts[timeOutsId]['WSsetTimeout'] = null;
@@ -361,9 +322,10 @@ function connect() {
                         }
                         $("#signalWS").addClass("singnal-error");
                         $("#signal3G").addClass("singnal-error");
-                        document.getElementById('heartbeat.id_uav_xyi').innerText = "离线";
 
-                    }, 5000);
+                        // document.getElementById('heartbeat.base_mode').innerText = "离线";
+
+                    }, 30000);
                     // console.log(121232);
                 }
                 begin += 1;
@@ -1472,17 +1434,17 @@ $('#confirmXPCtr').on('click', function () {
 //         $('#pid').modal('hide');
 //     }
 // })
-$('#XPPid').on('show.bs.modal', function () {
-    if (infos.heartbeat.base_mode && infos.heartbeat.base_mode == 1) {
-        $(this).find('input').val('');
-        $(this).find('#confirmXPCtr').show();
-    } else {
-        $(this).find('#confirmXPCtr').hide();
-        $('#XPPid').modal('hide');
-    }
-});
+// $('#XPPid').on('show.bs.modal', function () {
+//     if (infos.heartbeat.base_mode && infos.heartbeat.base_mode == 1) {
+//         $(this).find('input').val('');
+//         $(this).find('#confirmXPCtr').show();
+//     } else {
+//         $(this).find('#confirmXPCtr').hide();
+//         $('#XPPid').modal('hide');
+//     }
+// });
 var uavCMDPId2 = function (p1, p2, p3, p4, p5, p6, p7) {
-    if (infos.heartbeat.base_mode && infos.heartbeat.base_mode == 1) {
+    if (infos.heartbeat.base_mode && infos.heartbeat.base_mode >= 1) {
         var length = 6 + 4 * 7;
         var ab = new ArrayBuffer(length);
         var buffer = new DataView(ab);
@@ -1608,20 +1570,22 @@ var direction = function (vn, ve) {
 }
 var clickLnglat = [];
 
-// 图片拼接
-// function imageAllData(data){
-
-// }
 /* 添加点 */
 var addFlightPoint = function () {
     $('.single-right-up-sub').removeClass('select');
+
+    console.log("火星坐标转wgs84前 clickPointLatLng is ", clickPointLatLng.lng(), clickPointLatLng.lat());
+    var curcoordpoint = coordTransform(clickPointLatLng.lng(), clickPointLatLng.lat(), 1);
+    console.log("火星坐标转wgs84后 gcj02towgs84 is ", curcoordpoint);
+
     var outside = $('<div class="single-right-up-sub select"></div>'),
         upInsert = $('<span class="sanjiao glyphicon glyphicon-plus-sign" title="插入航点" onclick="flightPointOperate(this,\'insertpoint\')">&nbsp;</span>'),
         upDel = $('<span class="sanjiao glyphicon glyphicon-remove-circle" title="删除航点" onclick="flightPointOperate(this,\'delete\')">&nbsp;</span>'),
         upInfo = $('<div class="single-right-up-block" onclick="flightPointClick(this)"></div>'),
         upInfoNumber = $('<span class="number">' + (Local_count - 1) + '</span>'),
         upInfoTitle = $('<span class="infos">航点</span>'),
-        downinfo = $('<div class="single-right-up-hidden"><table><tbody><tr><td class="info">经度 :</td><td class="input"><input name="lon" onkeyup="enterLonLatValues(this)" type="text" style="width: 90%;" value="' + clickPointLatLng.lng().toFixed(6) + '"/></td></tr><tr><td class="info">纬度 :</td><td class="input"><input name="lat" onkeyup="enterLonLatValues(this)" style="width: 90%;" value="' + clickPointLatLng.lat().toFixed(6) + '" type="text"/></td></tr><tr><td class="info">速度 :</td><td class="input"><input name="speed" type="text" value="2.0"/><span>m/s</span></td></tr><tr><td class="info">高度 :</td><td class="input"><input name="altitude" value="25.0" type="text"/><span>m</span></td></tr></tbody></table></div>')
+        // downinfo = $('<div class="single-right-up-hidden"><table><tbody><tr><td class="info">经度 :</td><td class="input"><input name="lon" onkeyup="enterLonLatValues(this)" type="text" style="width: 90%;" value="' + clickPointLatLng.lng().toFixed(6) + '"/></td></tr><tr><td class="info">纬度 :</td><td class="input"><input name="lat" onkeyup="enterLonLatValues(this)" style="width: 90%;" value="' + clickPointLatLng.lat().toFixed(6) + '" type="text"/></td></tr><tr><td class="info">速度 :</td><td class="input"><input name="speed" type="text" value="2.0"/><span>m/s</span></td></tr><tr><td class="info">高度 :</td><td class="input"><input name="altitude" value="25.0" type="text"/><span>m</span></td></tr></tbody></table></div>')
+        downinfo = $('<div class="single-right-up-hidden"><table><tbody><tr><td class="info">经度 :</td><td class="input"><input name="lon" onkeyup="enterLonLatValues(this)" type="text" style="width: 90%;" value="' + curcoordpoint[0].toFixed(6) + '"/></td></tr><tr><td class="info">纬度 :</td><td class="input"><input name="lat" onkeyup="enterLonLatValues(this)" style="width: 90%;" value="' + curcoordpoint[1].toFixed(6) + '" type="text"/></td></tr><tr><td class="info">速度 :</td><td class="input"><input name="speed" type="text" value="2.0"/><span>m/s</span></td></tr><tr><td class="info">高度 :</td><td class="input"><input name="altitude" value="25.0" type="text"/><span>m</span></td></tr></tbody></table></div>')
     $('.single-right-up').append(outside.append(upInsert).append(upDel).append(upInfo.prepend(upInfoTitle).prepend(upInfoNumber)).append(downinfo));
 }
 /* 输入航点经纬度，修改marker在地图上的位置 */
@@ -1629,10 +1593,15 @@ var enterLonLatValues = function (eve) {
     var sub = $(eve).parents('.single-right-up-sub');
     var count = sub.find('.number:first').text();
     var modifyPoint = marklist[count];
+
+    console.log("火星坐标转wgs84前 右侧输入框经纬度修改 is ", sub.find('input')[0].value, '   ', sub.find('input')[1].value);
+    var curcoordpoint = coordTransform(sub.find('input')[0].value * 1, sub.find('input')[1].value * 1, 2);
+
     var lnglat = {
-        lng: sub.find('input')[0].value * 1,
-        lat: sub.find('input')[1].value * 1
+        lng: curcoordpoint[0] * 1,
+        lat: curcoordpoint[1] * 1
     };
+    console.log("火星坐标转wgs84后 右侧输入框经纬度修改 is ", lnglat.lng, '  ', lnglat.lat);
     modifyPoint.setPosition(lnglat);
     lineArr[count] = lnglat;
     polyLine.setPath(lineArr);
@@ -1691,12 +1660,10 @@ var flightPointOperate = function (eve, name) {
         points.push(savepoints);
     }
     console.log("counts is ", savecounts);
-    console.log("points is", points)
+    console.log("points is", points);
     // points = JSON.stringify(points);
 
     drawSearchPoint(true, savecounts, points);
-    // pointsOpration();
-    // }
 
 }
 var pointsOpration = function () {
@@ -1719,7 +1686,7 @@ var pointsOpration = function () {
         points.push(savepoints);
     }
     console.log("counts is ", savecounts);
-    console.log("points is", points)
+    console.log("points is", points);
     // points = JSON.stringify(points);
 
     drawSearchPoint(true, savecounts, points);
@@ -1787,7 +1754,7 @@ $('#addStartEndPoint').on('click', function () {
         upInfoNumber = $('<span class="number">' + +'</span>'),
         upInfoTitleStart = $('<span class="infos">起飞点</span>'),
         upInfoTitleEnd = $('<span class="infos">着陆点</span>'),
-        downinfo = $('<div class="single-right-up-hidden"><table><tbody><tr><td>速度 :</td><td><input name="speed" type="text" value="2.0"/><span>m/s</span></td></tr><tr><td>高度 :</td><td><input name="altitude" value="25.0" type="text"/><span style="float: right;">meters</span></td></tr></tbody></table></div>')
+        downinfo = $('<div class="single-right-up-hidden"><table><tbody><tr><td>速度 :</td><td><input name="speed" type="text" value="2.0"/><span>m/s</span></td></tr><tr><td>高度 :</td><td><input name="altitude" value="25.0" type="text"/><span style="float: right;">meters</span></td></tr></tbody></table></div>');
     $('.single-right-up').append(outside.append(upInfo.prepend(upInfoTitleStart).prepend(upInfoNumber)).append(downinfo));
     $('.single-right-up').append(outside.append(upInfo.prepend(upInfoTitleEnd).prepend(upInfoNumber)).append(downinfo));
 });
@@ -1796,7 +1763,7 @@ $('#addStartEndPoint').on('click', function () {
 $('#addFlightLine').on('click', function () {
     if ($(document.getElementById('heartbeat.base_mode')).eq(0).attr('data-value') == 1) {
         var points = $('.single-right-up-sub');
-        var length = 7 + 16 * points.length;
+        var length = 6 + 16 * points.length;
         var ab = new ArrayBuffer(length);
         var buffer = new DataView(ab);
         var result = '';
@@ -1929,21 +1896,16 @@ $('#searchFlightPoint').on('click', function () {
         }
     }
 });
-// var drawSearchPoint = function(draggable) {
 var drawSearchPoint = function (draggable, curcount, curpoint) {
     if (!curcount && !curpoint) {
         var counts = infos.mission_ack_2.count;
         var points = infos.mission_ack_2.point;
-        console.log('航路点传值');
+        console.log('默认108返回航路点');
     } else {
         var counts = curcount;
         var points = curpoint;
-        console.log('默认航路点');
-
+        console.log('航路点传值');
     }
-    // var counts = infos.mission_ack_2.count;
-    // var points = infos.mission_ack_2.point;
-
     // console.info("加载的counts is", counts);
     // console.info("加载的points is", points);
     Local_count = 1;
@@ -1984,12 +1946,31 @@ var drawSearchPoint = function (draggable, curcount, curpoint) {
                 points[i].lon = infos.gps_raw.lon_gps;
                 points[i].lat = infos.gps_raw.lat_gps;
 
+                // var curcoordpoint =coordTransform(points[i].lon,points[i].lat,2);
+                //
+                // points[i].lon = curcoordpoint[0];
+                // points[i].lat = curcoordpoint[1];
+
                 lnglat = {
                     lng: points[i].lon,
                     lat: points[i].lat
                 }
             }
         }
+
+        console.log("wgs84转火星坐标转前 is ", points[i].lon, points[i].lat);
+        var curcoordpoint = coordTransform(points[i].lon, points[i].lat, 2);
+        // points[i].lon = curcoordpoint[0];
+        // points[i].lat = curcoordpoint[1];
+
+        lnglat = {
+            lng: curcoordpoint[0],
+            lat: curcoordpoint[1]
+        }
+        console.log("lnglat is ", lnglat.lng, '   ', lnglat.lat);
+        console.log("wgs84转火星坐标转后 is ", curcoordpoint);
+
+
         lineArr.push(lnglat);
 
         if (i > 0) {
@@ -2017,8 +1998,15 @@ var drawSearchPoint = function (draggable, curcount, curpoint) {
                         lineArr[num] = e.latLng;
                         polyLine.setPath(lineArr);
                         var inputs = $('.single-right-up-sub').eq(num).find('input');
-                        inputs[0].value = e.latLng.lng();
-                        inputs[1].value = e.latLng.lat();
+
+                        console.log("火星坐标转wgs84前 clickPointLatLng is ", clickPointLatLng.lng(), clickPointLatLng.lat());
+                        var curcoordpoint = coordTransform(clickPointLatLng.lng(), clickPointLatLng.lat(), 1);
+                        console.log("火星坐标转wgs84后 gcj02towgs84 is ", curcoordpoint);
+
+                        inputs[0].value = curcoordpoint[0];
+                        inputs[1].value = curcoordpoint[1];
+                        // inputs[0].value = e.latLng.lng();
+                        // inputs[1].value = e.latLng.lat();
                         // }
                     }
                 });
@@ -2028,6 +2016,7 @@ var drawSearchPoint = function (draggable, curcount, curpoint) {
         }
 
         $('.single-right-up-sub').removeClass('select');
+
         var outside = $('<div class="single-right-up-sub select"></div>'),
             upInsert = $('<span class="sanjiao glyphicon glyphicon-plus-sign" title="插入航点" onclick="flightPointOperate(this,\'insertpoint\')">&nbsp;</span>'),
             upDel = $('<span class="sanjiao glyphicon glyphicon-remove-circle" title="删除航点" onclick="flightPointOperate(this,\'delete\')">&nbsp;</span>'),
@@ -2076,7 +2065,7 @@ $('#searchFlightEnd').on('click', function () {
     }
 });
 var locationFlight = function () {
-    console.log(infos['gps_raw'])
+    console.log(infos['gps_raw']);
     if (infos['heartbeat'] && infos['gps_raw']) {
         var cur_position = {
             lng: infos['gps_raw']['lon_gps'],
@@ -2092,6 +2081,10 @@ var drawSearchEnd = function () {
     var points = infos.mission_ack_3.point;
     var result = [];
     for (var t in points) {
+        console.log("wgs84 转火星坐标前 ", points[t].lon, points[t].lat);
+        var curcoordpoint = coordTransform(points[t].lon, points[t].lat, 2);
+        console.log("wgs84 转火星坐标后 ", curcoordpoint[0], curcoordpoint[1]);
+
         new google.maps.Marker({
             map: map,
             position: {
@@ -2272,6 +2265,10 @@ var setLogInfor = function (time, log) {
     //console.log($("#logList li.clone").length);
 
     var curHtml = '<p class="noMargin"><span class = "date-infor">' + time + ' </span ><span class = "log-infor">' + log + '</span ></p>';
+
+    if ($("#logList p").length > 4) {
+        $("#logList p").eq(0).remove();
+    }
     $("#logList").append(curHtml);
 }
 // 时间显示
@@ -2294,6 +2291,23 @@ var formatDateTime = function () {
 
     return t;
 };
+var gcj02towgs84, wgs84togcj02;
+var coordTransform = function (lng, lat, type) {
+    if (type == 1) {
+        //国测局坐标(火星坐标)转wgs84坐标
+        gcj02towgs84 = coordtransform.gcj02towgs84(lng, lat);
+        console.log("wgs84坐标  is  ", gcj02towgs84);
+        return gcj02towgs84;
+    } else {
+        //wgs84转国测局坐标(火星坐标)
+        wgs84togcj02 = coordtransform.wgs84togcj02(lng, lat);
+        console.log("火星坐标  is  ", wgs84togcj02);
+        return wgs84togcj02;
+
+    }
+
+
+}
 /* 当收到获取控制权的申请时候，将控制权给别人 */
 $('#confirm #ok').on('click', function () {
     if ($('#confirm').data('uid') && infos['token']) {

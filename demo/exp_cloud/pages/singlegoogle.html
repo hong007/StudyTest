@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../plusins/drag/jquery.dragsort.min.js"></script>
     <script type="text/javascript" src="../js/CustomMapMarker.js"></script>
     <script type="text/javascript" src="../js/MapComFn.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
     <!--<script type="text/javascript" src="../plusins/superslide/jquery.SuperSlide.2.1.1.js"></script>-->
     <script type="text/javascript">
         // google.maps.event.addDomListener(window, 'load', initMap);
@@ -86,67 +87,11 @@
             position: absolute;
             bottom: 96px;
             height: 100px;
+            color: red;
             /*border: 1px solid #ccc;*/
         }
-
-        .txtMarquee-top .hd {
-            /*overflow: hidden;
-            height: 30px;
-            background: #f4f4f4;
-            padding: 0 10px;*/
-        }
-
-        .txtMarquee-top .hd .prev,
-        .txtMarquee-top .hd .next {
-            /* display: block;
-            width: 9px;
-            height: 5px;
-            float: right;
-            margin-right: 5px;
-            margin-top: 10px;
-            overflow: hidden;
-            cursor: pointer;*/
-            /*background: url("../images/arrow.png") 0 -100px no-repeat;*/
-        }
-
-        /*    .txtMarquee-top .hd .next {
-            background-position: 0 -140px;
-        }
-
-        .txtMarquee-top .hd .prevStop {
-            background-position: -60px -100px;
-        }
-
-        .txtMarquee-top .hd .nextStop {
-            background-position: -60px -140px;
-        }*/
-
-        .txtMarquee-top .bd {
-            /*padding: 15px;*/
-        }
-
         .infoList {
             padding: 0 0 0 5px;
-        }
-
-        .txtMarquee-top .infoList li {
-            height: 20px;
-            line-height: 20px;
-            text-align: left;
-            list-style: none;
-        }
-
-        .txtMarquee-top .infoList li span {
-            /*float: right;*/
-            color: red;
-        }
-
-        .txtMarquee-top .infoList li a {
-            /*color: red;*/
-        }
-
-        .gmnoprint img {
-            opacity: 0.2 !important;
         }
     </style>
 </head>
@@ -376,15 +321,13 @@
                 <!--height="85"-->
                 <!--bgcolor="transparent"  vspace="10"  hspace="10" behavior="alternate" style="color: #f00;"-->
                 <!--id="logList">-->
-                <marquee direction="up" behavior="scroll" scrollamount="2" scrolldelay="0" loop="-1" width="240"
-                         height="85"
-                         bgcolor="transparent" behavior="alternate" style="color: #f00;"
-                         id="logList">
+                <!--<marquee direction="up" behavior="scroll" scrollamount="2" scrolldelay="0" loop="-1" width="240" height="85" bgcolor="transparent" behavior="alternate" style="color: #f00;" id="logList">-->
+                <div  id="logList">
                     <!--<p><span class="date-infor">2011-11-11</span><span class="log-infor">上线</span>-->
                     <!--</p>-->
                     <!--<p><span class="date-infor">2011-11-11</span><span class="log-infor">上线</span>-->
                     <!--</p>-->
-                </marquee>
+                </div>
             </div>
             <div class="block">
                 <p>

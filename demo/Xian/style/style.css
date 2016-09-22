@@ -9,7 +9,7 @@ html, body {
 }
 
 html {
-    font-size: 62.5%;
+    font-size: 100px;
 }
 
 * {
@@ -21,31 +21,29 @@ body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 1.4rem;
+    font-size: 0.14rem;
 }
 
 body, input, button, select, textarea {
-    font: 62.5%/1.5 "微软雅黑", "Microsoft Yahei", "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+    font-family: "微软雅黑", "Microsoft Yahei", "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: "liga", "kern";
-    font-size: 1.4rem;
 }
 
 table {
     border-collapse: collapse;
-    border-spacing: 0
+    border-spacing: 0;
 }
 
 img, a img {
-    border: 0
+    border: 0;
 }
 
 a {
     color: #0381e3;
     outline: medium none;
     text-decoration: none;
-    font-size: 1.4rem;
     star: expression(this.onFocus=this.blur());
 }
 
@@ -54,7 +52,7 @@ a:hover {
 }
 
 a, img {
-    -webkit-touch-callout: none; 
+    -webkit-touch-callout: none;
 }
 
 label {
@@ -92,7 +90,7 @@ input[type="number"] {
 input[type="text"],
 input[type="number"],
 textarea {
-    -webkit-appearance: none; 
+    -webkit-appearance: none;
 }
 
 input:focus, textarea:focus {
@@ -172,42 +170,43 @@ textarea {
     overflow: auto;
 }
 
-.rule-title {
-    font-size: 1.5em;
-    padding: 6% 0 10px;
-}
-
 .rules-menu {
-    padding: 20px;
+    padding: 0.18rem;
     background: url(../image/rulebg.png) no-repeat center center;
 }
 
+.rule-title {
+    font-size: 0.42rem;
+    padding: 0.56rem 0 0.1rem 0.2rem;
+}
+
 .rules-menu-item {
-    padding-left: 30px;
-    line-height: 22px;
+    padding: 0 0.28rem 0 0.72rem;
+    line-height: 0.48rem;
     position: relative;
+    font-size: 0.16rem;
 }
 
 .rules-menu-item:first-child {
-    padding-left: 10px;
+    padding-left: 0.1rem;
 }
 
 .square {
     position: absolute;
-    top: 6px;
-    left: 8px;
-    width: 12px;
-    height: 12px;
+    top: 0.12rem;
+    left: 0.34rem;
+    width: 0.22rem;
+    height: 0.22rem;
     display: inline-block;
     background: #ed1f7d;
-    margin-right: 10px;
+    margin-right: 0.1rem;
 }
 
 .page-item-bottom {
     position: absolute;
     bottom: 8%;
-    left: 10px;
-    right: 10px;
+    left: 0.1rem;
+    right: 0.1rem;
 }
 
 .logo-area img {
@@ -215,23 +214,24 @@ textarea {
 }
 
 .location-area {
-    font-size: 1.2em;
+    font-size: 0.20rem;
 }
 
 .date-area {
     color: #ed1f7d;
+    font-size: 0.20rem;
 }
 
 .container {
     margin: 0;
-    padding: 0 10px;
+    padding: 0 0.1rem;
     width: 100%;
     height: auto;
     position: relative;
 }
 
 .top {
-    padding-top: 8%;
+    padding-top: 0.5rem;
     width: 100%;
 }
 
@@ -241,10 +241,10 @@ textarea {
 
 .title {
     padding: 7% 0 5%;
-    width: 270px;
+    width: 2.7rem;
     margin: 0 auto;
     font-weight: normal;
-    font-size: 2.0rem;
+    font-size: 0.2rem;
 }
 
 .top .title {
@@ -256,7 +256,7 @@ textarea {
 }
 
 .content {
-    padding: 0 6px;
+    padding: 0 0.06rem;
 }
 
 .section {
@@ -274,7 +274,7 @@ textarea {
 
 .section-four {
     display: none;
-    min-height: 260px;
+    min-height: 2.6rem;
 }
 
 .active {
@@ -282,20 +282,19 @@ textarea {
 }
 
 .tips {
-    padding: 15px 10px 18px;
+    padding: 0.15rem 0.1rem 0.18rem;
     background: #2a2c2e;
     margin-bottom: 8.5%;
-    box-shadow: 0 7px 22px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.07rem 0.22rem rgba(0, 0, 0, 0.4);
 }
 
 .tips p {
     text-indent: 2.5rem;
-    line-height: 20px;
-    font-size: 1.4rem;
+    line-height: 0.2rem;
 }
 
 .default-p {
-    height: 50px;
+    height: 0.5rem;
 }
 
 .default-btn {
@@ -310,7 +309,7 @@ textarea {
 .bottom {
     margin-top: 8%;
     width: 100%;
-    height: 55px;
+    height: 0.55rem;
     background: url(../image/btmbg.png) no-repeat center;
     background-size: contain;
 }
@@ -324,59 +323,62 @@ textarea {
 
 .bottom-color {
     position: absolute;
-    bottom: -66%;
+    bottom: -3.8rem;
     left: 0;
     right: 0;
     width: 100%;
     height: 56%;
-    background: url(../image/btmcolbg.png) no-repeat center;
-    background-size: cover;
+    background: url(../image/btmcolbg02.png) no-repeat center;
+    background-size: contain;
 }
 
 .section-two {
-    padding-top: 10%;
+    padding-top: 0.2rem;
 }
 
-.section-two-item {
-    margin-bottom: 5%;
-}
+/*.section-two-item {*/
+/*margin-bottom: 5%;*/
+/*}*/
 
 .section-two-item .default-p {
-    height: 40px;
+    height: 0.9rem;
+    line-height: 0.9rem;
 }
 
 .section-two-item .default-btn {
     background: url(../image/newbtnbg.png) no-repeat center;
     background-size: 100%;
-    width: 65%;
+    width: 80%;
     color: #fff;
-    font-size: 1.4rem;
-    text-shadow: 2px 2px 9px rgba(255, 255, 255, 1)
+    height: 0.9rem;
+    font-size: 0.16rem;
+    text-shadow: 0.02rem 0.02rem 0.09rem rgba(255, 255, 255, 1)
 }
 
 .item-tips {
-    font-size: 1.2rem;
-    margin-top: 2px;
+    font-size: 0.14rem;
+    margin-top: 0.38rem;
     color: #ed1f7d;
 }
 
 .section-three .title {
     margin-top: -15%;
     margin-bottom: -6%;
-    padding-left: 25px;
+    padding-left: 0.25rem;
+    width: 90%;
 }
 
 .qt-block-title, .qt-block {
-    width: 270px;
-    margin: 10px auto;
+    width: 90%;
+    margin: 0.1rem auto;
 }
 
 .swiper-item .qt-block:first-child .qt {
-    padding-left: 25px;
+    padding-left: 0.25rem;
 }
 
 .qt {
-    font-size: 1.6rem;
+    font-size: 0.16rem;
 }
 
 .color1 {
@@ -385,7 +387,7 @@ textarea {
 
 .qt span {
     display: inline-block;
-    min-width: 30px;
+    min-width: 0.3rem;
 }
 
 .qt-input {
@@ -401,27 +403,27 @@ textarea {
 }
 
 .result {
-    text-shadow: -1px 5px 12px #000;
-    font-size: 5.0rem;
+    text-shadow: -0.01rem 0.05rem 0.12rem #000;
+    font-size: 0.50rem;
     color: #ed1f7d;
 }
 
 .result-score {
-    font-size: 4.0rem;
+    font-size: 0.40rem;
 }
 
 .result-score span {
-    font-size: 4.0rem;
+    font-size: 0.40rem;
 }
 
 .score, .score span {
-    font-size: 4.0rem;
-    margin-top: -8px;
+    font-size: 0.44rem;
+    margin-top: -0.08rem;
 }
 
 .result-qt {
     color: #fff;
-    font-size: 1.4em;
+    font-size: 0.14em;
     margin-top: 15%;
 }
 
@@ -434,26 +436,26 @@ textarea {
 }
 
 .contact {
-    margin-top: 70px;
+    margin-top: 0.7rem;
     color: #0381e3;
-    font-size: 2.2rem;
+    font-size: 0.22rem;
 }
 
 .contact span {
-    font-size: 2.2rem;
+    font-size: 0.22rem;
     color: #0381e3;
     text-decoration: underline;
 }
 
 .rewardcode-span {
-    font-size: 2.2rem;
+    font-size: 0.22rem;
     color: #0381e3;
 }
 
 .scoretips {
-    font-size: 2.2rem;
+    font-size: 0.22rem;
     color: #fff;
-    margin-top: 10px;
+    margin-top: 0.1rem;
 }
 
 .failbock {
@@ -461,17 +463,17 @@ textarea {
 }
 
 .fail-title {
-    font-size: 5.2rem;
+    font-size: 0.52rem;
     color: #fff;
 }
 
 .fail-infor {
-    font-size: 3.7rem;
+    font-size: 0.37rem;
     color: #fff;
 }
 
 .fail-encour {
-    font-size: 2.2rem;
+    font-size: 0.22rem;
     color: #1dc2dd;
-    margin-top: 30px;
+    margin-top: 0.3rem;
 }
