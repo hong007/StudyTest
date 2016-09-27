@@ -194,10 +194,19 @@ var imageAllData = '';
 
 var flightPointClick = function (ele) {
     var sub = $(ele).parents('.single-right-up-sub');
+    // console.log("定位航点 火星坐标转wgs84前 clickPointLatLng is ", sub.find("input[name=lon]").val() * 1, sub.find("input[name=lat]").val() * 1);
+    var curcoord_flightgps = coordTransform(sub.find("input[name=lon]").val() * 1, sub.find("input[name=lat]").val() * 1, 2);
+    // console.log("定位航点  火星坐标转wgs84后 gcj02towgs84 is ", curcoord_flightgps);
+
     var cur_position = {
-        lng: sub.find("input[name=lon]").val() * 1,
-        lat: sub.find("input[name=lat]").val() * 1
+        lng: curcoord_flightgps[0],
+        lat: curcoord_flightgps[1]
     }
+
+    // var cur_position = {
+    //     lng: sub.find("input[name=lon]").val() * 1,
+    //     lat: sub.find("input[name=lat]").val() * 1
+    // }
     map.setCenter(cur_position);
     var target = $(ele).parent();
     if (target.hasClass('select')) {
@@ -585,12 +594,14 @@ function connect() {
                 setValueFromInfos('gps_raw', 'satellites_visible');
                 NAV_GPS = [infos['gps_raw']['lon_gps'], infos['gps_raw']['lat_gps']];
 
-                // 存储GPS数据
-                // setGPSData(lon, lat);
+
+                var curcoordpoint = coordTransform(NAV_GPS[0], NAV_GPS[1], 2);
                 lineArr[0] = {
-                    lng: NAV_GPS[0],
-                    lat: NAV_GPS[1]
+                    lng: curcoordpoint[0],
+                    lat: curcoordpoint[1]
                 };
+                // console.log('GPS转换前  ',NAV_GPS[0],'  ',NAV_GPS[1])
+                // console.log('GPS转换后 ',curcoordpoint,'  ',lineArr[0],'  ',NAV_GPS[0],'  ',NAV_GPS[1])
                 if (infos['heartbeat']['system_status'] == 0) {
                     map.setCenter(lineArr[0]);
 
@@ -932,14 +943,15 @@ function connect() {
                 window.location.href = 'singlegoogle.html?id=' + id + '&t=' + encodeURI(token);
             }
         } else if (msgid == 254) {
-            console.log('msgid', msgid);
+
+            //console.log('msgid', msgid);
             //gps_raw解析
             begin += 1;
             var id = dv.getInt32(begin, LE);
             if (infos['heartbeat']['id_uav_xyi'] == id) {
                 begin += 4;
                 var type = dv.getUint8(begin);
-                console.info("254type is ", type);
+                // console.info("254type is ", type);
                 infos['flight-type'] = type;
 
                 if (type == 1) {
@@ -961,13 +973,13 @@ function connect() {
                         if (timeOuts[timeOutsId]['ThirdTimeoutShow']) {
                             window.clearTimeout(timeOuts[timeOutsId]['ThirdTimeoutShow']);
                             timeOuts[timeOutsId]['ThirdTimeoutShow'] = null;
-                            console.log("清空上一次收到254  3G断开");
+                            // console.log("清空上一次收到254  3G断开");
                         }
                         // console.log(!timeOuts[timeOutsId]['ThirdTimeoutShow']);
                         if (!timeOuts[timeOutsId]['ThirdTimeoutShow']) {
                             timeOuts[timeOutsId]['ThirdTimeoutShow'] = window.setTimeout(function () {
                                 $("#signal3G").removeClass("singnal-error");
-                                console.log("最后一次收到254  3G断开");
+                                // console.log("最后一次收到254  3G断开");
                             }, 5000);
                         }
                     }
@@ -988,7 +1000,7 @@ function connect() {
                         if (timeOuts[timeOutsId]['WSsetTimeoutShow']) {
                             window.clearTimeout(timeOuts[timeOutsId]['WSsetTimeoutShow']);
                             timeOuts[timeOutsId]['WSsetTimeoutShow'] = null;
-                            console.log("清空上一次收到254  WS断开");
+                            // console.log("清空上一次收到254  WS断开");
 
                         }
                         // console.log(!timeOuts[timeOutsId]['WSsetTimeoutShow']);
@@ -996,7 +1008,7 @@ function connect() {
                             timeOuts[timeOutsId]['WSsetTimeoutShow'] = window.setTimeout(function () {
                                 $("#signalWS").removeClass("singnal-error");
                                 // console.log(1)
-                                console.log("最后一次收到254  WS断开");
+                                // console.log("最后一次收到254  WS断开");
                             }, 5000);
                         }
                     }
@@ -1574,9 +1586,9 @@ var clickLnglat = [];
 var addFlightPoint = function () {
     $('.single-right-up-sub').removeClass('select');
 
-    console.log("火星坐标转wgs84前 clickPointLatLng is ", clickPointLatLng.lng(), clickPointLatLng.lat());
+    // console.log("火星坐标转wgs84前 clickPointLatLng is ", clickPointLatLng.lng(), clickPointLatLng.lat());
     var curcoordpoint = coordTransform(clickPointLatLng.lng(), clickPointLatLng.lat(), 1);
-    console.log("火星坐标转wgs84后 gcj02towgs84 is ", curcoordpoint);
+    // console.log("火星坐标转wgs84后 gcj02towgs84 is ", curcoordpoint);
 
     var outside = $('<div class="single-right-up-sub select"></div>'),
         upInsert = $('<span class="sanjiao glyphicon glyphicon-plus-sign" title="插入航点" onclick="flightPointOperate(this,\'insertpoint\')">&nbsp;</span>'),
@@ -1904,21 +1916,31 @@ var drawSearchPoint = function (draggable, curcount, curpoint) {
     } else {
         var counts = curcount;
         var points = curpoint;
-        console.log('航路点传值');
+        console.log('航路点传值', '航路点传值 counts', counts, ' 航路点传值 points', points);
     }
     // console.info("加载的counts is", counts);
     // console.info("加载的points is", points);
+    var inputs = $('.single-right-up-sub').eq(0).find('input');
+
     Local_count = 1;
     lineArr = [];
     if (counts == 1) {
         if (infos.gps_raw && infos.gps_raw.lon_gps && infos.gps_raw.lat_gps) {
             NAV_GPS[0] = infos.gps_raw.lon_gps;
             NAV_GPS[1] = infos.gps_raw.lat_gps;
+            inputs[0].value = infos.gps_raw.lon_gps;
+            inputs[1].value = infos.gps_raw.lat_gps;
+
+            // inputs[0].value = curcoordpoint[0];
+            // inputs[1].value = curcoordpoint[1];
+            console.log('infos.gps_raw ', infos.gps_raw);
         }
         lineArr.push({
             lng: NAV_GPS[0],
             lat: NAV_GPS[1]
         });
+
+
         console.log(lineArr);
     }
 
@@ -1934,17 +1956,22 @@ var drawSearchPoint = function (draggable, curcount, curpoint) {
     }
     // for (var i = 0; i < counts; i++) {
     for (var i = 0; i < counts; i++) {
-        // console.log("points",points);
+        console.log("points", points);
         var lnglat = {
             lng: points[i].lon,
             lat: points[i].lat
         };
-        // console.log(lnglat);
+        // var lnglat;
         if (i == 0) {
             if (infos.gps_raw && infos.gps_raw.lon_gps && infos.gps_raw.lat_gps) {
-                console.log(points);
+                inputs[0].value = infos.gps_raw.lon_gps;
+                inputs[1].value = infos.gps_raw.lat_gps;
+
                 points[i].lon = infos.gps_raw.lon_gps;
                 points[i].lat = infos.gps_raw.lat_gps;
+
+
+                console.log('points[0] is ', points[0]);
 
                 // var curcoordpoint =coordTransform(points[i].lon,points[i].lat,2);
                 //
@@ -1970,7 +1997,7 @@ var drawSearchPoint = function (draggable, curcount, curpoint) {
         console.log("lnglat is ", lnglat.lng, '   ', lnglat.lat);
         console.log("wgs84转火星坐标转后 is ", curcoordpoint);
 
-
+        console.log(lnglat);
         lineArr.push(lnglat);
 
         if (i > 0) {
@@ -2067,10 +2094,19 @@ $('#searchFlightEnd').on('click', function () {
 var locationFlight = function () {
     console.log(infos['gps_raw']);
     if (infos['heartbeat'] && infos['gps_raw']) {
+
+        console.log("飞机图标定位 火星坐标转wgs84前 clickPointLatLng is ", infos['gps_raw']['lon_gps'], infos['gps_raw']['lat_gps']);
+        var curcoord_flightgps = coordTransform(infos['gps_raw']['lon_gps'], infos['gps_raw']['lat_gps'], 2);
+        console.log("飞机图标定位 火星坐标转wgs84后 gcj02towgs84 is ", curcoord_flightgps);
+
         var cur_position = {
-            lng: infos['gps_raw']['lon_gps'],
-            lat: infos['gps_raw']['lat_gps']
+            lng: curcoord_flightgps[0],
+            lat: curcoord_flightgps[1]
         }
+        // var cur_position = {
+        //     lng: infos['gps_raw']['lon_gps'],
+        //     lat: infos['gps_raw']['lat_gps']
+        // }
         map.setCenter(cur_position);
         setLogInfor(formatDateTime(), '飞机定位');
     }
@@ -2296,12 +2332,12 @@ var coordTransform = function (lng, lat, type) {
     if (type == 1) {
         //国测局坐标(火星坐标)转wgs84坐标
         gcj02towgs84 = coordtransform.gcj02towgs84(lng, lat);
-        console.log("wgs84坐标  is  ", gcj02towgs84);
+        // console.log("wgs84坐标  is  ", gcj02towgs84);
         return gcj02towgs84;
     } else {
         //wgs84转国测局坐标(火星坐标)
         wgs84togcj02 = coordtransform.wgs84togcj02(lng, lat);
-        console.log("火星坐标  is  ", wgs84togcj02);
+        // console.log("火星坐标  is  ", wgs84togcj02);
         return wgs84togcj02;
 
     }

@@ -4,7 +4,7 @@
  */
 //UMD魔法代码
 // if the module has no dependencies, the above pattern can be simplified to
-(function(root, factory) {
+(function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define([], factory);
@@ -17,7 +17,7 @@
         // Browser globals (root is window)
         root.coordtransform = factory();
     }
-}(this, function() {
+}(this, function () {
     //定义一些常量
     var x_PI = 3.14159265358979324 * 3000.0 / 180.0;
     var PI = 3.1415926535897932384626;
