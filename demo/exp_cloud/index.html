@@ -80,15 +80,5 @@
             enter = '';
         }
     });
-    $('#confirmDown').on('click', function () {
-        var id = $("#flightNum").val();
-        if (id == '') {
-            alert("批次ID不能为空")
-        } else {
-            console.info("id is ", id);
-            $("#downLoad").modal('hide');
-            window.open('http://g1.xyitech.com:9999/csv?id=' + id);
-        }
-    });
 </script>
 </html>
